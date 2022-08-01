@@ -10,5 +10,10 @@ namespace {
         private static $db = [];
 
         private static $has_one = [];
+
+        public function getCompanies()
+        {
+            return Company::get();
+        }
     }
 }
