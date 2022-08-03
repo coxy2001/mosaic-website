@@ -3,7 +3,7 @@
 namespace Mosiac\Website\Admin;
 
 use SilverStripe\Admin\ModelAdmin;
-use Ticker\Model\Company;
+use Mosiac\Website\Model\Company;
 
 class CompanyAdmin extends ModelAdmin
 {
