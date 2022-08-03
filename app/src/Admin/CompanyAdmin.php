@@ -1,6 +1,6 @@
 <?php
 
-namespace Ticker\Admin;
+namespace Mosiac\Website\Admin;
 
 use SilverStripe\Admin\ModelAdmin;
 use Ticker\Model\Company;
