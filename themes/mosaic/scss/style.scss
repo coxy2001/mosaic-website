@@ -1,0 +1,15 @@
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+
+@import "variables";
+
+// Base
+@import "base/layout";
+@import "base/typography";
+@import "base/element";
+
+// Components
+@import "components/header";
+@import "components/nav";
+@import "components/footer";
+@import "components/company";

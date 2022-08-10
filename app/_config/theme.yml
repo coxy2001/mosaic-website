@@ -5,5 +5,4 @@ SilverStripe\View\SSViewer:
   themes:
     - '$public'
     - 'mosaic'
-    - 'simple'
     - '$default'

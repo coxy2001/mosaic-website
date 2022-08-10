@@ -4,9 +4,7 @@
     "description": "The SilverStripe Framework Installer",
     "require": {
         "php": "^7.3 || ^8.0",
-        "silverstripe/recipe-plugin": "^1.2",
         "silverstripe/recipe-cms": "~4.10.0@stable",
-        "silverstripe-themes/simple": "~3.2.0",
         "silverstripe/login-forms": "~4.6.0@stable",
         "dnadesign/silverstripe-elemental": "^4.8"
     },
@@ -15,6 +13,9 @@
     },
     "extra": {
         "resources-dir": "_resources",
+        "expose": [
+            "themes/mosaic/dist"
+        ],
         "project-files-installed": [
             "app/.htaccess",
             "app/_config.php",

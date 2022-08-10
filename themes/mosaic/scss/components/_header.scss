@@ -1,0 +1,19 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    background-color: $header-bg;
+
+    &__link {
+        text-align: center;
+        text-decoration: none;
+    }
+
+    &__title {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem;
+        color: $header-colour;
+    }
+}

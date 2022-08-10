@@ -4,6 +4,9 @@ namespace Mosiac\Website\Model\Page;
 
 use Mosiac\Website\Controller\TickerPageController;
 use Mosiac\Website\Model\Company;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\GridField\GridField;
 
 class TickerPage extends \Page
 {
@@ -14,5 +17,25 @@ class TickerPage extends \Page
     public function getCompanies()
     {
         return Company::get();
+    }
+
+    public function getDataList()
+    {
+        $fields = FieldList::create(($this->getGridField()));
+        $form = Form::create();
+        $form->setFields($fields);
+
+        return $form;
+    }
+
+    public function getGridField(): GridField
+    {
+        $field = GridField::create(
+            "Ticker List",
+            "Ticker List",
+            $this->getCompanies()
+        );
+
+        return $field;
     }
 }

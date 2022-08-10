@@ -5,6 +5,7 @@ namespace Mosiac\Website\Model;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
+use SilverStripe\View\ArrayData;
 
 class Company extends DataObject
 {
@@ -30,7 +31,7 @@ class Company extends DataObject
     private static $summary_fields = [
         "Ticker",
         "Name",
-        "Description",
+        "Sector",
         "Price",
         "ROC"
     ];
@@ -38,7 +39,7 @@ class Company extends DataObject
     private static $searchable_fields = [
         "Ticker",
         "Name",
-        "Description"
+        "Sector"
     ];
 
     public function getHistory()
@@ -47,11 +48,44 @@ class Company extends DataObject
         $historyData = ArrayList::create();
         foreach ($versions as $data) {
             $historyData->push([
-                "LastEdited" => date("d/F/Y", strtotime($data->LastEdited)),
+                "Date" => date("d/F/Y", strtotime($data->LastEdited)),
                 "MarketCap" => number_format($data->MarketCap),
                 "Price" => $data->Price
             ]);
         }
         return $historyData;
     }
+
+    public function getOldData()
+    {
+        $data = $this->Versions("LastEdited >= '2022-07-31' AND LastEdited < '2022-08-01'")->first();
+        $historyData = [
+            "Date" => date("d/F/Y", strtotime($data->LastEdited)),
+            "MarketCap" => number_format($data->MarketCap),
+            "Price" => $data->Price
+        ];
+        return ArrayData::create($historyData);
+    }
+
+    public function getDate()
+    {
+        return date("d/F/Y", strtotime($this->LastEdited));
+    }
+
+    public function canView($member = null)
+    {
+        return True;
+    }
+
+    // public function canEdit($member = null)
+    // {
+    // }
+
+    // public function canCreate($member = null, $context = [])
+    // {
+    // }
+
+    // public function canDelete($member = null)
+    // {
+    // }
 }

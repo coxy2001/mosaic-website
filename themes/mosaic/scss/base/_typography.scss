@@ -1,0 +1,51 @@
+// Headings
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-sans-serif;
+    color: $heading-colour;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+}
+
+h1 {
+    font-size: $h1-font-size;
+    margin-bottom: $h1-font-size * 0.8;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: $h2-font-size;
+    margin-bottom: $h2-font-size * 0.8;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: $h3-font-size;
+    margin-bottom: $h3-font-size * 0.8;
+}
+
+h4 {
+    font-size: $h4-font-size;
+    margin-bottom: $h4-font-size * 0.8;
+}
+
+h5 {
+    font-size: $h5-font-size;
+    margin-bottom: $h5-font-size * 0.8;
+}
+
+h6 {
+    font-size: $h6-font-size;
+    margin-bottom: $h6-font-size * 0.8;
+}
+
+// Element defaults
+p {
+    margin: 0;
+    margin-bottom: 1rem;
+}

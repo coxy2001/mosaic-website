@@ -1,0 +1,28 @@
+.nav {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+
+    &__item {
+        &.current {
+            background-color: $body-bg;
+
+            a {
+                color: $nav-link-current-colour;
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: $nav-link-colour;
+        text-decoration: none;
+
+        &:hover {
+            color: $nav-link-hover-colour;
+        }
+    }
+}

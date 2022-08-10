@@ -1,0 +1,15 @@
+.company {
+    padding-bottom: 1rem;
+
+    p {
+        margin: 0;
+    }
+
+    &__history {
+        display: flex;
+
+        &-item {
+            padding: 0 1rem;
+        }
+    }
+}

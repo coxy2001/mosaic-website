@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+h1 {
+  color: #000000;
+  font-weight: 700 !important;
+}
+
+h2 {
+  color: #000000;
+  font-weight: 700 !important;
+}
+
+h3 {
+  color: #000000;
+  font-weight: 500;
+}
+
+h4 {
+  color: #000000;
+  font-weight: 500;
+}
+
+h5 {
+  color: #000000;
+  font-weight: 500;
+}
+
+h6 {
+  color: #000000;
+  font-weight: 500;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #000000;
+}
+
+nav .nav-item.current {
+  background-color: #ffffff;
+}
+nav .nav-item.current a {
+  color: #000000;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #ffffff;
+  background-color: #000000;
+}
+footer .nav-link {
+  color: #00c4ff;
+}
+footer .nav-link :hover {
+  color: #007699;
+}
+
+#maincontent {
+  margin-top: 121px;
+}/*# sourceMappingURL=style.css.map */
