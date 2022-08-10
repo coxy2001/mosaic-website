@@ -14,19 +14,17 @@ class PullUpdates extends BuildTask
 
     public function run($request)
     {
-        echo shell_exec("pwd");
+        echo "<h3>Running: git pull</h3>";
+        echo shell_exec("cd .. && git pull");
+        echo "<h3>Running: composer install</h3>";
+        echo shell_exec("cd .. && composer install");
 
-        // shell_exec("git pull");
-        // echo "git pull <br />";
-        // shell_exec("composer install");
-        // echo "composer install <br />";
-        // shell_exec("php perms.php");
-
-        // exec("find . -type d -exec chmod 0775 {} +");
-        // echo "Folders updated <br />\n";
-        // exec("find . -type f -exec chmod 0664 {} +");
-        // echo "Files updated <br />\n";
-        // exec("chown -R www-data:www-data .");
-        // echo "Ownership updated <br />\n";
+        echo "<h3>Running: perms</h3>";
+        shell_exec("cd .. && find . -type d -exec chmod 0775 {} +");
+        echo "Folders updated <br>";
+        shell_exec("cd .. && find . -type f -exec chmod 0664 {} +");
+        echo "Files updated <br>";
+        shell_exec("cd .. && chown -R www-data:www-data .");
+        echo "Ownership updated <br>";
     }
 }
