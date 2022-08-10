@@ -1,63 +1,162 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  margin: 0;
+}
+
+#maincontent {
+  margin-top: 121px;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 576px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    max-width: 992px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #000;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
 h1 {
-  color: #000000;
-  font-weight: 700 !important;
+  font-size: 3rem;
+  margin-bottom: 2.4rem;
+  font-weight: 700;
 }
 
 h2 {
-  color: #000000;
-  font-weight: 700 !important;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
 h3 {
-  color: #000000;
-  font-weight: 500;
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
 }
 
 h4 {
-  color: #000000;
-  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 h5 {
-  color: #000000;
-  font-weight: 500;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 h6 {
-  color: #000000;
-  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
 }
 
-header {
+p {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.element {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.element__title h2 {
+  margin-bottom: 1rem;
+}
+
+.header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1;
-  background-color: #000000;
+  background-color: #000;
+}
+.header__link {
+  text-align: center;
+  text-decoration: none;
+}
+.header__title {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  color: #fff;
 }
 
-nav .nav-item.current {
-  background-color: #ffffff;
+.nav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
 }
-nav .nav-item.current a {
-  color: #000000;
+.nav__item.current {
+  background-color: #fff;
+}
+.nav__item.current a {
+  color: #000;
+}
+.nav__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+.nav__link:hover {
+  color: #00a6ff;
 }
 
-footer {
+.footer {
   text-align: center;
   padding: 1.5rem 0;
-  color: #ffffff;
-  background-color: #000000;
-}
-footer .nav-link {
-  color: #00c4ff;
-}
-footer .nav-link :hover {
-  color: #007699;
+  color: #fff;
+  background-color: #000;
 }
 
-#maincontent {
-  margin-top: 121px;
+.company {
+  padding-bottom: 1rem;
+}
+.company p {
+  margin: 0;
+}
+.company__history {
+  display: flex;
+}
+.company__history-item {
+  padding: 0 1rem;
 }/*# sourceMappingURL=style.css.map */
