@@ -47,13 +47,15 @@
 <div class="container">
 	<% if $Companies %>
 		<% loop $Companies %>
-			<div class="company">
-				<p>$Ticker - $Name</p>
-				<% with $OldData %>
-					<p>$Date</p>
-					<p>\${$MarketCap} - \${$Price}</p>
-				<% end_with %>
-			</div>
+			<% if $OldData %>
+				<div class="company">
+					<p>$Ticker - $Name</p>
+					<% with $OldData %>
+						<p>$Date</p>
+						<p>\${$MarketCap} - \${$Price}</p>
+					<% end_with %>
+				</div>
+			<% end_if %>
 		<% end_loop %>
 	<% end_if %>
 </div>

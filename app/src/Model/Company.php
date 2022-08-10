@@ -59,6 +59,10 @@ class Company extends DataObject
     public function getOldData()
     {
         $data = $this->Versions("LastEdited >= '2022-07-31' AND LastEdited < '2022-08-01'")->first();
+
+        if ($data == null)
+            return null;
+
         $historyData = [
             "Date" => date("d/F/Y", strtotime($data->LastEdited)),
             "MarketCap" => number_format($data->MarketCap),
