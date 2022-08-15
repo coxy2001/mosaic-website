@@ -1,31 +1,29 @@
 ## Overview
 
-[![Build Status](https://api.travis-ci.com/silverstripe/silverstripe-installer.svg?branch=4)](https://travis-ci.com/silverstripe/silverstripe-installer)
+Mosaic All Investment Calculator installer
 
-Base project folder for a SilverStripe ([http://silverstripe.org](http://silverstripe.org)) installation. Required modules are installed via [http://github.com/silverstripe/recipe-cms](http://github.com/silverstripe/recipe-cms). For information on how to change the dependencies in a recipe, please have a look at [https://github.com/silverstripe/recipe-plugin](https://github.com/silverstripe/recipe-plugin). In addition, installer includes [theme/simple](https://github.com/silverstripe-themes/silverstripe-simple) as a default theme.
+---
 
-## Installation ##
+## Installation
 
-`composer create-project silverstripe/installer my-app`
+Clone the repo to a directory in your webserver  
+`git clone https://github.com/coxy2001/mosaic-website.git ~mosaic`
+
+Install dependencies  
+`composer install`
+
+Create silverstripe-cache directory  
+`mkdir silverstripe-cache`
+
+Copy dev.env and rename to .env  
+`cp dev.env .env`  
+Edit SS_BASE_URL, SS_DATABASE_USERNAME, SS_DATABASE_PASSWORD in .env to match your webserver and sql config
+
+Create mosaic_cms table in your sql database
+
+Open the website in a browser, add /dev/build to the end of the base url  
+eg: http://localhost/~mosaic/dev/build  
+This will build the database and cache classes and functions.  
+Run /dev/build everytime you add or remove classes or functions
 
 See [Getting Started](https://docs.silverstripe.org/en/4/getting_started/) for more information.
-
-## Bugtracker ##
-
-Bugs are tracked on github.com ([framework issues](https://github.com/silverstripe/silverstripe-framework/issues),
-[cms issues](https://github.com/silverstripe/silverstripe-cms/issues)).
-Please read our [issue reporting guidelines](https://docs.silverstripe.org/en/4/contributing/issues_and_bugs/).
-
-## Development and Contribution ##
-
-If you would like to make changes to the SilverStripe core codebase, we have an extensive [guide to contributing code](https://docs.silverstripe.org/en/4/contributing/code/).
-
-## Links ##
-
- * [Changelogs](https://docs.silverstripe.org/en/4/changelogs/)
- * [Bugtracker: Framework](https://github.com/silverstripe/silverstripe-framework/issues)
- * [Bugtracker: CMS](https://github.com/silverstripe/silverstripe-cms/issues)
- * [Bugtracker: Installer](https://github.com/silverstripe/silverstripe-installer/issues)
- * [Forums](http://silverstripe.org/forums)
- * [Developer Mailinglist](https://groups.google.com/forum/#!forum/silverstripe-dev)
- * [License](./LICENSE)
