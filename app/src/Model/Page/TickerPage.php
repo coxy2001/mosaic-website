@@ -1,9 +1,9 @@
 <?php
 
-namespace Mosiac\Website\Model\Page;
+namespace Mosaic\Website\Model\Page;
 
-use Mosiac\Website\Controller\TickerPageController;
-use Mosiac\Website\Model\Company;
+use Mosaic\Website\Controller\TickerPageController;
+use Mosaic\Website\Model\Company;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\GridField\GridField;

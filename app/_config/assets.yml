@@ -4,7 +4,7 @@
 
 ---
 Name: project-assetsflysystem
-After: '#assetsflysystem'
+After: "#assetsflysystem"
 ---
 SilverStripe\Core\Injector\Injector:
   # Define public resolution strategy

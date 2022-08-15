@@ -1,6 +1,6 @@
 <?php
 
-namespace Mosiac\Website\Extension;
+namespace Mosaic\Website\Extension;
 
 use SilverStripe\ORM\DataExtension;
 

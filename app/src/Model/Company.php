@@ -1,6 +1,6 @@
 <?php
 
-namespace Mosiac\Website\Model;
+namespace Mosaic\Website\Model;
 
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;

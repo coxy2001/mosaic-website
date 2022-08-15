@@ -1,9 +1,9 @@
 <?php
 
-namespace Mosiac\Website\Admin;
+namespace Mosaic\Website\Admin;
 
 use SilverStripe\Admin\ModelAdmin;
-use Mosiac\Website\Model\Company;
+use Mosaic\Website\Model\Company;
 
 class CompanyAdmin extends ModelAdmin
 {

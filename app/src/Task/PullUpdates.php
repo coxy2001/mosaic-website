@@ -1,6 +1,6 @@
 <?php
 
-namespace Mosiac\Website\Task;
+namespace Mosaic\Website\Task;
 
 use SilverStripe\Dev\BuildTask;
 

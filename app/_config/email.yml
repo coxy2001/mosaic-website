@@ -2,7 +2,7 @@
 ---
 Name: project-emailconfig
 After:
-  - '#emailconfig'
+  - "#emailconfig"
 ---
 SilverStripe\Core\Injector\Injector:
   Swift_Transport:
