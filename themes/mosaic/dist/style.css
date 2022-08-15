@@ -92,6 +92,74 @@ p {
   margin-bottom: 1rem;
 }
 
+.btn-danger, .btn-success, .btn-primary {
+  display: inline;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  color: #fff;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+@media (min-width: 576px) {
+  .btn-danger, .btn-success, .btn-primary {
+    width: auto;
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+  }
+}
+
+.btn-primary {
+  border: 1px solid #007bff;
+  background-color: #007bff;
+}
+.btn-primary:hover:not(.btn--disabled) {
+  background-color: #0062cc;
+  border-color: #0062cc;
+}
+.btn-primary:active:not(.btn--disabled) {
+  background-color: #004a99;
+  border-color: #004a99;
+}
+.btn-success {
+  border: 1px solid #00cc00;
+  background-color: #00cc00;
+}
+.btn-success:hover:not(.btn--disabled) {
+  background-color: #00a300;
+  border-color: #00a300;
+}
+.btn-success:active:not(.btn--disabled) {
+  background-color: #007a00;
+  border-color: #007a00;
+}
+.btn-danger {
+  border: 1px solid #cc0000;
+  background-color: #cc0000;
+}
+.btn-danger:hover:not(.btn--disabled) {
+  background-color: #a30000;
+  border-color: #a30000;
+}
+.btn-danger:active:not(.btn--disabled) {
+  background-color: #7a0000;
+  border-color: #7a0000;
+}
+.btn--disabled {
+  cursor: default;
+  pointer-events: none;
+  color: #ccc;
+  background-color: #444;
+  border-color: #444;
+  transition: none;
+}
+
 .element {
   padding-top: 3rem;
   padding-bottom: 3rem;
