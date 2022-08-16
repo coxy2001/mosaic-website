@@ -1,12 +1,4 @@
 <div class="container">
-	$DataList
-</div>
-
-<br>
-<br>
-<br>
-
-<div class="container">
 	<% if $Companies %>
 		<% loop $Companies %>
 			<div class="company">
@@ -56,6 +48,22 @@
 					<% end_with %>
 				</div>
 			<% end_if %>
+		<% end_loop %>
+	<% end_if %>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+	<% if $CompaniesByDate %>
+		<% loop $CompaniesByDate %>
+			<div class="company">
+				<p>$Ticker - $Name</p>
+				<p>$Date</p>
+				<p>\${$MarketCap} - \${$Price}</p>
+			</div>
 		<% end_loop %>
 	<% end_if %>
 </div>

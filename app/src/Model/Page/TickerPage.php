@@ -4,9 +4,7 @@ namespace Mosaic\Website\Model\Page;
 
 use Mosaic\Website\Controller\TickerPageController;
 use Mosaic\Website\Model\Company;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\Form;
-use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\ArrayList;
 
 class TickerPage extends \Page
 {
@@ -19,23 +17,12 @@ class TickerPage extends \Page
         return Company::get();
     }
 
-    public function getDataList()
+    public function getCompaniesByDate($year = 2022, $month = 8)
     {
-        $fields = FieldList::create(($this->getGridField()));
-        $form = Form::create();
-        $form->setFields($fields);
-
-        return $form;
-    }
-
-    public function getGridField(): GridField
-    {
-        $field = GridField::create(
-            "Ticker List",
-            "Ticker List",
-            $this->getCompanies()
-        );
-
-        return $field;
+        $companies = [];
+        foreach (Company::get() as $company) {
+            array_push($companies, $company->versionByDate($year, $month));
+        }
+        return ArrayList::create($companies);
     }
 }
