@@ -3,8 +3,8 @@
     "type": "silverstripe-recipe",
     "description": "The SilverStripe Framework Installer",
     "require": {
-        "php": "^7.3 || ^8.0",
-        "silverstripe/recipe-cms": "~4.10.0@stable",
+        "php": "^7.4 || ^8.0",
+        "silverstripe/recipe-cms": "~4.11.0@stable",
         "silverstripe/login-forms": "~4.6.0@stable",
         "dnadesign/silverstripe-elemental": "^4.8",
         "silverstripe/crontask": "^2.4"
