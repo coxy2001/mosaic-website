@@ -14,9 +14,12 @@
     define('MARKET_CAP', 'eq_market_cap');
     define('FREE_CASH_FLOW', 'a1fcf');
     define('EARNINGS_YIELD', 'yield');
-    define('LINK', 'viewData.link');
-    define('FLAG', 'viewData.flag');
-    define("features", [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, LINK, FLAG]);
+    define('VIEWDATA', 'viewData');
+    define('LINK', 'link');
+    define('FLAG', 'flag');
+    define("FEATURES", [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA]);
+
+    $features = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE];
 
     define('BASE_INVESTING_URL', 'https://www.investing.com/');
     define('SCREENER_PATH', 'stock-screener/Service/SearchStocks');
@@ -62,7 +65,55 @@
     ]);
 
     $response = $client->request('POST', SCREENER_PATH, getScreenerRequestOptions($pageNumber, $exchangeNumber));
-    echo $response->getBody();
+    // echo $response->getBody();
+    $j = json_decode($response->getBody(), true);
+    // var_dump($j);
+    $totalCount = $j['totalCount'];
+    echo "count from total count: ";
+    echo $totalCount;
+    $hits = $j['hits'];
+    echo "\ncount of hits list: ";
+    echo count($hits);
+    echo "\n";
+    // var_dump($hits);
+
+    $extracted = array();
+
+    // for($i = 0; $i < count($hits); $i++)
+    //     $company = $hits[$i];
+        $i = 0;
+    foreach($hits as $company) {
+        // echo $company[NAME] . "\n";
+        // var_dump($company);
+        $companyLine = '';
+
+        foreach (FEATURES as $feature){
+            // TODO check if feature is present
+            if (strcmp($feature, VIEWDATA) == 0) {
+                $countryDetails = $company[$feature];
+                $companyLine = $companyLine . $countryDetails[LINK] . " " . $countryDetails[FLAG] . " ";
+            }
+            else {
+                $companyLine = $companyLine . $company[$feature] . " ";
+            }
+        }
+        echo $companyLine;
+        array_push($extracted, $companyLine);
+        echo $i . "\n";
+        $i++;
+    }
+    // foreach ($extracted as $line) {
+    //     echo 
+    // }
+            // TODO check if feature is present
+        //     if (strcmp($feature, VIEWDATA)) {
+        //         $countryDetails = $company[$feature];
+        //         $companyLine = $companyLine . $countryDetails[LINK] . " " . $countryDetails[FLAG] . " ";
+        //     }
+        //     else {
+        //         $companyLine = $companyLine . $company[$feature] . " ";
+        //     }
+        // echo $companyLine . "\n";
 
     // Manipulate JSON
 
