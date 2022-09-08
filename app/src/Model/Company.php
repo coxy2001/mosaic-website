@@ -16,6 +16,7 @@ class Company extends DataObject
         "Price" => "Decimal",
         "ROC" => "Decimal",
         "EarningsYield" => "Decimal",
+        "Link" => "Varchar"
     ];
 
     private static $table_name = 'Company';
@@ -28,7 +29,8 @@ class Company extends DataObject
         "Name",
         "Sector",
         "Price",
-        "ROC"
+        "ROC",
+        "Link"
     ];
 
     private static $searchable_fields = [
