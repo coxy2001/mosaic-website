@@ -5,6 +5,7 @@ namespace Mosaic\Website\Model\Page;
 use Mosaic\Website\Controller\TickerPageController;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\TopCompanies;
+use SilverStripe\Control\Controller;
 
 class TickerPage extends \Page
 {
@@ -19,10 +20,16 @@ class TickerPage extends \Page
 
     public function getTopCompanies()
     {
-        // $listID = array_key_exists("list", $_GET) ? $_GET["list"] : 1;
+        $request = Controller::curr()->getRequest();
+        $listID = $request->getVar("list");
 
-        $topCompany = TopCompanies::get()->first();
+        $topCompanies = $listID ? TopCompanies::get_by_id($listID) : TopCompanies::get()->last();
 
-        return $topCompany ? $topCompany->getPaginatedList() : null;
+        return $topCompanies ? $topCompanies->getPaginatedList() : null;
+    }
+
+    public function getHistoryOptions()
+    {
+        return TopCompanies::get();
     }
 }

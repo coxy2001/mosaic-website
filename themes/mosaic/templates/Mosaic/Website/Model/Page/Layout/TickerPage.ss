@@ -1,4 +1,12 @@
 <div class="container">
+	<select name="history" id="history">
+		<% loop $HistoryOptions %>
+			<option value="$ID">$Name</option>
+		<% end_loop %>
+	</select>
+</div>
+
+<div class="container">
 	<% if $TopCompanies %>
 		<% loop $TopCompanies %>
 			<div class="company">
@@ -8,7 +16,7 @@
 			</div>
 		<% end_loop %>
 
-		<%-- BEGIN PAGINATION --%>
+		<%-- Pagination --%>
 		<% if $TopCompanies.MoreThanOnePage %>
 			<div class="pagination">
 				<ul class="pagination__list">
@@ -20,8 +28,12 @@
 
 					<% loop $TopCompanies.PaginationSummary %>
 						<% if $Link %>
-							<li class="pagination__item <% if $CurrentBool %>pagination__item--current<% end_if %>">
-								<a class="pagination__link" href="$Link">$PageNum</a>
+							<li class="pagination__item">
+								<% if $CurrentBool %>
+									<span class="pagination__current">$PageNum</span>
+								<% else %>
+									<a class="pagination__link" href="$Link">$PageNum</a>
+								<% end_if %>
 							</li>
 						<% else %>
 							<li class="pagination__item">...</li>
@@ -38,6 +50,5 @@
 		<% else %>
 			<p><a href="?length=1">Show pagination</a></p>
 		<% end_if %>
-		<%-- END PAGINATION --%>
 	<% end_if %>
 </div>
