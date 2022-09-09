@@ -15,7 +15,7 @@ class TickerPage extends \Page
 
     public function getCompanies()
     {
-        return Company::get();
+        return Company::get()->filter("ClassName", Company::class);
     }
 
     public function getTopCompanies()
