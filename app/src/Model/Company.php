@@ -15,6 +15,8 @@ class Company extends DataObject
         "MarketCap" => "BigInt",
         "Price" => "Decimal",
         "ROC" => "Decimal",
+        "ROA" => "Decimal",
+        "PE" => "Decimal",
         "EarningsYield" => "Decimal",
         "Link" => "Varchar"
     ];
