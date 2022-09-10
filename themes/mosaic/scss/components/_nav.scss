@@ -8,10 +8,6 @@
     &__item {
         &.current {
             background-color: $body-bg;
-
-            a {
-                color: $nav-link-current-colour;
-            }
         }
     }
 
@@ -23,6 +19,10 @@
 
         &:hover {
             color: $nav-link-hover-colour;
+        }
+
+        &.current {
+            color: $nav-link-current-colour;
         }
     }
 }
