@@ -2,6 +2,8 @@
 
 namespace Mosaic\Website\Cron;
 require 'vendor/autoload.php';
+
+use Exception;
 use GuzzleHttp\Client;
 use Mosaic\Website\Model\Company;
 use SilverStripe\CronTask\Interfaces\CronTask;
@@ -21,7 +23,7 @@ use SilverStripe\CronTask\Interfaces\CronTask;
  const LINK = 'link';
  const FLAG = 'flag';
 
- const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
+ const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, PE, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
 
  const BASE_INVESTING_URL = 'https://www.investing.com/';
  const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
@@ -69,37 +71,15 @@ class UpdateCompaniesCron implements CronTask
         echo "\ncount of hits list: ";
         echo count($hits);
         echo "\n";
-        // var_dump($hits);
 
-        $extracted = array();
-
-        // for($i = 0; $i < count($hits); $i++)
-        //     $company = $hits[$i];
-            $i = 0;
+        $i = 1;
         foreach($hits as $c) {
-            // echo $company[NAME] . "\n";
-            // var_dump($company);
-            $companyLine = '';
-
             extractAndSave($c);
-
-            // foreach (FEATURES as $feature){
-            //     // TODO check if feature is present
-            //     if (strcmp($feature, VIEWDATA) == 0) {
-            //         $countryDetails = $c[$feature];
-            //         $companyLine = $companyLine . $countryDetails[LINK] . " " . $countryDetails[FLAG] . " ";
-            //     }
-            //     else {
-            //         $companyLine = $companyLine . $c[$feature] . " ";
-            //     }
-            // }
-            // echo $companyLine;
-            // array_push($extracted, $companyLine);
             echo $i . "\n";
             $i++;
-            if($i > 1) {
-                break;
-            }
+            // if($i > 1) {
+            //     break;
+            // }
         }
     }
 }
@@ -131,39 +111,54 @@ function getScreenerHeaders() {
 
 function extractAndSave($c) {
     $extracted = extractFeatures($c);
-    // var_dump($extracted);
+    if(count($extracted) != count(FEATURES) + 1) {
+        echo "\n Missing Features Not Writing to DB \n";
+        var_dump($extracted);
+        return;
+    }
     writeToDB($extracted);
 }
 
 function extractFeatures($c) {
     $extracted = array();
+    $missing = array();
     // TODO check features
     foreach(FEATURES as $feature) {
-        if (strcmp($feature, VIEWDATA) == 0) {
-            $countryDetails = $c[$feature];
-            $extracted += [FLAG => $countryDetails[FLAG]];
-            $extracted += [LINK => (BASE_INVESTING_URL . $countryDetails[LINK])];
+        // TODO check certain features non null and allow some to be null
+        try {
+            if (strcmp($feature, VIEWDATA) == 0) {
+                $countryDetails = $c[$feature];
+                $extracted += [FLAG => $countryDetails[FLAG]];
+                $extracted += [LINK => (BASE_INVESTING_URL . $countryDetails[LINK])];
+            }
+            else {
+                $extracted += [$feature => $c[$feature] ?? null];
+            }
+        } catch(Exception $e) {
+            $missing += $feature;
         }
-        else {
-            $extracted += [$feature => $c[$feature]];
-        }
+    }
+    if (count($missing) != 0) {
+        return $missing;
     }
     return $extracted;
 }
 
 function writeToDB($extracted) {
+    // TODO write null not 0
     $company = Company::create();
     $company->Ticker = $extracted[STOCK_SYMBOL];
     $company->Name = $extracted[NAME];
     $company->Description = ($extracted[STOCK_EXCHANGE] . $extracted[FLAG]);
-    // $company->Rank = 0;
-    // $company->Sector = $extracted[SECTOR];
-    // $company->MarketCapt = $extracted[MARKET_CAP];
-    // $company->Price = $extracted[PRICE];
-    // $company->ROC = 0;
-    // $company->ROA = $extracted[ROA];
-    // $company->PE = $extracted[PE];
-    // $company->EarningsYield = $extracted[EARNINGS_YIELD];
+    $company->Rank = 0;
+    $company->Sector = $extracted[SECTOR];
+    $company->MarketCapt = $extracted[MARKET_CAP];
+    $company->Price = $extracted[PRICE];
+    $company->ROC = 0;
+    $company->ROA = $extracted[ROA];
+    $company->PE = $extracted[PE];
+    $company->EarningsYield = $extracted[EARNINGS_YIELD];
     $company->Link = $extracted[LINK];
     $company->write();
+    echo "Successful db write ";
 }
