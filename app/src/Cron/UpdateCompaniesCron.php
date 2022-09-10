@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 use Exception;
 use GuzzleHttp\Client;
 use Mosaic\Website\Model\Company;
+use Mosaic\Website\Model\CompanyVersion;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
  // Constants for obtaining values from Investing.com 
@@ -81,6 +82,14 @@ class UpdateCompaniesCron implements CronTask
             //     break;
             // }
         }
+    }
+
+    public function addCompanyToList($company, $listID)
+    {
+        $version = CompanyVersion::create();
+        $version->update($company->toMap());
+        $version->TopCompaniesID = $listID;
+        return $version->write();
     }
 }
 function getScreenerRequestOptions($pn, $ex) {
