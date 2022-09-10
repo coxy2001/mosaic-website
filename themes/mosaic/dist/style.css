@@ -126,7 +126,7 @@ p {
   list-style: none;
   justify-content: center;
 }
-.nav__item.current {
+.nav__item--current {
   background-color: #fff;
 }
 .nav__link {
@@ -138,7 +138,7 @@ p {
 .nav__link:hover {
   color: #00a6ff;
 }
-.nav__link.current {
+.nav__link--current {
   color: #000;
 }
 

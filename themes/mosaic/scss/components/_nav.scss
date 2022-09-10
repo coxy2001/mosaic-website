@@ -6,7 +6,7 @@
     justify-content: center;
 
     &__item {
-        &.current {
+        &--current {
             background-color: $body-bg;
         }
     }
@@ -21,7 +21,7 @@
             color: $nav-link-hover-colour;
         }
 
-        &.current {
+        &--current {
             color: $nav-link-current-colour;
         }
     }
