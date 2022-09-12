@@ -5,7 +5,7 @@ namespace Mosaic\Website\Model\Page;
 use Mosaic\Website\Controller\TickerPageController;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\TopCompanies;
-use SilverStripe\ORM\Filters\WithinRangeFilter;
+use SilverStripe\Control\Controller;
 
 class TickerPage extends \Page
 {
@@ -15,26 +15,21 @@ class TickerPage extends \Page
 
     public function getCompanies()
     {
-        return Company::get();
+        return Company::get()->filter("ClassName", Company::class);
     }
 
     public function getTopCompanies()
     {
-        $year = array_key_exists("year", $_GET) ? $_GET["year"] : 2022;
-        $month = array_key_exists("month", $_GET) ? $_GET["month"] : 8;
-        $nextMonth = $month + 1;
+        $request = Controller::curr()->getRequest();
+        $listID = $request->getVar("list");
 
-        $dateRange = WithinRangeFilter::create();
-        $dateRange->setMin("'$year-$month-01'");
-        $dateRange->setMax("'$year-$nextMonth-01'");
+        $topCompanies = $listID ? TopCompanies::get_by_id($listID) : TopCompanies::get()->last();
 
-        $topCompany = TopCompanies::get()
-            ->filter(["LastEdited:WithinRange" => $dateRange])
-            ->first();
+        return $topCompanies ? $topCompanies->getPaginatedList() : null;
+    }
 
-        if ($topCompany)
-            return $topCompany->Companies;
-
-        return null;
+    public function getHistoryOptions()
+    {
+        return TopCompanies::get();
     }
 }
