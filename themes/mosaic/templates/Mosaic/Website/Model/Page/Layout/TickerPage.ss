@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
 	<% if $Companies %>
 		<% loop $Companies %>
 			<div class="company">
@@ -24,7 +24,6 @@
 			</div>
 		<% end_loop %>
 	<% end_if %>
-    -->
 </div>
 
 <div class="grid-container">
