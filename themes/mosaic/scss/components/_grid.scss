@@ -1,0 +1,46 @@
+.grid {
+    &__row {
+        display: grid;
+        grid-template-columns: 5% 16% 16% 7% 7% 16% 11% 11% 11%;
+        grid-gap: 0.5rem;
+        padding: 5rem;
+        background-color: #3c4147;
+    }
+
+    &__item {
+        background-color: green;
+
+    }
+
+    &__head {
+        background-color: #e8e8f4;
+        border-color: #999ca5;
+        border-style: solid;
+        border-width: 1px;
+
+        &:hover {
+            background-color: #999ca5;
+        }
+    }
+
+    &__blank {
+        grid-column: span 3;
+    }
+
+    &__text {
+        margin: 0.5rem;
+    }
+}
+
+#date-picker {
+    grid-column: span 2;
+    text-align: left;
+}
+
+#country-picker {
+    grid-column: span 2;
+}
+
+#download {
+    grid-column: span 2;
+}

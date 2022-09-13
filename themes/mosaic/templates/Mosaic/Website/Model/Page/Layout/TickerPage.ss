@@ -10,10 +10,10 @@
 <br>
 <br>
 
-<div class="container">
+<div class="container-full">
 	<% if $TopCompanies %>
 		<% loop $TopCompanies %>
-			<div class="company">
+			<div class="grid__row">
 				<p>$Ticker - $Name</p>
 				<p>$Date</p>
 				<p>\${$MarketCap} - \${$Price}</p>
