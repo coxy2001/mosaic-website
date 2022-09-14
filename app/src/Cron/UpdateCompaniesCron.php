@@ -3,6 +3,8 @@
 namespace Mosaic\Website\Cron;
 require 'vendor/autoload.php';
 
+use DOMDocument;
+use DOMXPath;
 use Exception;
 use GuzzleHttp\Client;
 use Mosaic\Website\Model\Company;
@@ -28,6 +30,8 @@ use SilverStripe\CronTask\Interfaces\CronTask;
 
  const BASE_INVESTING_URL = 'https://www.investing.com/';
  const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
+ const INCOME_STATEMENT = '-income-statement';
+ const BALANCE_SHEET = '-balance-sheet';
  const TIMEOUT = 15;
  const COUNTRY = 5;
  
@@ -60,6 +64,10 @@ class UpdateCompaniesCron implements CronTask
             'timeout' => TIMEOUT
         ]);
 
+        scrape($client, "/equities/linde-plc-income-statement?cid=942017");
+        
+        return;
+
         $response = $client->request('POST', SCREENER_PATH, getScreenerRequestOptions($pageNumber, $exchangeNumber));
         // $response = $client->request('POST', SCREENER_PATH);
         // echo $response->getBody();
@@ -83,15 +91,15 @@ class UpdateCompaniesCron implements CronTask
             // }
         }
     }
-
-    public function addCompanyToList($company, $listID)
-    {
+}
+function addCompanyToList($company, $listID) {
         $version = CompanyVersion::create();
         $version->update($company->toMap());
         $version->TopCompaniesID = $listID;
         return $version->write();
     }
-}
+
+
 function getScreenerRequestOptions($pn, $ex) {
     return [
         'headers' => getScreenerHeaders(),
@@ -170,4 +178,34 @@ function writeToDB($extracted) {
     $company->Link = $extracted[LINK];
     $company->write();
     echo "Successful db write ";
+}
+
+function scrape($client, $url) {
+    $response = $client->request('GET', $url);
+    $html = $response->getBody();
+    // var_dump($html);
+    $doc = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $doc->loadHTML($html);
+    // echo $doc->saveHTML();
+    $xpath = new DOMXPath($doc);
+    // var_dump($xpath);
+    libxml_clear_errors();
+
+    $extracted = $xpath->evaluate('//parent::span[text()="Total Revenue"]');
+    foreach($extracted as $extraction) {
+        var_dump($extraction->parentNode->parentNode);
+    }
+}
+
+function addPageToUrl($url, $page) {
+    $stringParts = explode('?', $url);
+}
+
+function processBalanceSheet() {
+
+}
+
+function processIncomeStatement($client, $url) {
+
 }
