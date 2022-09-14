@@ -39,7 +39,7 @@ class TopCompanies extends DataObject
         $request = Controller::curr()->getRequest();
 
         $paginatedList = PaginatedList::create(
-            $this->Companies()->Sort("Rank", "ASC"),
+            $this->Companies()->Sort($request->getVar("sort") ?: "Rank", $request->getVar("direction") ?: "ASC"),
             $request
         )
             ->setPageLength($request->getVar("length") ?: 50)
