@@ -1,3 +1,13 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaic Investment Securities</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="http://fonts.cdnfonts.com/css/effra-heavy" rel="stylesheet">
+</head>
+
+
 <div class="container">
 	<select name="history" id="history">
 		<% loop $HistoryOptions %>
@@ -10,16 +20,52 @@
 <br>
 <br>
 
-<div class="container-full">
+
+</div>
+
+<div class="grid__header">
+    <div class="grid__head" id="date-picker"><h5 class="grid-text">DATE</h5>
+        <!--TODO: date picker -->
+    </div>
+    <div class="grid__head" id="country-picker"><h5 class="grid-text">COUNTRY</h5>
+        <!--TODO: country picker-->
+    </div>
+    <div class="grid__blank"></div>
+    <div class="grid__head" id="download"><h5 class="grid-text">DOWNLOAD CSV</h5>
+        <!--TODO: download button-->
+    </div>
+</div>
+
+<div class="grid__header"> <!--Headings for every following row-->
+	<div class="grid__head"><h6 class="grid-text">	RANK				</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	COMPANY NAME		</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	TICKER:EXCHANGE		</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	P/E					</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	ROA					</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	MARKET:SECTOR		</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	MARKET CAP			</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	FREE CASH FLOW		</h6></div>
+	<div class="grid__head"><h6 class="grid-text">	DIVIDENDS YIELD		</h6></div>
+</div>
+
+    <!-- Rows go here -->
 	<% if $TopCompanies %>
 		<% loop $TopCompanies %>
-			<div class="grid__row">
-				<p>$Ticker - $Name</p>
-				<p>$Date</p>
-				<p>\${$MarketCap} - \${$Price}</p>
+			<div class="grid__header">
+				<div class="grid__item">	<p class="grid__text">$RANK				</p></div>
+				<div class="grid__item">	<p class="grid__text">$Name				</p></div>
+				<div class="grid__item">	<p class="grid__text">$Ticker $EXCHANGE	</p></div>
+				<div class="grid__item">	<p class="grid__text">P/E					</p></div>
+				<div class="grid__item">	<p class="grid__text">$ROA					</p></div>
+				<div class="grid__item">	<p class="grid__text">$SECTOR				</p></div>
+				<div class="grid__item">	<p class="grid__text">$MarketCap			</p></div>
+				<div class="grid__item">	<p class="grid__text">$FREE				</p></div>
+				<div class="grid__item">	<p class="grid__text">$DIVIDENDS			</p></div>
+				<!--<p>$Date</p>-->
+				<!--<p>\${$MarketCap} - \${$Price}</p>-->
 			</div>
 		<% end_loop %>
-
+    </div>
 		<%-- Pagination --%>
 		<% if $TopCompanies.MoreThanOnePage %>
 			<div class="pagination">
@@ -55,55 +101,26 @@
 			<p><a href="?length=1">Show pagination</a></p>
 		<% end_if %>
 	<% end_if %>
-</div>
 
-<div class="grid-container">
-    <div class="grid-head" id="date-picker">
-        <h5 class="grid-text">DATE</h5>
-        <!--TODO: date picker -->
-    </div>
-    <div class="grid-head" id="country-picker">
-        <h5 class="grid-text">COUNTRY</h5>
-        <!--TODO: country picker-->
-    </div>
-    <div class="grid-blank">
-    </div>
-    <div class="grid-head" id="download">
-        <h5 class="grid-text">DOWNLOAD CSV</h5>
-        <!--TODO: download button-->
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">RANK</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">COMPANY NAME</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">TICKER:EXCHANGE</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">P/E</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">ROA</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">MARKET:SECTOR</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">MARKET CAP</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">FREE CASH FLOW</h6>
-    </div>
-    <div class="grid-head">
-        <h6 class="grid-text">DIVIDENDS YIELD</h6>
-    </div>
-    <!-- Rows go here -->
-
-
-</div>
     
+
+    <div class="center">
+        <div class="pagination">
+            <a href="#">&laquo;</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+            <a href="#">6</a>
+            <a href="#">&raquo;</a>
+        </div>
+    </div>
+ 
+
+
+
+
 
 
 </html>
