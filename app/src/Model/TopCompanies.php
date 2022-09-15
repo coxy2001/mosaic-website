@@ -10,7 +10,8 @@ use SilverStripe\ORM\PaginatedList;
 class TopCompanies extends DataObject
 {
     private static $db = [
-        "Name" => "Varchar"
+        "Name" => "Varchar",
+        "Year" => "Varchar",
     ];
 
     private static $has_many = [
@@ -27,11 +28,13 @@ class TopCompanies extends DataObject
 
     private static $summary_fields = [
         "Name",
+        "Year",
         "LastEdited",
     ];
 
     private static $searchable_fields = [
         "Name",
+        "Year",
         "LastEdited",
     ];
 
