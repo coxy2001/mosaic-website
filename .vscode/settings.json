@@ -1,0 +1,20 @@
+{
+    "emmet.includeLanguages": {
+        "SilverStripe": "html"
+    },
+    "files.eol": "\n",
+    "liveSassCompile.settings.showOutputWindowOn": "Warning",
+    "liveSassCompile.settings.excludeList": [
+        "/**/node_modules/**",
+        "/.vscode/**",
+        "/vendor/**"
+    ],
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "~/../dist",
+            "savePathReplacementPairs": null
+        }
+    ]
+}
