@@ -67,8 +67,10 @@ class Scraper
 
     function addCompanyToList($company, $listID) {
         $version = CompanyVersion::create();
-        $version->update($company->toMap());
-        $version->TopCompaniesID = $listID;
+        $values = $company->toMap();
+        $values["TopCompaniesID"] = $listID;
+        unset($values["ID"]);
+        $version->update($values);
         return $version->write();
     }
 
