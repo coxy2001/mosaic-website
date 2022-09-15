@@ -37,6 +37,7 @@ class ListCompanyExtractor
             //     break;
             // }
         }
+        // RETURN list of companies
     }
 
     function extractFeatures($company) {

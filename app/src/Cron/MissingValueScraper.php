@@ -56,12 +56,12 @@ class MissingValueScraper
         $epsVals = self::getRowVals(self::getTR($resultEPS));
 
         if($incomeVals[0] == self::NET_INCOME && sizeof($incomeVals) == 5) {
-            // TODO try catch to check for number vals 
+            // TODO: try catch to check for number vals 
             $totalIncome = intVal($incomeVals[1]) + intVal($incomeVals[2]) + intVal($incomeVals[3]) + intVal($incomeVals[4]);
         }
         if($epsVals[0] == self::EPS && sizeof($epsVals) == 5) {
-            // TODO try catch to check for number vals 
-            // TODO watch out for floats!
+            // TODO: try catch to check for number vals 
+            // TODO: watch out for floats!
             $totalEPS = floatval($epsVals[1]) + floatval($epsVals[2]) + floatval($epsVals[3]) + floatval($epsVals[4]);
         }
 
