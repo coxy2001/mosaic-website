@@ -6,8 +6,6 @@ body {
 
 #maincontent {
   margin-top: 121px;
-  margin-left: 1rem;
-  margin-right: 1rem;
 }
 
 .container,
@@ -15,6 +13,8 @@ body {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @media (min-width: 576px) {
@@ -230,62 +230,6 @@ p {
   transition: none;
 }
 
-.element {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-.element__title h2 {
-  margin-bottom: 1rem;
-}
-
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-  background-color: #000;
-}
-.header__link {
-  text-align: center;
-  text-decoration: none;
-}
-.header__title {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  color: #fff;
-}
-
-.nav {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  justify-content: center;
-}
-.nav__item.current {
-  background-color: #fff;
-}
-.nav__item.current a {
-  color: #000;
-}
-.nav__link {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: #fff;
-  text-decoration: none;
-}
-.nav__link:hover {
-  color: #00a6ff;
-}
-
-.footer {
-  text-align: center;
-  padding: 1.5rem 0;
-  color: #fff;
-  background-color: #000;
-}
-
 .company {
   padding-bottom: 1rem;
 }
@@ -298,14 +242,3 @@ p {
 .company__history-item {
   padding: 0 1rem;
 }/*# sourceMappingURL=style.css.map */
-
-#date-picker {
-  grid-column: span 2;
-  text-align: left;
-}
-#country-picker {
-  grid-column: span 2;
-}
-#download {
-  grid-column: span 2;
-}
