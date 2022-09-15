@@ -1,7 +1,6 @@
 <?php
 
 namespace Mosaic\Website\Cron;
-require 'vendor/autoload.php';
 
 use DOMDocument;
 use DOMXPath;
