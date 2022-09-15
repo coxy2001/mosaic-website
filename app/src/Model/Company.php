@@ -41,6 +41,11 @@ class Company extends DataObject
         "Sector"
     ];
 
+    public static function getColumnHeaders() {
+        // TODO: make this actually query db for columns? Rather than hardcoded
+        return ['Ticker', 'Name', 'Description', 'Rank', 'Sector', 'MarketCap', 'Price', 'ROC', 'ROA', 'PE', 'EarningsYield', 'Link'];
+    }
+
     public function getDate()
     {
         return date("d F, Y", strtotime($this->LastEdited));

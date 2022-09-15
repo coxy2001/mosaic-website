@@ -8,6 +8,7 @@ class RequestBuilder {
     const BASE_INVESTING_URL = 'https://www.investing.com';
     const SCREENER_PATH = '/stock-screener/Service/SearchStocks';
     const TIMEOUT = 15;
+    const COUNTRY = 5;
 
     public static function getClient() {
         return new Client([
@@ -49,7 +50,7 @@ class RequestBuilder {
     
     function getScreenerBody($pn, $ex) {
         return [
-            'country[]' => COUNTRY,
+            'country[]' => self::COUNTRY,
             'exchange[]' => $ex,
             'pn' => $pn,
             'order[col]' => 'eq_market_cap',

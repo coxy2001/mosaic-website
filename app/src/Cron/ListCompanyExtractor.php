@@ -20,37 +20,29 @@ class ListCompanyExtractor
     const LINK = 'link';
     const FLAG = 'flag';
 
-    const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, PE, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
+    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA];
     
-    public function extractStocks($json) {
+    public static function extractStocks($json) {
         $hits = $json['hits'];
-        echo "\ncount of hits list: ";
-        echo count($hits);
-        echo "\n";
-
-        $i = 1;
+        $companies = array();
         foreach($hits as $company) {
-            extractFeatures($company);
-            echo $i . "\n";
-            $i++;
-            // if($i > 1) {
-            //     break;
-            // }
+            array_push($companies, self::extractFeatures($company));
         }
         // RETURN list of companies
+        return $companies;
     }
 
     function extractFeatures($company) {
         $extracted = array();
         $missing = array();
         // TODO check features
-        foreach(FEATURES as $feature) {
+        foreach(self::FEATURES as $feature) {
             // TODO check certain features non null and allow some to be null
             try {
-                if (strcmp($feature, VIEWDATA) == 0) {
+                if (strcmp($feature, self::VIEWDATA) == 0) {
                     $countryDetails = $company[$feature];
-                    $extracted += [FLAG => $countryDetails[FLAG]];
-                    $extracted += [LINK => (BASE_INVESTING_URL . $countryDetails[LINK])];
+                    $extracted += [self::FLAG => $countryDetails[self::FLAG]];
+                    $extracted += [self::LINK => (RequestBuilder::BASE_INVESTING_URL . $countryDetails[self::LINK])];
                 }
                 else {
                     $extracted += [$feature => $company[$feature] ?? null];
@@ -59,9 +51,20 @@ class ListCompanyExtractor
                 $missing += $feature;
             }
         }
+        // TODO: check what features were actually missing here
+        // TODO: up with missing feature code here
         if (count($missing) != 0) {
             return $missing;
         }
         return $extracted;
     }
+    // function extractAndSave($c) {
+    //     $extracted = extractFeatures($c);
+    //     if(count($extracted) != count(FEATURES) + 1) {
+    //         echo "\n Missing Features Not Writing to DB \n";
+    //         var_dump($extracted);
+    //         return;
+    //     }
+    //     writeToDB($extracted);
+    // }
 }

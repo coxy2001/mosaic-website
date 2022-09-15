@@ -5,10 +5,6 @@ use GuzzleHttp\Client;
 
 class CompanyGetter 
 {
-    const BASE_INVESTING_URL = 'https://www.investing.com/';
-    const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
-    const INCOME_STATEMENT = '-income-statement';
-    const BALANCE_SHEET = '-balance-sheet';
     const COUNTRY = 5;
     
     public static function getAll() {
@@ -29,11 +25,9 @@ class CompanyGetter
         echo count($hits);
         echo "\n";
 
-        $i = 1;
-        foreach($hits as $c) {
-            extractAndSave($c);
-            echo $i . "\n";
-            $i++;
-        }
+        $companies = array();
+        // TODO loop exchanges and pages feeding extractStocks new json ($j)
+        array_push($companies, ListCompanyExtractor::extractStocks($j));
+        return $companies;
     }    
 }
