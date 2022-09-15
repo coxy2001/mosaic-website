@@ -15,4 +15,14 @@ class CompanyAdmin extends ModelAdmin
 
     private static $url_segment = 'company';
     private static $menu_title = 'Companies';
+
+    public function getList()
+    {
+        $list = parent::getList();
+
+        if (parent::getModelClass() === Company::class)
+            $list = $list->filter("ClassName", Company::class);
+
+        return $list;
+    }
 }
