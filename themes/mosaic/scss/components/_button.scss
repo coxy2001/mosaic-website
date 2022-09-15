@@ -3,13 +3,13 @@
     background-color: $colour;
 
     &:hover:not(.btn--disabled) {
-        background-color: mix(#000, $colour, 20%);
-        border-color: mix(#000, $colour, 20%);
+        background-color: darken($colour, 10%);
+        border-color: darken($colour, 10%);
     }
 
     &:active:not(.btn--disabled) {
-        background-color: mix(#000, $colour, 40%);
-        border-color: mix(#000, $colour, 40%);
+        background-color: darken($colour, 20%);
+        border-color: darken($colour, 20%);
     }
 }
 
@@ -20,6 +20,7 @@
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
+    text-decoration: none;
     user-select: none;
     color: #fff;
     border-radius: 0.25rem;

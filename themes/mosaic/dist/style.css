@@ -10,7 +10,8 @@ body {
   margin-right: 1rem;
 }
 
-.container {
+.container,
+.container-full {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -92,13 +93,70 @@ p {
   margin-bottom: 1rem;
 }
 
-.btn-danger, .btn-success, .btn-primary {
+.element {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.element__title h2 {
+  margin-bottom: 1rem;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #000;
+}
+.header__link {
+  text-align: center;
+  text-decoration: none;
+}
+.header__title {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  color: #fff;
+}
+
+.nav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+}
+.nav__item--current {
+  background-color: #fff;
+}
+.nav__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+.nav__link:hover {
+  color: #00a6ff;
+}
+.nav__link--current {
+  color: #000;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #fff;
+  background-color: #000;
+}
+
+.btn-danger, .btn-success, .btn-secondary, .btn-primary {
   display: inline;
   width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
+  text-decoration: none;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -108,7 +166,7 @@ p {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (min-width: 576px) {
-  .btn-danger, .btn-success, .btn-primary {
+  .btn-danger, .btn-success, .btn-secondary, .btn-primary {
     width: auto;
     margin-bottom: 0;
     margin-right: 0.5rem;
@@ -127,29 +185,41 @@ p {
   background-color: #004a99;
   border-color: #004a99;
 }
+.btn-secondary {
+  border: 1px solid #f7ff00;
+  background-color: #f7ff00;
+}
+.btn-secondary:hover:not(.btn--disabled) {
+  background-color: #c6cc00;
+  border-color: #c6cc00;
+}
+.btn-secondary:active:not(.btn--disabled) {
+  background-color: #949900;
+  border-color: #949900;
+}
 .btn-success {
   border: 1px solid #00cc00;
   background-color: #00cc00;
 }
 .btn-success:hover:not(.btn--disabled) {
-  background-color: #00a300;
-  border-color: #00a300;
+  background-color: #009900;
+  border-color: #009900;
 }
 .btn-success:active:not(.btn--disabled) {
-  background-color: #007a00;
-  border-color: #007a00;
+  background-color: #006600;
+  border-color: #006600;
 }
 .btn-danger {
   border: 1px solid #cc0000;
   background-color: #cc0000;
 }
 .btn-danger:hover:not(.btn--disabled) {
-  background-color: #a30000;
-  border-color: #a30000;
+  background-color: #990000;
+  border-color: #990000;
 }
 .btn-danger:active:not(.btn--disabled) {
-  background-color: #7a0000;
-  border-color: #7a0000;
+  background-color: #660000;
+  border-color: #660000;
 }
 .btn--disabled {
   cursor: default;
@@ -214,33 +284,6 @@ p {
   padding: 1.5rem 0;
   color: #fff;
   background-color: #000;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 5% 16% 16% 7% 7% 16% 11% 11% 11% ;
-  grid-gap: 0.5rem;
-  padding: 5rem;
-  background-color: #3c4147;
-}
-.grid-item {
-  background-color: green;
-
-}
-.grid-head {
-  background-color: #e8e8f4;
-  border-color: #999ca5;
-  border-style: solid;
-  border-width: 1px;
-}
-.grid-head:hover { 
-  background-color: #999ca5;
-}
-.grid-blank {
-  grid-column: span 3;
-}
-.grid-text {
-  margin: 0.5rem;
 }
 
 .company {

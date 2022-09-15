@@ -3,6 +3,7 @@
 namespace Mosaic\Website\Model;
 
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\PaginatedList;
 
@@ -41,8 +42,17 @@ class TopCompanies extends DataObject
     {
         $request = Controller::curr()->getRequest();
 
+        $sort = [$request->getVar("sort") ?: "Rank" => $request->getVar("direction") ?: "ASC"];
+        if ($request->getVar("sort") && $request->getVar("sort") !== "Rank")
+            $sort["Rank"] = "ASC";
+
+        $filter = [];
+        if ($request->getVar("countries")) {
+            $filter["Sector"] = explode(',', $request->getVar("countries"));
+        }
+
         $paginatedList = PaginatedList::create(
-            $this->Companies()->Sort("Rank", "ASC"),
+            $this->Companies()->sort($sort)->filter($filter),
             $request
         )
             ->setPageLength($request->getVar("length") ?: 50)
