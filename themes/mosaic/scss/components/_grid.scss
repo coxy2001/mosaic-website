@@ -20,10 +20,8 @@
     }
     &__header {
         display:grid;
-        grid-template-columns: 5% 15% 15% 7% 7% 16% 10% 11% 11%;
-        grid-gap: 0.5rem;
-        padding: 1rem;
-        margin-top: 0rem;
+        grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
+        padding: 0.5rem;
         background-color: #3c4147;
 
     }
@@ -31,6 +29,7 @@
     &__item {
         height: 100%;
         background-color: green;
+        margin:0.25rem;
 
     }
 
@@ -54,111 +53,133 @@
     }
 }
 
+* {
+  font-family: 'Effra Light', sans-serif;
+  font-size: small;
+}
+
+body {
+  overflow: hidden;
+  /* Hide scrollbars */
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Noto Sans JP", sans-serif;
+  color: #000;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2.4rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+h6 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 5% 16% 16% 7% 7% 16% 11% 11% 11%;
+  grid-gap: 0.5rem;
+  padding: 5rem;
+  background-color: #3c4147;
+}
+
+.grid-item {
+  background-color: green;
+
+}
+
+.grid-head {
+  background-color: #e8e8f4;
+  border-color: #999ca5;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.grid-head:hover {
+  background-color: #999ca5;
+}
+
+.grid-blank {
+  grid-column: span 3;
+}
+
+.grid-text {
+  margin: 0.5rem;
+}
+
 #date-picker {
-    grid-column: span 2;
-    text-align: left;
+  grid-column: span 2;
+  text-align: left;
 }
 
 #country-picker {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
 #download {
-    grid-column: span 2;
+  grid-column: span 2;
 }
-*{
-    font-family: 'Effra Light', sans-serif;
-    font-size: small;
-  }
-  
-  body {
-    
-    margin:0;
-  }
-  
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 2.4rem;
-    font-weight: 700;
-  }
-  
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    font-weight: 700;
-  }
-  
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 1.6rem;
-  }
-  
-  h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  h5 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  h6 {
-    font-family: "Noto Sans JP", sans-serif;
-    color: #000;
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-  }
-  
-  .pagination {
-    display: inline-block;
-  }
-  
-  .pagination a {
-    font-size: large;
-    font-weight: bold;
-    color: white;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-  }
-  
-  
-  #footer{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #3c4147;
-    color: white;
-    height: 15rem;
-  }
-  
-  .img{
-    float: left;
-  }
-  
-  #investing{
-    position: relative;
-    width: 45rem;
-    height: auto;
-    top: -170px;
-  }
-  
-  #logo{
-    position: relative;
-    width: 20rem;
-    height: auto;
-    top: 25px;
-    padding-left: 5px;
-    padding-right: 10px;
-  }
-  
-  #disclaimer{
-    position: relative;
-    column-count: 2;
-    column-gap: 6px;
-    margin-left: 20px;
-    text-align: left;
-    padding: 0px 0px 15px 0px;
-    padding-top: 50px;
-  }
+
+.center {
+  text-align: center;
+  background-color: #3c4147;
+  border-bottom: 2px solid green;
+  position: absolute;
+  bottom: 15rem;
+  width: 100%;
+  height: 5%;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  vertical-align: middle;
+  font-size: large;
+  font-weight: 600;
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+
+

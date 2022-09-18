@@ -13,12 +13,13 @@
 
     <div id="site-footer">
         <footer id="footer">
-            <!--Image broken, can't link source<div id="1"> <a href="https://www.investing.com/" target="_blank"><img class="img" id="investing"
-                        src="investing.png" alt="Data From Investing.com"></a></div>-->
-            <!--Image broken, can't link source<div id="2"><img class="img" id="logo" src="logo.png" alt="logo"></div>-->
+            <div id="investing"> <a href="https://www.investing.com/" target="_blank"><img class="img"
+                        src="imgs/investing.png" alt="Data From Investing.com"></a></div>
+            <div id="logo"><img class="img" src="imgs/logo.png" alt="logo"></div>
 
-            <div id="3">
-                <p id="disclaimer">[Your website] makes no representation as to the timeliness, accuracy or suitability of any content
+            <div id="disclaimer">
+                <p>[Your website] makes no representation as to the timeliness, accuracy or suitability
+                    of any content
                     on this website, and cannot be held liable for any irregularity or inaccuracy.
 
                     Stock recommendations and comments on this website are solely those of analysts and experts quoted.

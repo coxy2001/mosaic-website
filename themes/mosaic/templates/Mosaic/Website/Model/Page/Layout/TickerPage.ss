@@ -3,8 +3,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mosaic Investment Securities</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="http://fonts.cdnfonts.com/css/effra-heavy" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/readable/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 </head>
 
 
@@ -27,9 +32,9 @@
     <div class="grid__head" id="date-picker"><h5 class="grid-text">DATE</h5>
         <!--TODO: date picker -->
     </div>
-    <div class="grid__head" id="country-picker"><h5 class="grid-text">COUNTRY</h5>
-        <!--TODO: country picker-->
-    </div>
+        <div class="grid-head" id="country-picker">
+            <select class="selectpicker countrypicker" multiple data-live-search="true" data-flag="true"></select>
+        </div>
     <div class="grid__blank"></div>
     <div class="grid__head" id="download"><h5 class="grid-text">DOWNLOAD CSV</h5>
         <!--TODO: download button-->
@@ -66,27 +71,22 @@
 			</div>
 		<% end_loop %>
     </div>
-		<%-- Pagination --%>
+		<%-- Pagination --%>	<!-- Re-styled pagination to appear inline; can't find original css-->
+		<div class="center">
 		<% if $TopCompanies.MoreThanOnePage %>
 			<div class="pagination">
-				<ul class="pagination__list">
 					<% if $TopCompanies.NotFirstPage %>
-						<li class="pagination__item">
-							<a class="pagination__link" href="$TopCompanies.PrevLink">&lt;</a>
-						</li>
+						<a class="pagination__link" href="$TopCompanies.PrevLink">&lt;</a>
 					<% end_if %>
 
 					<% loop $TopCompanies.PaginationSummary %>
 						<% if $Link %>
-							<li class="pagination__item">
-								<% if $CurrentBool %>
-									<span class="pagination__current">$PageNum</span>
-								<% else %>
-									<a class="pagination__link" href="$Link">$PageNum</a>
-								<% end_if %>
-							</li>
+							<% if $CurrentBool %>
+								<a class="pagination__link" style="color:black;"	>$PageNum</a>
+							<% else %>
+								<a class="pagination__link" href="$Link">$PageNum</a>
+							<% end_if %>
 						<% else %>
-							<li class="pagination__item">...</li>
 						<% end_if %>
 					<% end_loop %>
 
@@ -95,29 +95,20 @@
 							<a class="pagination__link" href="$TopCompanies.NextLink">&gt;</a>
 						</li>
 					<% end_if %>
-				</ul>
 			</div>
 		<% else %>
 			<p><a href="?length=1">Show pagination</a></p>
 		<% end_if %>
+		</div>
 	<% end_if %>
 
     
-
-    <div class="center">
-        <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
-        </div>
     </div>
- 
-
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <script src="js/countrypicker.js"></script>
 
 
 
