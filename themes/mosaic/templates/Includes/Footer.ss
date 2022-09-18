@@ -1,39 +1,21 @@
-<!--<footer class="footer">
-    <div class="container">
-        <ul class="nav">
-            <% loop Menu(1) %>
-                <a class="nav__link" href="$Link" title="$Title.XML">$MenuTitle.XML</a>
-            <% end_loop %>
-        </ul>
+<div id="site-footer">
+    <footer id="footer">
+        <div id="investing">
+            <a href="https://www.investing.com/" target="_blank">
+                <img class="img" src="$SiteConfig.DataLogo.URL" alt="Data From Investing.com">
+            </a>
+        </div>
 
-        <p class="copyright">$SiteConfig.CompanyName &copy; $Now.Year</p>
-    </div>
-</footer>-->
+        <div id="logo">
+            <% if $SiteConfig.FooterLogo.URL %>
+                <img class="img" src="$SiteConfig.FooterLogo.URL" alt="logo">
+            <% else_if $SiteConfig.Logo.URL %>
+                <img class="img" src="$SiteConfig.Logo.URL" alt="logo">
+            <% end_if %>
+        </div>
 
-
-    <div id="site-footer">
-        <footer id="footer">
-            <div id="investing"> <a href="https://www.investing.com/" target="_blank"><img class="img"
-                        src="imgs/investing.png" alt="Data From Investing.com"></a></div>
-            <div id="logo"><img class="img" src="imgs/logo.png" alt="logo"></div>
-
-            <div id="disclaimer">
-                <p>[Your website] makes no representation as to the timeliness, accuracy or suitability
-                    of any content
-                    on this website, and cannot be held liable for any irregularity or inaccuracy.
-
-                    Stock recommendations and comments on this website are solely those of analysts and experts quoted.
-                    They do not represent the opinions of [your website] on whether to buy, sell or hold shares of any
-                    particular stock.
-
-                    All investors are advised to conduct their own independent research before making an investment
-                    decision. Investors should consider the source and suitability of any investment advice for their
-                    needs. Your use of this website, and its content, is at your own risk.
-
-                    Links from this website to third-party websites are in no way an endorsement by [your website] of
-                    their contents or their suitability for any purpose.
-
-                    All times and dates on [your website] are according to [your timezone].</p>
-            </div>
-        </footer>
-    </div>
+        <div id="disclaimer">
+            $SiteConfig.Disclaimer
+        </div>
+    </footer>
+</div>

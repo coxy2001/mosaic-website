@@ -10,10 +10,8 @@
     float: left;
 }
 
-#investing img {
-    width: 500px;
-    height: 200px;
-    object-fit: cover;
+.img {
+    width: 100%;
 }
 
 #logo {
@@ -21,22 +19,10 @@
     width: 15%;
 }
 
-#logo img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-}
-
 #disclaimer {
     float: right;
     width: 60%;
-}
-
-#disclaimer p {
-    column-count: 2;
-    text-align: center;
-    padding: 1rem 1.5rem 1rem 1rem;
+    padding: 1rem;
 }
 
 .selectpicker {

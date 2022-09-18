@@ -19,6 +19,12 @@ class SiteConfigExtension extends DataExtension
         "DataLogo" => Image::class,
     ];
 
+    private static $owns = [
+        "Logo",
+        "FooterLogo",
+        "DataLogo",
+    ];
+
     public function updateCMSFields($fields)
     {
         $fields->addFieldsToTab(
