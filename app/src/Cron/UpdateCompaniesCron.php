@@ -22,8 +22,9 @@ class UpdateCompaniesCron implements CronTask
     const VIEWDATA = 'viewData';
     const LINK = 'link';
     const FLAG = 'flag';
+    const CUSTOM_CALC = 'custom_calculation';
 
-    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA];
+    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA, self::CUSTOM_CALC];
 
     const BASE_INVESTING_URL = 'https://www.investing.com/';
     const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
@@ -54,8 +55,9 @@ class UpdateCompaniesCron implements CronTask
     }
     // TODO: put this code in model class? Find better way to write all at once?
     function writeToDB($extracted) {
-        // TODO write null not 0
+        // TODO: write null not 0
         $company = Company::create();
+        // TODO: loop using tomap for array keys
         $company->Ticker = $extracted[self::STOCK_SYMBOL];
         $company->Name = $extracted[self::NAME];
         $company->Description = ($extracted[self::STOCK_EXCHANGE] . $extracted[self::FLAG]);
@@ -68,6 +70,7 @@ class UpdateCompaniesCron implements CronTask
         $company->PE = $extracted[self::PE];
         $company->EarningsYield = $extracted[self::EARNINGS_YIELD];
         $company->Link = $extracted[self::LINK];
+        $company->CustomCalculation = $extracted[self::CUSTOM_CALC];
         $company->write();
         echo "Successful db write ";
     }

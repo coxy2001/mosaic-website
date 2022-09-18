@@ -19,14 +19,25 @@ class ListCompanyExtractor
     const VIEWDATA = 'viewData';
     const LINK = 'link';
     const FLAG = 'flag';
+    const CUSTOM_CALC = 'custom_calculation';
 
     const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA];
     
     public static function extractStocks($json) {
         $hits = $json['hits'];
         $companies = array();
+        $i = 0;
         foreach($hits as $company) {
-            array_push($companies, self::extractFeatures($company));
+            $i += 1;
+            try {
+                array_push($companies, self::extractFeatures($company));
+            }
+            catch (Exception $e) {
+                echo "\nSkipping company: " . $e->getMessage() . "\n";
+            }
+            if ($i == 10) {
+                break;
+            }
         }
         // RETURN list of companies
         return $companies;
@@ -51,10 +62,29 @@ class ListCompanyExtractor
                 $missing += $feature;
             }
         }
-        // TODO: check what features were actually missing here
-        // TODO: up with missing feature code here
+        $extracted += [self::CUSTOM_CALC => null];
         if (count($missing) != 0) {
-            return $missing;
+            try {
+                if (in_array(self::NAME, $missing) || in_array(self::STOCK_SYMBOL, $missing) || in_array(self::STOCK_EXCHANGE, $missing) || in_array(self::LINK, $missing) || in_array(self::PRICE, $missing)) {
+                    throw new Exception('Missing required stock features');
+                }
+                if (in_array(self::ROA, $missing)) {
+                    $ROA = MissingValueScraper::getROA($extracted[self::LINK]);
+                    $extracted[self::ROA]= $ROA;
+                    $extracted[self::CUSTOM_CALC] = true;
+                }
+                if (in_array(self::PE, $missing)) {
+                    $PE = MissingValueScraper::getPE($extracted[self::LINK], $extracted[self::PRICE]);
+                    $extracted[self::PE] = $PE;
+                    $extracted[self::CUSTOM_CALC] = true;
+                }
+            }
+            catch (Exception $e) {
+                throw new Exception('ROA or PE could not be calculated! Reason: '.$e->getMessage());
+            }
+        }
+        else {
+            $extracted[self::CUSTOM_CALC] = false;
         }
         return $extracted;
     }
