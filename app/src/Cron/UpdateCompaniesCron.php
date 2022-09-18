@@ -5,7 +5,7 @@ namespace Mosaic\Website\Cron;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\CompanyVersion;
 use SilverStripe\CronTask\Interfaces\CronTask;
- 
+
 class UpdateCompaniesCron implements CronTask
 {
     // Constants for obtaining values from Investing.com 
@@ -49,30 +49,34 @@ class UpdateCompaniesCron implements CronTask
         echo "\n Update Companies Task Running \n";
         $allCompanies = CompanyGetter::getAll();
         foreach ($allCompanies as $company) {
-            self::writeToDB($company);
+            $this->writeToDB($company);
         }
     }
+
     // TODO: put this code in model class? Find better way to write all at once?
-    function writeToDB($extracted) {
+    function writeToDB($extracted)
+    {
         // TODO write null not 0
         $company = Company::create();
-        $company->Ticker = $extracted[self::STOCK_SYMBOL];
-        $company->Name = $extracted[self::NAME];
-        $company->Description = ($extracted[self::STOCK_EXCHANGE] . $extracted[self::FLAG]);
-        $company->Rank = 0;
-        $company->Sector = $extracted[self::SECTOR];
-        $company->MarketCap = $extracted[self::MARKET_CAP];
-        $company->Price = $extracted[self::PRICE];
-        $company->ROC = 0;
-        $company->ROA = $extracted[self::ROA];
-        $company->PE = $extracted[self::PE];
-        $company->EarningsYield = $extracted[self::EARNINGS_YIELD];
-        $company->Link = $extracted[self::LINK];
-        $company->write();
+        $company->update([
+            "Ticker" => $extracted[self::STOCK_SYMBOL],
+            "Name" => $extracted[self::NAME],
+            "Description" => ($extracted[self::STOCK_EXCHANGE] . $extracted[self::FLAG]),
+            "Rank" => 0,
+            "Sector" => $extracted[self::SECTOR],
+            "MarketCap" => $extracted[self::MARKET_CAP],
+            "Price" => $extracted[self::PRICE],
+            "ROC" => 0,
+            "ROA" => $extracted[self::ROA],
+            "PE" => $extracted[self::PE],
+            "EarningsYield" => $extracted[self::EARNINGS_YIELD],
+            "Link" => $extracted[self::LINK],
+        ])->write();
         echo "Successful db write ";
     }
-    
-    function addCompanyToList($company, $listID) {
+
+    function addCompanyToList($company, $listID)
+    {
         $version = CompanyVersion::create();
         $values = $company->toMap();
         $values["TopCompaniesID"] = $listID;
