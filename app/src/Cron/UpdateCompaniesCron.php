@@ -1,39 +1,40 @@
 <?php
 
 namespace Mosaic\Website\Cron;
-require 'vendor/autoload.php';
 
 use Exception;
 use GuzzleHttp\Client;
 use Mosaic\Website\Model\Company;
+use Mosaic\Website\Model\CompanyVersion;
+use Mosaic\Website\Model\TopCompanies;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
- // Constants for obtaining values from Investing.com 
- const NAME = 'name_trans';
- const STOCK_SYMBOL = 'stock_symbol';
- const STOCK_EXCHANGE = 'exchange_trans';
- const SECTOR = 'sector_trans';
- const ROA = 'aroapct';
- const PE = 'eq_pe_ratio';
- const PRICE = 'last';
- const MARKET_CAP = 'eq_market_cap';
- const FREE_CASH_FLOW = 'a1fcf';
- const EARNINGS_YIELD = 'yield';
- const VIEWDATA = 'viewData';
- const LINK = 'link';
- const FLAG = 'flag';
+// Constants for obtaining values from Investing.com
+const NAME = 'name_trans';
+const STOCK_SYMBOL = 'stock_symbol';
+const STOCK_EXCHANGE = 'exchange_trans';
+const SECTOR = 'sector_trans';
+const ROA = 'aroapct';
+const PE = 'eq_pe_ratio';
+const PRICE = 'last';
+const MARKET_CAP = 'eq_market_cap';
+const FREE_CASH_FLOW = 'a1fcf';
+const EARNINGS_YIELD = 'yield';
+const VIEWDATA = 'viewData';
+const LINK = 'link';
+const FLAG = 'flag';
 
- const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, PE, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
+const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, PE, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
 
- const BASE_INVESTING_URL = 'https://www.investing.com/';
- const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
- const TIMEOUT = 15;
- const COUNTRY = 5;
- 
+const BASE_INVESTING_URL = 'https://www.investing.com/';
+const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
+const TIMEOUT = 15;
+const COUNTRY = 5;
+
 class UpdateCompaniesCron implements CronTask
 {
     /**
-     * Run this task every 5 minutes
+     * Run this task every minute
      *
      * @return string
      */
@@ -49,8 +50,6 @@ class UpdateCompaniesCron implements CronTask
      */
     public function process()
     {
-        echo "this is my crontask \n";
-        // Variables to be used
         $pageNumber = 1;
         $exchangeNumber = 50;
 
@@ -60,37 +59,52 @@ class UpdateCompaniesCron implements CronTask
         ]);
 
         $response = $client->request('POST', SCREENER_PATH, getScreenerRequestOptions($pageNumber, $exchangeNumber));
-        // $response = $client->request('POST', SCREENER_PATH);
-        // echo $response->getBody();
         $j = json_decode($response->getBody(), true);
-        // var_dump($j);
         $totalCount = $j['totalCount'];
-        echo "count from total count: ";
-        echo $totalCount;
         $hits = $j['hits'];
-        echo "\ncount of hits list: ";
-        echo count($hits);
-        echo "\n";
+        echo "count from total count: $totalCount <br>";
+        echo "count of hits list: " . count($hits);
 
-        $i = 1;
-        foreach($hits as $c) {
+        foreach ($hits as $c) {
             extractAndSave($c);
-            echo $i . "\n";
-            $i++;
-            // if($i > 1) {
-            //     break;
-            // }
         }
+
+        $this->bundleTopCompanies(500);
+    }
+
+    public function bundleTopCompanies($limit)
+    {
+        $list = TopCompanies::create();
+        $list->Name = date("Y F, d");
+        $list->Year = "2022";
+        $listID = $list->write();
+
+        $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
+        foreach ($companies as $company)
+            $this->addCompanyToList($company, $listID);
+    }
+
+    public function addCompanyToList($company, $listID)
+    {
+        $values = $company->toMap();
+        $values["TopCompaniesID"] = $listID;
+        unset($values["ID"]);
+
+        $version = CompanyVersion::create();
+        return $version->update($values)->write();
     }
 }
-function getScreenerRequestOptions($pn, $ex) {
+
+function getScreenerRequestOptions($pn, $ex)
+{
     return [
         'headers' => getScreenerHeaders(),
         'form_params' => getScreenerBody($pn, $ex),
     ];
 }
 
-function getScreenerBody($pn, $ex) {
+function getScreenerBody($pn, $ex)
+{
     return [
         'country[]' => COUNTRY,
         'exchange[]' => $ex,
@@ -100,7 +114,8 @@ function getScreenerBody($pn, $ex) {
     ];
 }
 
-function getScreenerHeaders() {
+function getScreenerHeaders()
+{
     return [
         'accept' => 'application/json, text/javascript, */*; q=0.01',
         'accept-language' => 'en-US,en;q=0.9',
@@ -109,9 +124,10 @@ function getScreenerHeaders() {
     ];
 }
 
-function extractAndSave($c) {
+function extractAndSave($c)
+{
     $extracted = extractFeatures($c);
-    if(count($extracted) != count(FEATURES) + 1) {
+    if (count($extracted) != count(FEATURES) + 1) {
         echo "\n Missing Features Not Writing to DB \n";
         var_dump($extracted);
         return;
@@ -119,22 +135,21 @@ function extractAndSave($c) {
     writeToDB($extracted);
 }
 
-function extractFeatures($c) {
-    $extracted = array();
-    $missing = array();
-    // TODO check features
-    foreach(FEATURES as $feature) {
-        // TODO check certain features non null and allow some to be null
+function extractFeatures($c)
+{
+    $extracted = [];
+    $missing = [];
+
+    foreach (FEATURES as $feature) {
         try {
             if (strcmp($feature, VIEWDATA) == 0) {
                 $countryDetails = $c[$feature];
                 $extracted += [FLAG => $countryDetails[FLAG]];
                 $extracted += [LINK => (BASE_INVESTING_URL . $countryDetails[LINK])];
-            }
-            else {
+            } else {
                 $extracted += [$feature => $c[$feature] ?? null];
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $missing += $feature;
         }
     }
@@ -144,21 +159,21 @@ function extractFeatures($c) {
     return $extracted;
 }
 
-function writeToDB($extracted) {
-    // TODO write null not 0
+function writeToDB($extracted)
+{
     $company = Company::create();
-    $company->Ticker = $extracted[STOCK_SYMBOL];
-    $company->Name = $extracted[NAME];
-    $company->Description = ($extracted[STOCK_EXCHANGE] . $extracted[FLAG]);
-    $company->Rank = 0;
-    $company->Sector = $extracted[SECTOR];
-    $company->MarketCapt = $extracted[MARKET_CAP];
-    $company->Price = $extracted[PRICE];
-    $company->ROC = 0;
-    $company->ROA = $extracted[ROA];
-    $company->PE = $extracted[PE];
-    $company->EarningsYield = $extracted[EARNINGS_YIELD];
-    $company->Link = $extracted[LINK];
-    $company->write();
-    echo "Successful db write ";
+    $company->update([
+        "Ticker" => $extracted[STOCK_SYMBOL],
+        "Name" => $extracted[NAME],
+        "Description" => ($extracted[STOCK_EXCHANGE] . " : " . $extracted[FLAG]),
+        "Rank" => 0,
+        "Sector" => $extracted[SECTOR],
+        "MarketCap" => $extracted[MARKET_CAP],
+        "Price" => $extracted[PRICE],
+        "ROC" => 0,
+        "ROA" => $extracted[ROA],
+        "PE" => $extracted[PE],
+        "EarningsYield" => $extracted[EARNINGS_YIELD],
+        "Link" => $extracted[LINK],
+    ])->write();
 }
