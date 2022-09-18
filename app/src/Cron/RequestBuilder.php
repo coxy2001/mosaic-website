@@ -16,17 +16,29 @@ class RequestBuilder {
         ]);
     }
 
-    public static function getScreenerRequest($pageNumber, $exchangeNumber) {
-        return new Request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
+    public static function requestScreener($pageNumber, $exchangeNumber, $client) {
+        $response = $client->request('POST',  (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
+        return $response;
     }
 
-    public static function getStockPageRequest($url, $page) {
+    public static function requestStockPage($url, $page, $client) {
         $url = self::addPageToUrl($url, $page);
-        return new Request('GET', $url);
-
+        $response = $client->request('GET', $url);
+        return $response;
     }
 
-    function addPageToUrl($url, $page) {
+    // public static function getScreenerRequest($pageNumber, $exchangeNumber) {
+    //     return new Request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
+    //     // return new Request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerHeaders(), self::getScreenerBody($pageNumber, $exchangeNumber));
+    // }
+
+    // public static function getStockPageRequest($url, $page) {
+    //     $url = self::addPageToUrl($url, $page);
+    //     return new Request('GET', $url);
+
+    // }
+
+    static function addPageToUrl($url, $page) {
         if (strcmp($page, self::INCOME_STATEMENT) != 0 || strcmp($page, self::BALANCE_SHEET) != 0) {
             // TODO return / error
         }
@@ -38,17 +50,19 @@ class RequestBuilder {
         else {
             $p2 = '';
         }
-        return self::BASE_INVESTING_URL . $p1 . $page . $p2;
+        return $p1 . $page . $p2;
     }
     
-    function getScreenerRequestOptions($pagenumber, $exchange) {
+    static function getScreenerRequestOptions($pagenumber, $exchange) {
         return [
             'headers' => self::getScreenerHeaders(),
             'form_params' => self::getScreenerBody($pagenumber, $exchange),
+            // 'body' => self::getScreenerBody($pagenumber, $exchange),
+
         ];
     }
     
-    function getScreenerBody($pn, $ex) {
+    static function getScreenerBody($pn, $ex) {
         return [
             'country[]' => self::COUNTRY,
             'exchange[]' => $ex,
@@ -58,7 +72,7 @@ class RequestBuilder {
         ];
     }
     
-    function getScreenerHeaders() {
+    static function getScreenerHeaders() {
         return [
             'accept' => 'application/json, text/javascript, */*; q=0.01',
             'accept-language' => 'en-US,en;q=0.9',

@@ -12,14 +12,12 @@ class MissingValueScraper
     const TOTAL_ASSETS = 'Total Assets';
     const NET_INCOME = 'Net Income';
 
-    public static function getROA($companyUrl) {
-        $client = RequestBuilder::getClient();
-
-        $response = $client->send(RequestBuilder::getStockPageRequest($companyUrl, self::INCOME_STATEMENT));
+    public static function getROA($companyUrl, $client) {
+        $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
         $xpath = self::getXPath($response->getBody());
         $totalIncome = self::getIncome($xpath);
 
-        $response = $client->send(RequestBuilder::getStockPageRequest($companyUrl, self::BALANCE_SHEET));
+        $response = RequestBuilder::requestStockPage($companyUrl, self::BALANCE_SHEET, $client);
         $xpath = self::getXPath($response->getBody());
         $assets = self::getTotalAssets($xpath);
 
@@ -27,10 +25,8 @@ class MissingValueScraper
         return $totalIncome / $assets * 100;
     }
 
-    public static function getPE($companyUrl, $price) {
-        $client = RequestBuilder::getClient();
-
-        $response = $client->send(RequestBuilder::getStockPageRequest($companyUrl, self::INCOME_STATEMENT));
+    public static function getPE($companyUrl, $price, $client) {
+        $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
         $xpath = self::getXPath($response->getBody());
         $totalEPS = self::getEPS($xpath);
         
@@ -58,7 +54,7 @@ class MissingValueScraper
     //     return ['ROA'=>$ROA, 'PE'=>$PE];
     // }
 
-    function getIncome($xpath) {
+    static function getIncome($xpath) {
         $resultIncome = $xpath->evaluate('//parent::span[text()="Net Income"]');
         var_dump($resultIncome);
         $incomeVals = self::getRowVals(self::getTR($resultIncome));
@@ -71,7 +67,7 @@ class MissingValueScraper
         return $totalIncome;
     }
 
-    function getEPS($xpath) {
+    static function getEPS($xpath) {
         $resultEPS = $xpath->evaluate('//parent::span[text()="Diluted EPS Excluding Extraordinary Items"]');
         var_dump($resultEPS);
         $epsVals = self::getRowVals(self::getTR($resultEPS));
@@ -116,7 +112,7 @@ class MissingValueScraper
     //     return ['totalIncome' => $totalIncome, 'totalEPS' => $totalEPS];
     // }
 
-    function getTotalAssets($xpath) {
+    static function getTotalAssets($xpath) {
         $resultAssets = $xpath->evaluate('//parent::span[text()="Total Assets"]');
         var_dump($resultAssets);
     
@@ -139,7 +135,7 @@ class MissingValueScraper
         return $assets;
     }
 
-    function getXPath($html) {
+    static function getXPath($html) {
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML($html);
@@ -150,7 +146,7 @@ class MissingValueScraper
         return $xpath;
     }
 
-    function getTR($result) {
+    static function getTR($result) {
         if (sizeof($result) == 1) {
             $result = $result[0];
         }
@@ -158,7 +154,7 @@ class MissingValueScraper
         $TR = $TD->parentNode;
         return $TR;
     }
-    function getRowVals($TR) {
+    static function getRowVals($TR) {
         $textContent = $TR->textContent;
         $textContent = trim($textContent);
         $textList = preg_split('/\r\n|\r|\n/', $textContent);

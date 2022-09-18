@@ -2,6 +2,7 @@
 
 namespace Mosaic\Website\Cron;
 
+use Exception;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\CompanyVersion;
 use SilverStripe\CronTask\Interfaces\CronTask;
@@ -47,14 +48,21 @@ class UpdateCompaniesCron implements CronTask
      */
     public function process()
     {
-        echo "\n Update Companies Task Running \n";
+        echo "Update Companies Task Running \n";
         $allCompanies = CompanyGetter::getAll();
+        // var_dump($allCompanies);
         foreach ($allCompanies as $company) {
-            self::writeToDB($company);
+            // TODO: if array key exists not try catch
+            try {
+                // self::writeToDB($company);
+            }
+            catch (Exception $e) {
+                echo "Failed to write to db\n";
+            }
         }
     }
     // TODO: put this code in model class? Find better way to write all at once?
-    function writeToDB($extracted) {
+    static function writeToDB($extracted) {
         // TODO: write null not 0
         $company = Company::create();
         // TODO: loop using tomap for array keys
@@ -72,10 +80,10 @@ class UpdateCompaniesCron implements CronTask
         $company->Link = $extracted[self::LINK];
         $company->CustomCalculation = $extracted[self::CUSTOM_CALC];
         $company->write();
-        echo "Successful db write ";
+        echo "Successful db write \n";
     }
     
-    function addCompanyToList($company, $listID) {
+    static function addCompanyToList($company, $listID) {
         $version = CompanyVersion::create();
         $values = $company->toMap();
         $values["TopCompaniesID"] = $listID;
