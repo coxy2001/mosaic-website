@@ -1,136 +1,109 @@
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mosaic Investment Securities</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/readable/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-</head>
-
-<div class="grid__header">
-    <div class="grid__head" id="date-picker">
-        <h5 class="grid-text">DATE</h5>
+<div class="grid__row">
+	<div class="grid__head" id="date-picker">
 		<select name="history" id="history">
 			<% loop $HistoryOptions %>
 				<option value="$ID">$Name</option>
 			<% end_loop %>
 		</select>
-    </div>
-    <div class="grid-head" id="country-picker">
-        <select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select>
-    </div>
-    <div class="grid__blank"></div>
-    <div class="grid__head" id="download">
-        <h5 class="grid-text">DOWNLOAD CSV</h5>
-        <!--TODO: download button-->
-    </div>
+	</div>
+	<div class="grid-head" id="country-picker">
+		<select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select>
+	</div>
+	<div class="grid__blank"></div>
+	<div class="grid__head" id="download">
+		<h3 class="grid__text">Download CSV</h3>
+		<!--TODO: download button-->
+	</div>
 </div>
 
-<div class="grid__header">
-    <div class="grid__head">
-        <h6 class="grid-text"> RANK </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> COMPANY NAME </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> TICKER:EXCHANGE </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> P/E </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> ROA </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> MARKET:SECTOR </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> MARKET CAP </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> FREE CASH FLOW </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> DIVIDENDS YIELD </h6>
-    </div>
-</div>
-
-<% if $TopCompanies %>
-	<% loop $TopCompanies %>
+<div class="grid">
 	<div class="grid__row">
-		<div class="grid__item">
-			<p class="grid__text">$RANK </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> RANK </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$Name </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> COMPANY NAME </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$Ticker $EXCHANGE </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> TICKER </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">P/E </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> P/E </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$ROA </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> ROA </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$SECTOR </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> MARKET SECTOR </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$MarketCap </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> MARKET CAP </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$FREE </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> FREE CASH FLOW </h4>
 		</div>
-		<div class="grid__item">
-			<p class="grid__text">$DIVIDENDS </p>
+		<div class="grid__head">
+			<h4 class="grid__text"> DIVIDENDS YIELD </h4>
 		</div>
 	</div>
-	<% end_loop %>
-
-	<%-- Pagination --%>
-	<% if $TopCompanies.MoreThanOnePage %>
-		<div class="pagination">
-			<ul class="pagination__list">
+	
+	<% if $TopCompanies %>
+		<% loop $TopCompanies %>
+		<div class="grid__row">
+			<div class="grid__item">
+				<p class="grid__text">$Rank</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$Name</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$Ticker</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$PE</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$ROA</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$Sector</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$MarketCap</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$FreeCashFlow</p>
+			</div>
+			<div class="grid__item">
+				<p class="grid__text">$Dividends</p>
+			</div>
+		</div>
+		<% end_loop %>
+	
+		<% if $TopCompanies.MoreThanOnePage %>
+			<div class="pagination">
 				<% if $TopCompanies.NotFirstPage %>
-					<li class="pagination__item">
-						<a class="pagination__link" href="$TopCompanies.PrevLink">&lt;</a>
-					</li>
+					<a class="pagination__item" href="$TopCompanies.PrevLink">&lt;</a>
 				<% end_if %>
-
+	
 				<% loop $TopCompanies.PaginationSummary %>
 					<% if $Link %>
-						<li class="pagination__item">
-							<% if $CurrentBool %>
-								<span class="pagination__current">$PageNum</span>
-							<% else %>
-								<a class="pagination__link" href="$Link">$PageNum</a>
-							<% end_if %>
-						</li>
+						<% if $CurrentBool %>
+							<span class="pagination__item pagination__item--current">$PageNum</span>
+						<% else %>
+							<a class="pagination__item" href="$Link">$PageNum</a>
+						<% end_if %>
 					<% else %>
-						<li class="pagination__item">...</li>
+						<span class="pagination__item">...</span>
 					<% end_if %>
 				<% end_loop %>
-
+	
 				<% if $TopCompanies.NotLastPage %>
-					<li class="pagination__item">
-						<a class="pagination__link" href="$TopCompanies.NextLink">&gt;</a>
-					</li>
+					<a class="pagination__item" href="$TopCompanies.NextLink">&gt;</a>
 				<% end_if %>
-			</ul>
-		</div>
-	<% else %>
-		<p><a href="?length=1">Show pagination</a></p>
+			</div>
+		<% else %>
+			<p><a href="?length=1">Show pagination</a></p>
+		<% end_if %>
 	<% end_if %>
-<% end_if %>
-
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script src="js/countrypicker.js"></script>
+</div>
