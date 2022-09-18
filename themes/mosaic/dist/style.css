@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
 body {
-  font-family: "Noto Sans JP", sans-serif;
+  font-family: "Effra Light", sans-serif;
   margin: 0;
 }
 
@@ -49,8 +49,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Effra Light", "Noto Sans JP", sans-serif;
-  color: #000;
+  font-family: "Effra Light", "Effra Light", sans-serif;
+  color: #e8e8f4;
   font-weight: 1000;
   line-height: 1.5;
   margin: 0;
@@ -79,9 +79,9 @@ h4 {
 }
 
 h5 {
-  font-family: "Effra Light", "Noto Sans JP", sans-serif;
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
+  font-family: "Effra Light", "Effra Light", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1.6rem;
 }
 
 h6 {
@@ -128,7 +128,7 @@ p {
   justify-content: center;
 }
 .nav__item--current {
-  background-color: #fff;
+  background-color: #3c4147;
 }
 .nav__link {
   display: block;
@@ -298,26 +298,17 @@ p {
 }
 
 .grid__row {
-  display: flex;
-  flex-direction: column;
-  flex-flow: row wrap;
-  padding: 1rem;
-  margin: 0rem;
+  display: grid;
+  grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
+  padding: 0.5rem;
+  padding-block: 0.25rem;
   background-color: #3c4147;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-}
-.grid__row > div {
-  margin: 1rem;
-  margin-top: 0.1rem;
-  margin-bottom: 0.1rem;
-  flex: 1;
 }
 .grid__header {
   display: grid;
   grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
   padding: 0.5rem;
+  padding-bottom: 0.25rem;
   background-color: #3c4147;
 }
 .grid__item {
@@ -339,10 +330,11 @@ p {
 }
 .grid__text {
   margin: 0.5rem;
+  color: black;
 }
 
 * {
-  font-family: "Effra Light", sans-serif;
+  font-family: sans-serif;
   font-size: small;
 }
 
@@ -358,43 +350,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Noto Sans JP", sans-serif;
-  color: #000;
+  text-align: center;
+  font-family: sans-serif;
   font-weight: 500;
   line-height: 1.2;
   margin: 0;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 2.4rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 2rem;
-  margin-bottom: 1.6rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-  margin-bottom: 1.2rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-h6 {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
 }
 
 .grid-container {
@@ -426,6 +386,7 @@ h6 {
 
 .grid-text {
   margin: 0.5rem;
+  color: #000;
 }
 
 #date-picker {
@@ -435,6 +396,13 @@ h6 {
 
 #country-picker {
   grid-column: span 2;
+  background-color: rgba(0, 0, 0, 0);
+  border-style: none;
+}
+
+#country-picker-button {
+  width: auto;
+  align-self: center;
 }
 
 #download {
@@ -467,4 +435,8 @@ h6 {
   top: 50%;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
+}
+
+html {
+  background-color: #3c4147;
 }/*# sourceMappingURL=style.css.map */

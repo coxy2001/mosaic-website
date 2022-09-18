@@ -1,120 +1,70 @@
 .grid {
     &__row {
-        display: -webkit-flex;
-        display: flex;
-        flex-direction: column;
-        flex-flow: row wrap;
-        padding:1rem;
-        margin: 0rem;
-        background-color: #3c4147;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 100%;
-    }
-
-    &__row > div{
-        margin: 1rem;
-        margin-top:0.1rem;
-        margin-bottom:0.1rem;
-        flex: 1;
-    }
-    &__header {
         display:grid;
         grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
         padding: 0.5rem;
-        background-color: #3c4147;
-
+        padding-block: 0.25rem;
+        background-color: $body-bg;
     }
-
+    &__header {
+      display:grid;
+      grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
+      padding: 0.5rem;
+      padding-bottom:0.25rem;
+      background-color: $body-bg;
+    }
     &__item {
         height: 100%;
         background-color: green;
         margin:0.25rem;
-
     }
-
     &__head {
-        background-color: #e8e8f4;
-        border-color: #999ca5;
+        background-color: $heading-colour;
+        border-color: $heading-darker;
         border-style: solid;
         border-width: 1px;
-
         &:hover {
-            background-color: #999ca5;
+            background-color: $heading-darker;
         }
     }
-
     &__blank {
         grid-column: span 3;
     }
-
     &__text {
         margin: 0.5rem;
+        color:black;
     }
 }
 
 * {
-  font-family: 'Effra Light', sans-serif;
+  font-family: sans-serif;
   font-size: small;
 }
-
 body {
   overflow: hidden;
   /* Hide scrollbars */
   margin: 0;
 }
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Noto Sans JP", sans-serif;
-  color: #000;
+  text-align: center;
+  font-family: sans-serif;
   font-weight: 500;
   line-height: 1.2;
   margin: 0;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: 2.4rem;
-  font-weight: 700;
-}
-
-h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 2rem;
-  margin-bottom: 1.6rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-  margin-bottom: 1.2rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-h6 {
-  font-size: 1rem;
-  margin-bottom: 0.8rem;
-}
 
 .grid-container {
   display: grid;
   grid-template-columns: 5% 16% 16% 7% 7% 16% 11% 11% 11%;
   grid-gap: 0.5rem;
   padding: 5rem;
-  background-color: #3c4147;
+  background-color: $body-bg;
 }
 
 .grid-item {
@@ -139,6 +89,7 @@ h6 {
 
 .grid-text {
   margin: 0.5rem;
+  color: $body-colour;
 }
 
 #date-picker {
@@ -148,6 +99,13 @@ h6 {
 
 #country-picker {
   grid-column: span 2;
+  background-color: #00000000;
+  border-style: none;
+}
+
+#country-picker-button{
+  width:auto;
+  align-self: center;
 }
 
 #download {
@@ -156,7 +114,7 @@ h6 {
 
 .center {
   text-align: center;
-  background-color: #3c4147;
+  background-color: $body-bg;
   border-bottom: 2px solid green;
   position: absolute;
   bottom: 15rem;
@@ -182,4 +140,4 @@ h6 {
   -webkit-transform: translateY(-50%);
 }
 
-
+html{background-color: $body-bg;}
