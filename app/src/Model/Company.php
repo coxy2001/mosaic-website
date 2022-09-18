@@ -15,7 +15,10 @@ class Company extends DataObject
         "MarketCap" => "BigInt",
         "Price" => "Decimal",
         "ROC" => "Decimal",
+        "ROA" => "Decimal",
+        "PE" => "Decimal",
         "EarningsYield" => "Decimal",
+        "Link" => "Varchar"
     ];
 
     private static $table_name = 'Company';
@@ -28,7 +31,8 @@ class Company extends DataObject
         "Name",
         "Sector",
         "Price",
-        "ROC"
+        "ROC",
+        "Link"
     ];
 
     private static $searchable_fields = [
