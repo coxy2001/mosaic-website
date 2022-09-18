@@ -1,18 +1,3 @@
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mosaic Investment Securities</title>
-
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/readable/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
-</head>
-
-
 <div class="container">
     <select name="history" id="history">
         <% loop $HistoryOptions %>
@@ -21,22 +6,20 @@
     </select>
 </div>
 
-<br>
-<br>
-<br>
-
-
-</div>
-
+<!--BUTTONS FOR DATE, COUNTRY PICKERS AND DOWNLOAD BUTTON-->
 <div class="grid__header">
+	<!--DATE PICKER-->
     <div class="grid__head" id="date-picker">
         <h5 class="grid-text">DATE</h5>
         <!--TODO: date picker -->
     </div>
+	<!--COUNTRY PICKER-->
     <div class="grid-head" id="country-picker">
         <select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select>
     </div>
-    <div class="grid__blank"></div>
+    <div class="grid__blank">
+	</div>
+	<!--DOWNLOAD BUTTON-->
     <div class="grid__head" id="download">
         <h5 class="grid-text">DOWNLOAD CSV</h5>
         <!--TODO: download button-->
@@ -44,73 +27,35 @@
 </div>
 
 <div class="grid__header">
-    <!--Headings for every following row-->
-    <div class="grid__head">
-        <h6 class="grid-text"> RANK </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> COMPANY NAME </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> TICKER:EXCHANGE </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> P/E </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> ROA </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> MARKET:SECTOR </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> MARKET CAP </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> FREE CASH FLOW </h6>
-    </div>
-    <div class="grid__head">
-        <h6 class="grid-text"> DIVIDENDS YIELD </h6>
-    </div>
+    <!--HEADINGS FOR EACH COLUMN-->
+    <div class="grid__head"><h6 class="grid-text"> RANK 			</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> COMPANY NAME 	</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> TICKER:EXCHANGE 	</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> P/E 				</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> ROA 				</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> MARKET:SECTOR 	</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> MARKET CAP 		</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> FREE CASH FLOW 	</h6></div>
+    <div class="grid__head"><h6 class="grid-text"> DIVIDENDS YIELD 	</h6></div>
 </div>
 
-<div>
-    <!-- Rows go here -->
-    <% if $TopCompanies %>
-    <% loop $TopCompanies %>
-    <div class="grid__row">
-        <div class="grid__item">
-            <p class="grid__text">$RANK </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$Name </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$Ticker $EXCHANGE </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">P/E </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$ROA </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$SECTOR </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$MarketCap </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$FREE </p>
-        </div>
-        <div class="grid__item">
-            <p class="grid__text">$DIVIDENDS </p>
-        </div>
-        <!--<p>$Date</p>-->
-        <!--<p>\${$MarketCap} - \${$Price}</p>-->
-    </div>
-    <% end_loop %>
+<!-- Rows go here -->
+<% if $TopCompanies %>
+<% loop $TopCompanies %>
+<div class="grid__row">
+	<div class="grid__item"><p class="grid__text">$RANK </p></div>
+	<div class="grid__item"><p class="grid__text">$Name </p></div>
+	<div class="grid__item"><p class="grid__text">$Ticker $EXCHANGE </p></div>
+	<div class="grid__item"><p class="grid__text">P/E </p></div>
+	<div class="grid__item"><p class="grid__text">$ROA </p></div>
+	<div class="grid__item"><p class="grid__text">$SECTOR </p></div>
+	<div class="grid__item"><p class="grid__text">$MarketCap </p></div>
+	<div class="grid__item"><p class="grid__text">$FREE </p></div>
+	<div class="grid__item"><p class="grid__text">$DIVIDENDS </p></div>
+	<!--<p>$Date</p>-->
+	<!--<p>\${$MarketCap} - \${$Price}</p>-->
 </div>
+<% end_loop %>
 
 </div>
 <%-- Pagination --%>
@@ -148,10 +93,6 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-<script src="js/countrypicker.js"></script>
 
 
 
