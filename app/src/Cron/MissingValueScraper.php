@@ -12,6 +12,8 @@ class MissingValueScraper
     const TOTAL_ASSETS = 'Total Assets';
     const NET_INCOME = 'Net Income';
 
+    // TODO: Check for ratios tab first!
+
     public static function getROA($companyUrl, $client) {
         $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
         $xpath = self::getXPath($response->getBody());
@@ -56,7 +58,7 @@ class MissingValueScraper
 
     static function getIncome($xpath) {
         $resultIncome = $xpath->evaluate('//parent::span[text()="Net Income"]');
-        var_dump($resultIncome);
+        // var_dump($resultIncome);
         $incomeVals = self::getRowVals(self::getTR($resultIncome));
 
         if($incomeVals[0] == self::NET_INCOME && sizeof($incomeVals) == 5) {
@@ -69,7 +71,7 @@ class MissingValueScraper
 
     static function getEPS($xpath) {
         $resultEPS = $xpath->evaluate('//parent::span[text()="Diluted EPS Excluding Extraordinary Items"]');
-        var_dump($resultEPS);
+        // var_dump($resultEPS);
         $epsVals = self::getRowVals(self::getTR($resultEPS));
 
         if($epsVals[0] == self::EPS && sizeof($epsVals) == 5) {
@@ -114,7 +116,7 @@ class MissingValueScraper
 
     static function getTotalAssets($xpath) {
         $resultAssets = $xpath->evaluate('//parent::span[text()="Total Assets"]');
-        var_dump($resultAssets);
+        // var_dump($resultAssets);
     
         
         $assetVals = self::getRowVals(self::getTR($resultAssets));
@@ -149,6 +151,9 @@ class MissingValueScraper
     static function getTR($result) {
         if (sizeof($result) == 1) {
             $result = $result[0];
+        }
+        else {
+            throw new Exception('Page returned no results');
         }
         $TD = $result->parentNode;
         $TR = $TD->parentNode;

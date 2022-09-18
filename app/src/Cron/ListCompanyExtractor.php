@@ -107,7 +107,7 @@ class ListCompanyExtractor
                 }
             }
             catch (Exception $e) {
-                throw new Exception('ROA or PE could not be calculated! Reason: '.$e->getMessage());
+                throw new Exception("ROA or PE could not be calculated! \nReason: " .$e->getMessage() . "\nStock: " . ($extracted[self::LINK] ?? null));
             }
         }
         else {

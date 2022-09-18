@@ -50,10 +50,13 @@ class UpdateCompaniesCron implements CronTask
     {
         echo "Update Companies Task Running \n";
         $allCompanies = CompanyGetter::getAll();
+        $successCount = 0;
         // var_dump($allCompanies);
         foreach ($allCompanies as $company) {
             $this->writeToDB($company);
+            $successCount++;
         }
+        echo $successCount . " Succesful Writes\n";
     }
 
     // TODO: put this code in model class? Find better way to write all at once?
@@ -76,7 +79,6 @@ class UpdateCompaniesCron implements CronTask
             "Link" => $extracted[self::LINK],
             "CustomCalculation" => $extracted[self::CUSTOM_CALC],
         ])->write();
-        echo "Successful db write \n";
     }
 
     function addCompanyToList($company, $listID)
