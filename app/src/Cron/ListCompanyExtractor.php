@@ -19,49 +19,109 @@ class ListCompanyExtractor
     const VIEWDATA = 'viewData';
     const LINK = 'link';
     const FLAG = 'flag';
+    const CUSTOM_CALC = 'custom_calculation';
 
-    const FEATURES = [NAME, STOCK_SYMBOL, STOCK_EXCHANGE, SECTOR, PE, ROA, PRICE, MARKET_CAP, FREE_CASH_FLOW, EARNINGS_YIELD, VIEWDATA];
+    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA];
     
-    public function extractStocks($json) {
+    public static function extractStocks($json, $client) {
         $hits = $json['hits'];
-        echo "\ncount of hits list: ";
-        echo count($hits);
-        echo "\n";
-
-        $i = 1;
+        $companies = array();
+        $i = 0;
         foreach($hits as $company) {
-            extractFeatures($company);
-            echo $i . "\n";
-            $i++;
-            // if($i > 1) {
+            $i += 1;
+            try {
+                array_push($companies, self::extractFeatures($company, $client));
+            }
+            catch (Exception $e) {
+                echo "\nSkipping company: " . $e->getMessage() . "\n";
+            }
+            // if ($i == 10) {
             //     break;
             // }
         }
         // RETURN list of companies
+        return $companies;
     }
 
-    function extractFeatures($company) {
+    static function extractFeatures($company, $client) {
         $extracted = array();
         $missing = array();
         // TODO check features
-        foreach(FEATURES as $feature) {
+        foreach(self::FEATURES as $feature) {
             // TODO check certain features non null and allow some to be null
             try {
-                if (strcmp($feature, VIEWDATA) == 0) {
+                if (strcmp($feature, self::VIEWDATA) == 0) {
+                    if (!array_key_exists($feature, $company)) {
+                        array_push($missing, $feature);
+                        array_push($missing, self::FLAG);
+                        array_push($missing, self::LINK);
+                        return;
+                    }
                     $countryDetails = $company[$feature];
-                    $extracted += [FLAG => $countryDetails[FLAG]];
-                    $extracted += [LINK => (BASE_INVESTING_URL . $countryDetails[LINK])];
+                    if (!array_key_exists(self::FLAG, $countryDetails)) {
+                        array_push($missing, self::FLAG);
+                    }
+                    else {
+                        $extracted += [self::FLAG => $countryDetails[self::FLAG]];
+                    }
+                    if (!array_key_exists(self::LINK, $countryDetails)) {
+                        array_push($missing, self::LINK);
+                    }
+                    else {
+                        $extracted += [self::LINK => (RequestBuilder::BASE_INVESTING_URL . $countryDetails[self::LINK])];
+                    }
                 }
                 else {
-                    $extracted += [$feature => $company[$feature] ?? null];
+                    if (array_key_exists($feature, $company)) {
+                        $extracted += [$feature => $company[$feature]];
+                    }
+                    else {
+                        array_push($missing, $feature);
+                    }
                 }
             } catch(Exception $e) {
-                $missing += $feature;
+                array_push($missing, $feature);
             }
         }
+        $extracted += [self::CUSTOM_CALC => null];
         if (count($missing) != 0) {
-            return $missing;
+            echo "Fixing missing features \n";
+            try {
+                if (in_array(self::NAME, $missing) || in_array(self::STOCK_SYMBOL, $missing) || in_array(self::STOCK_EXCHANGE, $missing) || in_array(self::LINK, $missing) || in_array(self::PRICE, $missing)) {
+                    throw new Exception('Missing required stock features');
+                }
+                else {
+                    foreach ($missing as $feature) {
+                        $extracted += [$feature => null];
+                    }
+                }
+                if (in_array(self::ROA, $missing)) {
+                    $ROA = MissingValueScraper::getROA($extracted[self::LINK], $client);
+                    $extracted[self::ROA]= $ROA;
+                    $extracted[self::CUSTOM_CALC] = true;
+                }
+                if (in_array(self::PE, $missing)) {
+                    $PE = MissingValueScraper::getPE($extracted[self::LINK], $extracted[self::PRICE], $client);
+                    $extracted[self::PE] = $PE;
+                    $extracted[self::CUSTOM_CALC] = true;
+                }
+            }
+            catch (Exception $e) {
+                throw new Exception("ROA or PE could not be calculated! \nReason: " .$e->getMessage() . "\nStock: " . ($extracted[self::LINK] ?? null));
+            }
+        }
+        else {
+            $extracted[self::CUSTOM_CALC] = false;
         }
         return $extracted;
     }
+    // function extractAndSave($c) {
+    //     $extracted = extractFeatures($c);
+    //     if(count($extracted) != count(FEATURES) + 1) {
+    //         echo "\n Missing Features Not Writing to DB \n";
+    //         var_dump($extracted);
+    //         return;
+    //     }
+    //     writeToDB($extracted);
+    // }
 }

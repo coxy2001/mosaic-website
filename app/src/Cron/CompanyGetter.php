@@ -2,38 +2,61 @@
 namespace Mosaic\Website\Cron;
 use Exception;
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 
 class CompanyGetter 
 {
-    const BASE_INVESTING_URL = 'https://www.investing.com/';
-    const SCREENER_PATH = 'stock-screener/Service/SearchStocks';
-    const INCOME_STATEMENT = '-income-statement';
-    const BALANCE_SHEET = '-balance-sheet';
     const COUNTRY = 5;
     
     public static function getAll() {
         $pageNumber = 1;
         $exchangeNumber = 50;
+        try {
+            $client = RequestBuilder::getClient();
 
-        $client = RequestBuilder::getClient();
 
+            // $response = $client->send(RequestBuilder::getScreenerRequest($pageNumber, $exchangeNumber));
+            // $response = $client->send(new Request('GET', 'https://www.thunderclient.com/welcome'));
+            // $response = $client->send(new Request())
 
-        $response = $client->send(RequestBuilder::getScreenerRequest($pageNumber, $exchangeNumber));
+            $response = RequestBuilder::requestScreener($pageNumber, $exchangeNumber, $client);
+            $j = json_decode($response->getBody(), true);
+            // var_dump($j);
+            
 
-        $j = json_decode($response->getBody(), true);
-        $totalCount = $j['totalCount'];
-        echo "count from total count: ";
-        echo $totalCount;
-        $hits = $j['hits'];
-        echo "\ncount of hits list: ";
-        echo count($hits);
-        echo "\n";
+            $totalCount = $j['totalCount'];
+            echo "count from total count: ";
+            echo $totalCount . "\n";
+            $hits = $j['hits'];
+            echo "count of hits list: ";
+            echo count($hits) . "\n";
 
-        $i = 1;
-        foreach($hits as $c) {
-            extractAndSave($c);
-            echo $i . "\n";
-            $i++;
+            for($i = 0; $i < 50; $i++) {
+                echo $hits[$i]['stock_symbol'] . "\n";
+            }
+
+            echo $j['isEU'] . "\n";
+            echo $j['pageNumber'] . "\n";
+            echo $j['totalCount'] . "\n";
+
         }
+        catch(Exception $e) {
+            echo "\nEror recieveing response from investing.com: " . $e->getMessage() . "\n";
+            // var_dump($j);
+            echo $e->getMessage() . "\n";
+            // echo $e->getTraceAsString() . "\n";
+        }
+
+        try {
+        $companies = array();
+        // // TODO loop exchanges and pages feeding extractStocks new json ($j)
+        $companies = ListCompanyExtractor::extractStocks($j, $client);
+
+        echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
+        }
+        catch (Exception $e) {
+            echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
+        }
+        return $companies;
     }    
 }

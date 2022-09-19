@@ -18,7 +18,8 @@ class Company extends DataObject
         "ROA" => "Decimal",
         "PE" => "Decimal",
         "EarningsYield" => "Decimal",
-        "Link" => "Varchar"
+        "Link" => "Varchar",
+        "CustomCalculation" => "Boolean",
     ];
 
     private static $table_name = 'Company';
@@ -40,6 +41,11 @@ class Company extends DataObject
         "Name",
         "Sector"
     ];
+
+    public static function getColumnHeaders() {
+        // TODO: make this actually query db for columns? Rather than hardcoded
+        return ['Ticker', 'Name', 'Description', 'Rank', 'Sector', 'MarketCap', 'Price', 'ROC', 'ROA', 'PE', 'EarningsYield', 'Link', 'CustomCalculation'];
+    }
 
     public function getDate()
     {
