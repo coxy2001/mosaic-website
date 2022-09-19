@@ -1,6 +1,32 @@
-.footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    color: $footer-colour;
-    background-color: $footer-bg;
+#footer {
+    background-color: #3c4147;
+    color: white;
+    display: flex;
+}
+
+#investing {
+    height: 100%;
+    width: 25%;
+    float: left;
+}
+
+.img {
+    width: 100%;
+}
+
+#logo {
+    height: 100%;
+    width: 15%;
+}
+
+#disclaimer {
+    float: right;
+    width: 60%;
+    padding: 1rem;
+}
+
+.selectpicker {
+    position: relative;
+    float: right;
+    left: 20%;
 }

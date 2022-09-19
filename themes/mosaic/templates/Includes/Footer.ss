@@ -1,11 +1,21 @@
-<footer class="footer">
-    <div class="container">
-        <ul class="nav">
-            <% loop Menu(1) %>
-                <a class="nav__link" href="$Link" title="$Title.XML">$MenuTitle.XML</a>
-            <% end_loop %>
-        </ul>
+<div id="site-footer">
+    <footer id="footer">
+        <div id="investing">
+            <a href="https://www.investing.com/" target="_blank">
+                <img class="img" src="$SiteConfig.DataLogo.URL" alt="Data From Investing.com">
+            </a>
+        </div>
 
-        <p class="copyright">$SiteConfig.CompanyName &copy; $Now.Year</p>
-    </div>
-</footer>
+        <div id="logo">
+            <% if $SiteConfig.FooterLogo.URL %>
+                <img class="img" src="$SiteConfig.FooterLogo.URL" alt="logo">
+            <% else_if $SiteConfig.Logo.URL %>
+                <img class="img" src="$SiteConfig.Logo.URL" alt="logo">
+            <% end_if %>
+        </div>
+
+        <div id="disclaimer">
+            $SiteConfig.Disclaimer
+        </div>
+    </footer>
+</div>

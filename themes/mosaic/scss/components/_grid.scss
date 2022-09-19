@@ -1,0 +1,57 @@
+.grid {
+    &__row {
+        display: grid;
+        grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
+        padding: 0.5rem;
+        padding-block: 0.25rem;
+    }
+
+    &__item {
+        background-color: green;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+
+    &__head {
+        background-color: $heading-colour;
+        border-color: $heading-darker;
+        border-style: solid;
+        border-width: 1px;
+        &:hover {
+            background-color: $heading-darker;
+        }
+    }
+
+    &__blank {
+        grid-column: span 3;
+    }
+
+    &__text {
+        margin: 0.5rem;
+        color: black;
+    }
+}
+
+#date-picker {
+    grid-column: span 2;
+    text-align: left;
+}
+
+#country-picker {
+    grid-column: span 2;
+    background-color: #00000000;
+    border-style: none;
+}
+
+#country-picker-button {
+    width: auto;
+    align-self: center;
+}
+
+#download {
+    grid-column: span 2;
+}
+
+#history {
+    padding: 0.5rem;
+}
