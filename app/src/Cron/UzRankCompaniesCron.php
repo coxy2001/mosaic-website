@@ -28,7 +28,7 @@ class UzRankCompaniesCron implements CronTask
     {
         echo "Rank Companies Task Running \n";
         echo "Getting Companies Sorted by ROA\n";
-        $companiesROA = Company::get()->sort('ROA')->chunkedFetch();
+        $companiesROA = Company::get()->filter("ClassName", Company::class)->sort('ROA')->chunkedFetch();
 
         $counter = 1;
         echo "Adding ROA rank\n";
@@ -42,7 +42,7 @@ class UzRankCompaniesCron implements CronTask
         $counter = 1;
         echo "Adding PE rank and overall rank\n";
 
-        $companiesPE = Company::get()->sort('AbsoluteValuePE')->chunkedFetch();
+        $companiesPE = Company::get()->filter("ClassName", Company::class)->sort('AbsoluteValuePE')->chunkedFetch();
         // $companiesPE = DB::query('AbsoluteValuePE')->chunkedFetch();
 
         foreach($companiesPE as $company) {

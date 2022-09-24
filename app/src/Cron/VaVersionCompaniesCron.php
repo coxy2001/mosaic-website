@@ -31,9 +31,6 @@ class UpdateCompanies implements CronTask
         echo "Adding TopCompanies and Versioning\n";
         $this->bundleTopCompanies(self::TOP_COMPANY_LIMIT);
         echo "Done\n";
-        echo "Cleaning Database\n";
-        $this->removeOldCompanies();
-        echo "Done\n";
     }
 
     public function bundleTopCompanies($limit)
@@ -57,12 +54,5 @@ class UpdateCompanies implements CronTask
 
         $version = CompanyVersion::create();
         return $version->update($values)->write();
-    }
-
-    public function removeOldCompanies() {
-        $companies = Company::get()->filter("ClassName", Company::class);
-        foreach ($companies as $company) {
-            $company->delete();
-        }
     }
 }

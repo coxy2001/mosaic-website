@@ -3,6 +3,7 @@
 namespace Mosaic\Website\Cron;
 
 use Mosaic\Website\Model\Company;
+use phpDocumentor\Reflection\Types\Null_;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
 class UpdateCompaniesCron implements CronTask
@@ -61,7 +62,11 @@ class UpdateCompaniesCron implements CronTask
     function writeToDB($extracted)
     {
         // TODO write null not 0
-        $company = Company::create();
+        $link = $extracted[self::LINK];
+        $company = Company::get()->filter("Link", $link)->first();
+        if($company == null) {
+            $company = Company::create();
+        }
         $company->update([
             "Ticker" => $extracted[self::STOCK_SYMBOL],
             "Name" => $extracted[self::NAME],
