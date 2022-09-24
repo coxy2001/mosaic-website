@@ -2,9 +2,7 @@
 
 namespace Mosaic\Website\Cron;
 
-use Exception;
 use Mosaic\Website\Model\Company;
-use Mosaic\Website\Model\CompanyVersion;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
 class UpdateCompaniesCron implements CronTask
@@ -81,15 +79,5 @@ class UpdateCompaniesCron implements CronTask
             "Link" => $extracted[self::LINK],
             "CustomCalculation" => $extracted[self::CUSTOM_CALC],
         ])->write();
-    }
-
-    function addCompanyToList($company, $listID)
-    {
-        $version = CompanyVersion::create();
-        $values = $company->toMap();
-        $values["TopCompaniesID"] = $listID;
-        unset($values["ID"]);
-        $version->update($values);
-        return $version->write();
     }
 }

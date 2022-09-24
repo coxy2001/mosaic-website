@@ -4,6 +4,7 @@ namespace Mosaic\Website\Cron;
 
 use Mosaic\Website\Model\Company;
 use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\ORM\DB;
 
 class UzRankCompaniesCron implements CronTask
 {
@@ -27,7 +28,7 @@ class UzRankCompaniesCron implements CronTask
     {
         echo "Rank Companies Task Running \n";
         echo "Getting Companies Sorted by ROA\n";
-        $companiesROA = Company::get()->sort('AbsoluteValueROA')->chunkedFetch();
+        $companiesROA = Company::get()->sort('ROA')->chunkedFetch();
 
         $counter = 1;
         echo "Adding ROA rank\n";
@@ -40,7 +41,10 @@ class UzRankCompaniesCron implements CronTask
 
         $counter = 1;
         echo "Adding PE rank and overall rank\n";
+
         $companiesPE = Company::get()->sort('AbsoluteValuePE')->chunkedFetch();
+        // $companiesPE = DB::query('AbsoluteValuePE')->chunkedFetch();
+
         foreach($companiesPE as $company) {
             $PErank = $counter;
             // TODO: check this exists before accessing

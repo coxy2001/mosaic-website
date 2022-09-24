@@ -48,11 +48,11 @@ class CompanyGetter
         }
 
         try {
-        $companies = array();
-        // // TODO loop exchanges and pages feeding extractStocks new json ($j)
-        $companies = ListCompanyExtractor::extractStocks($j, $client);
+            $companies = array();
+            // // TODO loop exchanges and pages feeding extractStocks new json ($j)
+            $companies = ListCompanyExtractor::extractStocks($j, $client);
 
-        echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
+            echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
         }
         catch (Exception $e) {
             echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
