@@ -6,7 +6,8 @@ use SilverStripe\ORM\DataObject;
 
 class Company extends DataObject
 {
-    protected const DB_FIELDS = [
+    // TODO: bad to have this public?
+    public const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
         "Ticker" => "Varchar",

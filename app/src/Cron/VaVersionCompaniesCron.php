@@ -5,6 +5,7 @@ namespace Mosaic\Website\Cron;
 use Exception;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\CompanyVersion;
+use Mosaic\Website\Model\TemporaryCompany;
 use Mosaic\Website\Model\TopCompanies;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
@@ -40,17 +41,39 @@ class UpdateCompanies implements CronTask
         $list->Year = "2022";
         $listID = $list->write();
 
-        $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
+        // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
+        $companies = Company::get()->sort("Rank")->limit($limit);
+        
+        $counter = 0;
+        // foreach ($companies as $company) {
+        //     // TODO: does catch get triggered if roa not in values
+        //     try {
+        //         $values = $company->toMap();
+        //         unset($values["ID"]);
+        //         $values["Rank"] = $counter;
+
+        //         $newCompany = Company::create();
+        //         $newCompany->update($values)->write();
+        //     }
+        //     catch (Exception $e) {
+        //         echo "\n Error while copying from temp companies to companies\n" . $e->getMessage() . "\n";
+        //     }
+        //     $counter++;
+        // }
+        // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
         echo "Retrived: " . count($companies) . " from the database, sorted by rank\n";
-        foreach ($companies as $company)
-            $this->addCompanyToList($company, $listID);
+        foreach ($companies as $company) {
+            $this->addCompanyToList($company, $listID, $counter);
+            $counter += 1;
+        }
     }
 
-    public function addCompanyToList($company, $listID)
+    public function addCompanyToList($company, $listID, $rank)
     {
         $values = $company->toMap();
         $values["TopCompaniesID"] = $listID;
         unset($values["ID"]);
+        $values["Rank"] = $rank;
 
         $version = CompanyVersion::create();
         return $version->update($values)->write();

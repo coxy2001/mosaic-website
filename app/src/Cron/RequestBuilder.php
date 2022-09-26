@@ -10,6 +10,24 @@ class RequestBuilder {
     const TIMEOUT = 15;
     const COUNTRY = 5;
 
+    // Constants for obtaining values from Investing.com 
+    const NAME = 'name_trans';
+    const STOCK_SYMBOL = 'stock_symbol';
+    const STOCK_EXCHANGE = 'exchange_trans';
+    const SECTOR = 'sector_trans';
+    const ROA = 'aroapct';
+    const PE = 'eq_pe_ratio';
+    const PRICE = 'last';
+    const MARKET_CAP = 'eq_market_cap';
+    const FREE_CASH_FLOW = 'a1fcf';
+    const EARNINGS_YIELD = 'yield';
+    const VIEWDATA = 'viewData';
+    const LINK = 'link';
+    const FLAG = 'flag';
+    const CUSTOM_CALC = 'custom_calculation';
+
+    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA, self::CUSTOM_CALC];
+
     public static function getClient() {
         return new Client([
             'timeout' => self::TIMEOUT

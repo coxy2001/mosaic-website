@@ -6,7 +6,7 @@ use Mosaic\Website\Model\Company;
 use phpDocumentor\Reflection\Types\Null_;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class UpdateCompaniesCron implements CronTask
+class VbDeleteCompaniesCron implements CronTask
 {
     /**
      * Run this task every 5 minutes
@@ -25,7 +25,13 @@ class UpdateCompaniesCron implements CronTask
      */
     public function process()
     {
-        echo "Update Companies Task Running \n";
-        $allCompanies = CompanyGetter::getAll();
+        echo "Delete Companies Task Running \n";
+        // TODO: way to just drop the table and add it again?
+        $companies = Company::get();
+        foreach($companies as $company) {
+            $company->delete();
+        }
+        echo "Done!\n";
+
     }
 }
