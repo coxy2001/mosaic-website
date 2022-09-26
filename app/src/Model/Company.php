@@ -9,6 +9,8 @@ class Company extends DataObject
     private static $db = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
+        "Ticker" => "Varchar",
+        "Exchange" => "Varchar",
         "Description" => "Text",
         "Rank" => "Int",
         "RankROA" => "Int",
@@ -16,14 +18,19 @@ class Company extends DataObject
         "Sector" => "Varchar",
         "MarketCap" => "BigInt",
         "Price" => "Decimal",
-        "ROC" => "Decimal",
         "ROA" => "Decimal",
-        "AbsoluteValueROA" => "Decimal",
         "PE" => "Decimal",
         "AbsoluteValuePE" => "Decimal",
-        "EarningsYield" => "Decimal",
+        "FreeCashFlow" => "Int",
+        "DividendsYield" => "Decimal",
+        "EarningsPerShare" => "Int",
         "Link" => "Varchar",
+        "Flag" => "Varchar",
         "CustomCalculation" => "Boolean",
+        "CurrentRatio" => "Decimal",
+        "CashHoldings" => "Int",
+        "PriceToBook" => "Decimal",
+        "5yrPE" => "Int",
     ];
 
     private static $table_name = 'Company';
@@ -43,13 +50,9 @@ class Company extends DataObject
     private static $searchable_fields = [
         "Ticker",
         "Name",
-        "Sector"
+        "Sector",
+        "Link",
     ];
-
-    public static function getColumnHeaders() {
-        // TODO: make this actually query db for columns? Rather than hardcoded
-        return ['Ticker', 'Name', 'Description', 'Rank', 'Sector', 'MarketCap', 'Price', 'ROC', 'ROA', 'PE', 'EarningsYield', 'Link', 'CustomCalculation'];
-    }
 
     public function getDate()
     {
