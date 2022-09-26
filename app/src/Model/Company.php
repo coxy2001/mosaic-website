@@ -6,7 +6,7 @@ use SilverStripe\ORM\DataObject;
 
 class Company extends DataObject
 {
-    private static $db = [
+    protected const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
         "Ticker" => "Varchar",
@@ -32,6 +32,7 @@ class Company extends DataObject
         "PriceToBook" => "Decimal",
         "5yrPE" => "Int",
     ];
+    private static $db = self::DB_FIELDS;
 
     private static $table_name = 'Company';
     private static $singular_name = 'Company';
