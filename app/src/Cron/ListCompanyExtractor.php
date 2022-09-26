@@ -3,6 +3,8 @@ namespace Mosaic\Website\Cron;
 
 use Exception;
 
+use function PHPUnit\Framework\isNull;
+
 class ListCompanyExtractor
 {   
     public static function extractStocks($json, $client) {
@@ -12,7 +14,11 @@ class ListCompanyExtractor
         foreach($hits as $company) {
             $i += 1;
             try {
-                array_push($companies, self::extractFeatures($company, $client));
+                $extracted = self::extractFeatures($company, $client);
+                if (is_null($extracted)) {
+                    throw new Exception("Extractor returned nothing");
+                }
+                array_push($companies, $extracted);
             }
             catch (Exception $e) {
                 echo "\nSkipping company: " . $e->getMessage() . "\n";
@@ -29,12 +35,27 @@ class ListCompanyExtractor
         foreach(RequestBuilder::FEATURES as $feature) {
             // TODO check certain features non null and allow some to be null
             try {
-                if (strcmp($feature, RequestBuilder::VIEWDATA) == 0) {
+                // Skips if stock exists in another country (ppid)
+                if (strcmp($feature, RequestBuilder::PARENT_PAIR_ID) == 0) {
+                    if (!array_key_exists($feature, $company)) {
+                        array_push($missing, $feature);
+                        continue;
+                    }
+                    else {
+                        $pID = $company[$feature];
+                        if (intval($pID) != 0) {
+                            // TODO: throw exception of custom type here instead of returning
+                            echo "PID: " . $pID . "\n";
+                            return;
+                        }
+                    }
+                }
+                else if (strcmp($feature, RequestBuilder::VIEWDATA) == 0) {
                     if (!array_key_exists($feature, $company)) {
                         array_push($missing, $feature);
                         array_push($missing, RequestBuilder::FLAG);
                         array_push($missing, RequestBuilder::LINK);
-                        return;
+                        continue;
                     }
                     $countryDetails = $company[$feature];
                     if (!array_key_exists(RequestBuilder::FLAG, $countryDetails)) {

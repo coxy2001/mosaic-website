@@ -10,9 +10,7 @@ class Company extends DataObject
     public const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
-        "Ticker" => "Varchar",
         "Exchange" => "Varchar",
-        "Description" => "Text",
         "Rank" => "Int",
         "RankROA" => "Int",
         "RankPE" => "Int",
@@ -21,17 +19,17 @@ class Company extends DataObject
         "Price" => "Decimal",
         "ROA" => "Decimal",
         "PE" => "Decimal",
+        "EPS" => "Decimal",
         "AbsoluteValuePE" => "Decimal",
         "FreeCashFlow" => "Int",
         "DividendsYield" => "Decimal",
-        "EarningsPerShare" => "Int",
         "Link" => "Varchar",
         "Flag" => "Varchar",
         "CustomCalculation" => "Boolean",
         "CurrentRatio" => "Decimal",
-        "CashHoldings" => "Int",
         "PriceToBook" => "Decimal",
-        "5yrPE" => "Int",
+        // "CashHoldings" => "Int",
+        // "5yrPE" => "Int",
     ];
     private static $db = self::DB_FIELDS;
 

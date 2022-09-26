@@ -36,11 +36,6 @@ class UpdateCompanies implements CronTask
 
     public function bundleTopCompanies($limit)
     {
-        $list = TopCompanies::create();
-        $list->Name = date("Y F, d");
-        $list->Year = "2022";
-        $listID = $list->write();
-
         // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
         $companies = Company::get()->sort("Rank")->limit($limit);
         
@@ -61,7 +56,19 @@ class UpdateCompanies implements CronTask
         //     $counter++;
         // }
         // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
-        echo "Retrived: " . count($companies) . " from the database, sorted by rank\n";
+        $count = count($companies);
+        echo "Retrived: " . $count . " from the database, sorted by rank\n";
+
+        if ($count == 0) {
+            echo "No entries available to put into top companies. Aborting... \n";
+            return;
+        }
+
+        $list = TopCompanies::create();
+        $list->Name = date("Y F, d");
+        $list->Year = "2022";
+        $listID = $list->write();
+
         foreach ($companies as $company) {
             $this->addCompanyToList($company, $listID, $counter);
             $counter += 1;

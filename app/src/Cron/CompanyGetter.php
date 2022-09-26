@@ -9,7 +9,7 @@ class CompanyGetter
 {   
     public static function getAll() {
         $pageNumber = 1;
-        $exchangeNumber = 50;
+        $exchangeNumber = 2;
         try {
             $client = RequestBuilder::getClient();
 
@@ -68,17 +68,20 @@ class CompanyGetter
         $tempCompany->update([
             "Ticker" => $extracted[RequestBuilder::STOCK_SYMBOL],
             "Name" => $extracted[RequestBuilder::NAME],
-            "Description" => ($extracted[RequestBuilder::STOCK_EXCHANGE] . $extracted[RequestBuilder::FLAG]),
-            "Rank" => 0,
+            "Exchange" => $extracted[RequestBuilder::STOCK_EXCHANGE],
             "Sector" => $extracted[RequestBuilder::SECTOR],
             "MarketCap" => $extracted[RequestBuilder::MARKET_CAP],
             "Price" => $extracted[RequestBuilder::PRICE],
-            "ROC" => 0,
             "ROA" => $extracted[RequestBuilder::ROA],
             "PE" => $extracted[RequestBuilder::PE],
+            "EPS" => $extracted[RequestBuilder::EPS],
             "AbsoluteValuePE" => abs($extracted[RequestBuilder::PE]),
-            "EarningsYield" => $extracted[RequestBuilder::EARNINGS_YIELD],
+            "DividendsYield" => $extracted[RequestBuilder::DIVIDENDS_YIELD],
             "Link" => $extracted[RequestBuilder::LINK],
+            "Flag" => $extracted[RequestBuilder::FLAG],
+            "FreeCashFlow" => $extracted[RequestBuilder::FREE_CASH_FLOW],
+            "CurrentRatio" => $extracted[RequestBuilder::CURRENT_RATIO],
+            "PriceToBook" => $extracted[RequestBuilder::PRICE_TO_BOOK],
             "CustomCalculation" => $extracted[RequestBuilder::CUSTOM_CALC],
         ])->write();
     }

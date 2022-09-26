@@ -11,6 +11,8 @@ class RequestBuilder {
     const COUNTRY = 5;
 
     // Constants for obtaining values from Investing.com 
+    // consider ttm pe? ttmpehigh, ttmpelow
+    // consider ttm roa? ttmroapct
     const NAME = 'name_trans';
     const STOCK_SYMBOL = 'stock_symbol';
     const STOCK_EXCHANGE = 'exchange_trans';
@@ -19,14 +21,26 @@ class RequestBuilder {
     const PE = 'eq_pe_ratio';
     const PRICE = 'last';
     const MARKET_CAP = 'eq_market_cap';
-    const FREE_CASH_FLOW = 'a1fcf';
-    const EARNINGS_YIELD = 'yield';
+    // const MARKET_CAP = 'mktcap';
     const VIEWDATA = 'viewData';
     const LINK = 'link';
     const FLAG = 'flag';
     const CUSTOM_CALC = 'custom_calculation';
+    // const FREE_CASH_FLOW = 'a1fcf';
+    const FREE_CASH_FLOW = 'ttmfcf';
+    const DIVIDENDS_YIELD = 'yield_us';
 
-    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE, self::MARKET_CAP, self::FREE_CASH_FLOW, self::EARNINGS_YIELD, self::VIEWDATA, self::CUSTOM_CALC];
+    const CURRENT_RATIO = 'acurratio';
+    // const CURRENT_RATIO = 'qcurratio';
+    // const PRICE_TO_BOOK = 'aprice2bk';
+    // const PRICE_TO_BOOK = 'price2bk';
+    const PRICE_TO_BOOK = 'price2bk_us';
+    const EPS = 'eq_eps';
+    const PARENT_PAIR_ID = 'parent_pair_ID';
+
+    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE,
+        self::MARKET_CAP, self::FREE_CASH_FLOW, self::DIVIDENDS_YIELD, self::VIEWDATA, self::CURRENT_RATIO, self::PRICE_TO_BOOK,
+        self::EPS, self::PARENT_PAIR_ID];
 
     public static function getClient() {
         return new Client([
