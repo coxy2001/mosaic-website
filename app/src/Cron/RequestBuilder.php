@@ -27,17 +27,6 @@ class RequestBuilder {
         return $response;
     }
 
-    // public static function getScreenerRequest($pageNumber, $exchangeNumber) {
-    //     return new Request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
-    //     // return new Request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerHeaders(), self::getScreenerBody($pageNumber, $exchangeNumber));
-    // }
-
-    // public static function getStockPageRequest($url, $page) {
-    //     $url = self::addPageToUrl($url, $page);
-    //     return new Request('GET', $url);
-
-    // }
-
     static function addPageToUrl($url, $page) {
         if (strcmp($page, self::INCOME_STATEMENT) != 0 || strcmp($page, self::BALANCE_SHEET) != 0) {
             // TODO return / error
@@ -57,7 +46,6 @@ class RequestBuilder {
         return [
             'headers' => self::getScreenerHeaders(),
             'form_params' => self::getScreenerBody($pagenumber, $exchange),
-            // 'body' => self::getScreenerBody($pagenumber, $exchange),
 
         ];
     }

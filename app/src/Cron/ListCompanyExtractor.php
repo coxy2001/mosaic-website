@@ -35,9 +35,6 @@ class ListCompanyExtractor
             catch (Exception $e) {
                 echo "\nSkipping company: " . $e->getMessage() . "\n";
             }
-            // if ($i == 10) {
-            //     break;
-            // }
         }
         // RETURN list of companies
         return $companies;
@@ -115,13 +112,4 @@ class ListCompanyExtractor
         }
         return $extracted;
     }
-    // function extractAndSave($c) {
-    //     $extracted = extractFeatures($c);
-    //     if(count($extracted) != count(FEATURES) + 1) {
-    //         echo "\n Missing Features Not Writing to DB \n";
-    //         var_dump($extracted);
-    //         return;
-    //     }
-    //     writeToDB($extracted);
-    // }
 }

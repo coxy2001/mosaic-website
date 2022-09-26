@@ -35,30 +35,8 @@ class MissingValueScraper
         return $price / $totalEPS;
     }
 
-    // public static function getROAandPE($companyUrl, $price) {
-    //     $client = RequestBuilder::getClient();
-
-    //     $response = $client->send(RequestBuilder::getStockPageRequest($companyUrl, self::INCOME_STATEMENT));
-    //     $xpath = self::getXPath($response->getBody());
-    //     $results = self::getIncomeAndEPS($xpath);
-    //     // TODO: check these tags are present
-    //     $totalIncome = $results['totalIncome'];
-    //     $totalEPS = $results['totalEPS'];
-
-    //     $response = $client->send(RequestBuilder::getStockPageRequest($companyUrl, self::BALANCE_SHEET));
-    //     $xpath = self::getXPath($response->getBody());
-    //     $assets = self::getTotalAssets($xpath);
-
-    //     // TODO: investigate floats
-    //     $ROA = $totalIncome / $assets * 100;
-    //     $PE = $price / $totalEPS;
-
-    //     return ['ROA'=>$ROA, 'PE'=>$PE];
-    // }
-
     static function getIncome($xpath) {
         $resultIncome = $xpath->evaluate('//parent::span[text()="Net Income"]');
-        // var_dump($resultIncome);
         $incomeVals = self::getRowVals(self::getTR($resultIncome));
 
         if($incomeVals[0] == self::NET_INCOME && sizeof($incomeVals) == 5) {
@@ -71,7 +49,6 @@ class MissingValueScraper
 
     static function getEPS($xpath) {
         $resultEPS = $xpath->evaluate('//parent::span[text()="Diluted EPS Excluding Extraordinary Items"]');
-        // var_dump($resultEPS);
         $epsVals = self::getRowVals(self::getTR($resultEPS));
 
         if($epsVals[0] == self::EPS && sizeof($epsVals) == 5) {
@@ -82,41 +59,8 @@ class MissingValueScraper
         return $totalEPS;
     }
 
-    // function getIncomeAndEPS($xpath) {
-    //     try {
-    //         $resultIncome = $xpath->evaluate('//parent::span[text()="Net Income"]');
-    //         var_dump($resultIncome);
-    //         $incomeVals = self::getRowVals(self::getTR($resultIncome));
-    //     }
-    //     catch (Exception $e) {
-    //             throw new Exception('Could');
-    //         }
-    
-    //         $resultEPS = $xpath->evaluate('//parent::span[text()="Diluted EPS Excluding Extraordinary Items"]');
-    //         var_dump($resultEPS);
-
-    //         $epsVals = self::getRowVals(self::getTR($resultEPS));
-    //     }
-    //     catch (Exception $e) {
-    //         throw new Exception('Could')
-    //     }
-
-    //     if($incomeVals[0] == self::NET_INCOME && sizeof($incomeVals) == 5) {
-    //         // TODO: try catch to check for number vals 
-    //         $totalIncome = intVal($incomeVals[1]) + intVal($incomeVals[2]) + intVal($incomeVals[3]) + intVal($incomeVals[4]);
-    //     }
-    //     if($epsVals[0] == self::EPS && sizeof($epsVals) == 5) {
-    //         // TODO: try catch to check for number vals 
-    //         // TODO: watch out for floats!
-    //         $totalEPS = floatval($epsVals[1]) + floatval($epsVals[2]) + floatval($epsVals[3]) + floatval($epsVals[4]);
-    //     }
-
-    //     return ['totalIncome' => $totalIncome, 'totalEPS' => $totalEPS];
-    // }
-
     static function getTotalAssets($xpath) {
         $resultAssets = $xpath->evaluate('//parent::span[text()="Total Assets"]');
-        // var_dump($resultAssets);
     
         
         $assetVals = self::getRowVals(self::getTR($resultAssets));
@@ -141,9 +85,7 @@ class MissingValueScraper
         $doc = new DOMDocument();
         libxml_use_internal_errors(true);
         $doc->loadHTML($html);
-        // echo $doc->saveHTML();
         $xpath = new DOMXPath($doc);
-        // var_dump($xpath);
         libxml_clear_errors();
         return $xpath;
     }
