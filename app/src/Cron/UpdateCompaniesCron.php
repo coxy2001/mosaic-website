@@ -2,8 +2,8 @@
 
 namespace Mosaic\Website\Cron;
 
+use Exception;
 use Mosaic\Website\Model\Company;
-use phpDocumentor\Reflection\Types\Null_;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
 class UpdateCompaniesCron implements CronTask
@@ -25,7 +25,18 @@ class UpdateCompaniesCron implements CronTask
      */
     public function process()
     {
-        echo "Update Companies Task Running \n";
-        $allCompanies = CompanyGetter::getAll();
+        try{
+            // Abort if there are already entries in Company
+            echo "Update Companies Task Running \n";
+            $companies = Company::get();
+            if(count($companies) != 0) {
+                throw new Exception("Company table should be empty before getting new ones");
+            }
+            // Add data into Company table
+            CompanyGetter::getAll();
+        }
+        catch(Exception $e) {
+            echo "\n\nError while getting new Company data\n" . $e->getMessage() . "\n\n";
+        }
     }
 }

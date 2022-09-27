@@ -1,28 +1,26 @@
 <?php
 namespace Mosaic\Website\Cron;
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
 use Mosaic\Website\Model\Company;
 
 class CompanyGetter 
 {   
+    // Gets all the stock data into the company database
     public static function getAll() {
         $pageNumber = 1;
         $exchangeNumber = 2;
         try {
+            // Generate and send the first request
             $client = RequestBuilder::getClient();
-
             $response = RequestBuilder::requestScreener($pageNumber, $exchangeNumber, $client);
             $j = json_decode($response->getBody(), true);
 
+            // Get the number of loops required for the country/exchange selection
             $totalCount = $j['totalCount'];
             echo "count from total count: ";
             echo $totalCount . "\n";
             $hits = $j['hits'];
-
             $iterations = ceil($totalCount / count($hits));
-
             echo "Iterations for this exchange: " . ($iterations) . "\n";
 
         }
@@ -33,8 +31,8 @@ class CompanyGetter
         $total = count($hits);
         for ($i = 0; $i < $iterations; $i++){
             try {
+                // Extract the stocks from the JSON
                 $companies = array();
-                // // TODO loop exchanges and pages feeding extractStocks new json ($j)
                 $companies = ListCompanyExtractor::extractStocks($j, $client);
 
                 echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
@@ -44,8 +42,8 @@ class CompanyGetter
                 echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
             }
             try {
+                // Write the results to the database
                 $successCount = 0;
-                // var_dump($allCompanies);
                 foreach ($companies as $company) {
                     self::writeToDB($company);
                     $successCount++;
@@ -56,6 +54,7 @@ class CompanyGetter
                 echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
             }
             try {
+                // Get the next set of data, unless we're done then continue
                 if ($i + 1 == $iterations) {
                     continue;
                 }
@@ -73,15 +72,10 @@ class CompanyGetter
         echo "\n\nTotal: " . $total . "\n\n";
     }    
     
+    // Creates and writes a new entry for the company database
     static function writeToDB($extracted)
     {
         // TODO write null not 0
-
-        // $link = $extracted[self::LINK];
-        // $company = Company::get()->filter("Link", $link)->first();
-        // if($company == null) {
-        //     $company = Company::create();
-        // }
 
         $tempCompany = Company::create();
 

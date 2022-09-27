@@ -38,31 +38,37 @@ class RequestBuilder {
     const EPS = 'eq_eps';
     const PARENT_PAIR_ID = 'parent_pair_ID';
 
+    // List of features to extract
     const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE,
         self::MARKET_CAP, self::FREE_CASH_FLOW, self::DIVIDENDS_YIELD, self::VIEWDATA, self::CURRENT_RATIO, self::PRICE_TO_BOOK,
         self::EPS, self::PARENT_PAIR_ID];
 
+    // Client object for making requests
     public static function getClient() {
         return new Client([
             'timeout' => self::TIMEOUT
         ]);
     }
 
+    // Requests data for 50 stocks based on the page number. Can filter by exchange
+    // Returns JSON
     public static function requestScreener($pageNumber, $exchangeNumber, $client) {
         $response = $client->request('POST',  (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
         return $response;
     }
 
+    // Gets the HTML of a specified stock page on Investing.com 
+    // Returns HTML
     public static function requestStockPage($url, $page, $client) {
+        // Insert the page time (income statement or balance sheet)
         $url = self::addPageToUrl($url, $page);
+        // Get the HTML
         $response = $client->request('GET', $url);
         return $response;
     }
 
+    // Inserts a given page into the url
     static function addPageToUrl($url, $page) {
-        if (strcmp($page, self::INCOME_STATEMENT) != 0 || strcmp($page, self::BALANCE_SHEET) != 0) {
-            // TODO return / error
-        }
         $stringParts = explode('?', $url);
         $p1 = $stringParts[0];
         if (sizeof($stringParts) > 1) {
@@ -74,11 +80,11 @@ class RequestBuilder {
         return $p1 . $page . $p2;
     }
     
+    // Properties for screener post request
     static function getScreenerRequestOptions($pagenumber, $exchange) {
         return [
             'headers' => self::getScreenerHeaders(),
             'form_params' => self::getScreenerBody($pagenumber, $exchange),
-
         ];
     }
     

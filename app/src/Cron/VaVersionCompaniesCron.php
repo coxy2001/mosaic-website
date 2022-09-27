@@ -23,65 +23,76 @@ class UpdateCompanies implements CronTask
     }
 
     /**
-     * Update company data
+     * Create new TopCompany entry
+     * Give top 200 rank of Company the version
+     * Write the companies to CompanyVersion
      *
      * @return void
      */
     public function process()
     {
-        echo "Adding TopCompanies and Versioning\n";
-        $this->bundleTopCompanies(self::TOP_COMPANY_LIMIT);
-        echo "Done\n";
+        try {
+            echo "Adding TopCompanies and Versioning\n";
+            $this->bundleTopCompanies();
+            echo "Done\n";
+        }
+        catch(Exception $e) {
+            echo "\n\nError while adding top companies\n" . $e->getMessage() . "\n\n";
+        }
     }
 
-    public function bundleTopCompanies($limit)
+    // Creates a new entry in top companies
+    // Takes all the stocks currently in Company table 
+    // Assigns them a version and puts the top 200 into the CompanyVersion table
+    public function bundleTopCompanies()
     {
-        // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
-        $companies = Company::get()->sort("Rank")->limit($limit);
+        // Get all the companies currently in the Company table ordered by Rank
+        $companies = Company::get()->sort("Rank")->limit(self::TOP_COMPANY_LIMIT);
         
+        // Set counter for relabling the Rank in an incremental fashion
         $counter = 0;
-        // foreach ($companies as $company) {
-        //     // TODO: does catch get triggered if roa not in values
-        //     try {
-        //         $values = $company->toMap();
-        //         unset($values["ID"]);
-        //         $values["Rank"] = $counter;
 
-        //         $newCompany = Company::create();
-        //         $newCompany->update($values)->write();
-        //     }
-        //     catch (Exception $e) {
-        //         echo "\n Error while copying from temp companies to companies\n" . $e->getMessage() . "\n";
-        //     }
-        //     $counter++;
-        // }
-        // $companies = Company::get()->filter("ClassName", Company::class)->sort("Rank")->limit($limit);
         $count = count($companies);
         echo "Retrived: " . $count . " from the database, sorted by rank\n";
 
+        // Don't create a new topcompanies entry if data failed to get into Company table
         if ($count == 0) {
             echo "No entries available to put into top companies. Aborting... \n";
             return;
         }
 
+        // Create new entry in TopCompanies table
         $list = TopCompanies::create();
         $list->Name = date("Y F, d");
         $list->Year = "2022";
         $listID = $list->write();
 
+        // For each company in Company table
+        // Relable rank and put top 200 in TopCompany table
         foreach ($companies as $company) {
             $this->addCompanyToList($company, $listID, $counter);
             $counter += 1;
         }
     }
 
+    // Adds the company to the CompanyVersionTable complete with version number
     public function addCompanyToList($company, $listID, $rank)
     {
+        // Get the values of the current company
         $values = $company->toMap();
+        // Don't update if the keys dont exist
+        if(!array_key_exists("TopCompaniesID", $values) || !array_key_exists("ID", $values) || !array_key_exists("Rank", $values)) {
+            echo "\n\nArray Keys Missing while updating TopCompanies. Aborting addCompanyToList\n\n";
+            return;
+        }
+        // Set the top companies ID
         $values["TopCompaniesID"] = $listID;
+        // Unset the ID as we want this to be done when the object is written to the database
         unset($values["ID"]);
+        // Set the rank (Important for this rank to be incremental)
         $values["Rank"] = $rank;
 
+        // Create the CompanyVersion entry and write to the CompanyVersion table
         $version = CompanyVersion::create();
         return $version->update($values)->write();
     }
