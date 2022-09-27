@@ -45,8 +45,8 @@ class ListCompanyExtractor
                         $pID = $company[$feature];
                         if (intval($pID) != 0) {
                             // TODO: throw exception of custom type here instead of returning
-                            // echo "PID: " . $pID . "\n";
-                            // return;
+                            echo "PID: " . $pID . "\n";
+                            return;
                         }
                     }
                 }
