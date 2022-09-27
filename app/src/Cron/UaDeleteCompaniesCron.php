@@ -6,10 +6,10 @@ use Mosaic\Website\Model\Company;
 use phpDocumentor\Reflection\Types\Null_;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class VbDeleteCompaniesCron implements CronTask
+class UaDeleteCompaniesCron implements CronTask
 {
     /**
-     * Run this task every 5 minutes
+     * 
      *
      * @return string
      */
@@ -19,7 +19,7 @@ class VbDeleteCompaniesCron implements CronTask
     }
 
     /**
-     * Update company data
+     * Deletes everything in the Company Table
      *
      * @return void
      */
