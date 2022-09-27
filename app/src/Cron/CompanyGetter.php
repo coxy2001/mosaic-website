@@ -21,36 +21,56 @@ class CompanyGetter
             echo $totalCount . "\n";
             $hits = $j['hits'];
 
+            $iterations = ceil($totalCount / count($hits));
+
+            echo "Iterations for this exchange: " . ($iterations) . "\n";
+
         }
         catch(Exception $e) {
             echo "\nEror recieveing response from investing.com: " . $e->getMessage() . "\n";
             echo $e->getMessage() . "\n";
         }
+        $total = count($hits);
+        for ($i = 0; $i < $iterations; $i++){
+            try {
+                $companies = array();
+                // // TODO loop exchanges and pages feeding extractStocks new json ($j)
+                $companies = ListCompanyExtractor::extractStocks($j, $client);
 
-        try {
-            $companies = array();
-            // // TODO loop exchanges and pages feeding extractStocks new json ($j)
-            $companies = ListCompanyExtractor::extractStocks($j, $client);
+                echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
 
-            echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
-
-        }
-        catch (Exception $e) {
-            echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
-        }
-        try {
-            $successCount = 0;
-            // var_dump($allCompanies);
-            foreach ($companies as $company) {
-                self::writeToDB($company);
-                $successCount++;
             }
-            echo $successCount . " Succesful Writes\n";
+            catch (Exception $e) {
+                echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
+            }
+            try {
+                $successCount = 0;
+                // var_dump($allCompanies);
+                foreach ($companies as $company) {
+                    self::writeToDB($company);
+                    $successCount++;
+                }
+                echo $successCount . " Succesful Writes\n";
+            }
+            catch (Exception $e) {
+                echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
+            }
+            try {
+                if ($i + 1 == $iterations) {
+                    continue;
+                }
+                $pageNumber++;    
+                $response = RequestBuilder::requestScreener($pageNumber, $exchangeNumber, $client);
+                $j = json_decode($response->getBody(), true); 
+                $hits = $j['hits'];
+                $total += count($hits);   
+            }
+            catch(Exception $e) {
+                echo "\nEror recieveing response from investing.com: " . $e->getMessage() . "\n";
+                echo $e->getMessage() . "\n";
+            }
         }
-        catch (Exception $e) {
-            echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
-        }
-        return $companies;
+        echo "\n\nTotal: " . $total . "\n\n";
     }    
     
     static function writeToDB($extracted)
