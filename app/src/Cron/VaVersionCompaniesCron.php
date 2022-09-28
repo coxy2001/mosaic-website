@@ -48,11 +48,8 @@ class UpdateCompanies implements CronTask
     {
         // Get all the companies currently in the Company table ordered by Rank
         $companies = Company::get()->sort("Rank")->limit(self::TOP_COMPANY_LIMIT);
-        
-        // Set counter for relabling the Rank in an incremental fashion
-        $counter = 0;
 
-        $count = count($companies);
+        $count = $companies->count();;
         echo "Retrived: " . $count . " from the database, sorted by rank\n";
 
         // Don't create a new topcompanies entry if data failed to get into Company table
@@ -67,11 +64,13 @@ class UpdateCompanies implements CronTask
         $list->Year = "2022";
         $listID = $list->write();
 
+        // Set counter for relabling the Rank in an incremental fashion
+        $counter = 1;
         // For each company in Company table
         // Relable rank and put top 200 in TopCompany table
         foreach ($companies as $company) {
             $this->addCompanyToList($company, $listID, $counter);
-            $counter += 1;
+            $counter++;
         }
     }
 
@@ -80,15 +79,11 @@ class UpdateCompanies implements CronTask
     {
         // Get the values of the current company
         $values = $company->toMap();
-        // Don't update if the keys dont exist
-        if(!array_key_exists("TopCompaniesID", $values) || !array_key_exists("ID", $values) || !array_key_exists("Rank", $values)) {
-            echo "\n\nArray Keys Missing while updating TopCompanies. Aborting addCompanyToList\n\n";
-            return;
-        }
-        // Set the top companies ID
-        $values["TopCompaniesID"] = $listID;
+
         // Unset the ID as we want this to be done when the object is written to the database
         unset($values["ID"]);
+        // Set the top companies ID
+        $values["TopCompaniesID"] = $listID;
         // Set the rank (Important for this rank to be incremental)
         $values["Rank"] = $rank;
 
