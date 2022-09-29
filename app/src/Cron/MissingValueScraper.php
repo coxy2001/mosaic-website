@@ -32,7 +32,7 @@ class MissingValueScraper
         $assets = self::getTotalAssets($xpath);
 
         // TODO: is this the best idea?
-        if ($assets = 0) {
+        if ($assets == 0) {
             return 0;
         }
 
