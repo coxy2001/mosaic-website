@@ -19,7 +19,7 @@ class ListCompanyExtractor
                 // For each company get all the values we care about
                 $extracted = self::extractFeatures($company, $client);
                 if (is_null($extracted)) {
-                    throw new Exception("Extractor returned nothing");
+                    continue;
                 }
                 array_push($companies, $extracted);
             }
@@ -54,7 +54,7 @@ class ListCompanyExtractor
                         $pID = $company[$feature];
                         if (intval($pID) != 0) {
                             // TODO: throw exception of custom type here instead of returning
-                            echo "PID: " . $pID . "\n";
+                            // echo "PID: " . $pID . "\n";
                             return;
                         }
                     }
@@ -96,7 +96,7 @@ class ListCompanyExtractor
         }
         $extracted += [RequestBuilder::CUSTOM_CALC => false];
         if (count($missing) != 0) {
-            echo "Fixing missing features \n";
+            // echo "Fixing missing features \n";
             try {
                 // Check for required features
                 if (in_array(RequestBuilder::NAME, $missing) || in_array(RequestBuilder::STOCK_SYMBOL, $missing) || in_array(RequestBuilder::STOCK_EXCHANGE, $missing) || in_array(RequestBuilder::LINK, $missing) || in_array(RequestBuilder::PRICE, $missing)) {
