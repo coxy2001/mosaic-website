@@ -31,6 +31,11 @@ class MissingValueScraper
         // Extract Assets
         $assets = self::getTotalAssets($xpath);
 
+        // TODO: is this the best idea?
+        if ($assets = 0) {
+            return 0;
+        }
+
         // TODO: investigate floats
         // Return ROA
         return $totalIncome / $assets * 100;
