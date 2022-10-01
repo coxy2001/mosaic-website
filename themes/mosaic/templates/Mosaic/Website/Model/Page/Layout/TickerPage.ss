@@ -33,17 +33,24 @@
 	</div>
 
 	<% if $TopCompanies %>
+    <!--TODO: Sort items by specified heading-->
 		<% loop $TopCompanies %>
 			<div class="grid__row">
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
-				<div class="grid__item"><p class="grid__text">$Name</p></div>
+				<div class="grid__item"><a class="grid__text" href="$link">$Name</p></div>
 				<div class="grid__item"><p class="grid__text">$Ticker</p></div>
-				<div class="grid__item"><p class="grid__text">$PE</p></div>
-				<div class="grid__item"><p class="grid__text">$ROA</p></div>
+				<div class="grid__item"><p class="grid__text">$Exchange</p></div>
 				<div class="grid__item"><p class="grid__text">$Sector</p></div>
 				<div class="grid__item"><p class="grid__text">$MarketCap</p></div>
+				<div class="grid__item"><p class="grid__text">$Price</p></div>
+				<div class="grid__item"><p class="grid__text">$ROA</p></div>
+				<div class="grid__item"><p class="grid__text">$PE</p></div>
+				<div class="grid__item"><p class="grid__text">$EPS</p></div>
+				<div class="grid__item"><p class="grid__text">$AbsoluteValuePE</p></div>
 				<div class="grid__item"><p class="grid__text">$FreeCashFlow</p></div>
-				<div class="grid__item"><p class="grid__text">$Dividends</p></div>
+				<div class="grid__item"><p class="grid__text">$DividendsYield</p></div>
+				<div class="grid__item"><p class="grid__text">$CurrentRatio</p></div>
+				<div class="grid__item"><p class="grid__text">$PriceToBook</p></div>
 			</div>
 		<% end_loop %>
 
