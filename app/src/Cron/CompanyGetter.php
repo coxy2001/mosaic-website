@@ -8,7 +8,7 @@ class CompanyGetter
     // Gets all the stock data into the company database
     public static function getAll() {
         $pageNumber = 1;
-        $exchangeNumber = ",";
+        $exchangeNumber = "2";
         try {
             // Generate and send the first request
             $client = RequestBuilder::getClient();
@@ -30,6 +30,9 @@ class CompanyGetter
         }
         $total = count($hits);
         for ($i = 0; $i < $iterations; $i++){
+            if ($i == 4) {
+                break;
+            }
             try {
                 // Print current page
                 echo "\nPage: " . ($i + 1) . "/" . $iterations . "\n";

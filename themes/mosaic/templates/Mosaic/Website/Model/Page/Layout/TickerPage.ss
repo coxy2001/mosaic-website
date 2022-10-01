@@ -24,12 +24,17 @@
 		<div class="grid__head"><h4 class="grid__text">RANK</h4></div>
 		<div class="grid__head"><h4 class="grid__text">COMPANY NAME</h4></div>
 		<div class="grid__head"><h4 class="grid__text">TICKER</h4></div>
-		<div class="grid__head"><h4 class="grid__text">P/E</h4></div>
-		<div class="grid__head"><h4 class="grid__text">ROA</h4></div>
-		<div class="grid__head"><h4 class="grid__text">MARKET SECTOR</h4></div>
+		<div class="grid__head"><h4 class="grid__text">EXCHANGE</h4></div>
+		<div class="grid__head"><h4 class="grid__text">SECTOR</h4></div>
 		<div class="grid__head"><h4 class="grid__text">MARKET CAP</h4></div>
+		<div class="grid__head"><h4 class="grid__text">PRICE</h4></div>
+		<div class="grid__head"><h4 class="grid__text">ROA</h4></div>
+		<div class="grid__head"><h4 class="grid__text">PE</h4></div>
+		<div class="grid__head"><h4 class="grid__text">EPS</h4></div>
 		<div class="grid__head"><h4 class="grid__text">FREE CASH FLOW</h4></div>
 		<div class="grid__head"><h4 class="grid__text">DIVIDENDS YIELD</h4></div>
+		<div class="grid__head"><h4 class="grid__text">CURRENT RATIO</h4></div>
+		<div class="grid__head"><h4 class="grid__text">PRICE TO BOOK</h4></div>
 	</div>
 
 	<% if $TopCompanies %>
@@ -46,7 +51,6 @@
 				<div class="grid__item"><p class="grid__text">$ROA</p></div>
 				<div class="grid__item"><p class="grid__text">$PE</p></div>
 				<div class="grid__item"><p class="grid__text">$EPS</p></div>
-				<div class="grid__item"><p class="grid__text">$AbsoluteValuePE</p></div>
 				<div class="grid__item"><p class="grid__text">$FreeCashFlow</p></div>
 				<div class="grid__item"><p class="grid__text">$DividendsYield</p></div>
 				<div class="grid__item"><p class="grid__text">$CurrentRatio</p></div>
