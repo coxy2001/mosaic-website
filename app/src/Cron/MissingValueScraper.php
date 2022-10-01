@@ -100,6 +100,9 @@ class MissingValueScraper
         else {
             throw new Exception("Could not find all EPS values");
         }
+        if ($totalEPS == 0) {
+            throw new Exception("No EPS values");
+        }
         return $totalEPS;
     }
 

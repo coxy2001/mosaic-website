@@ -8,7 +8,7 @@ class CompanyGetter
     // Gets all the stock data into the company database
     public static function getAll() {
         $pageNumber = 1;
-        $exchangeNumber = 2;
+        $exchangeNumber = ",";
         try {
             // Generate and send the first request
             $client = RequestBuilder::getClient();
@@ -21,7 +21,7 @@ class CompanyGetter
             echo $totalCount . "\n";
             $hits = $j['hits'];
             $iterations = ceil($totalCount / count($hits));
-            echo "Iterations for this exchange: " . ($iterations) . "\n";
+            echo "Iterations for this batch: " . ($iterations) . "\n";
 
         }
         catch(Exception $e) {
@@ -31,24 +31,31 @@ class CompanyGetter
         $total = count($hits);
         for ($i = 0; $i < $iterations; $i++){
             try {
+                // Print current page
+                echo "\nPage: " . ($i + 1) . "/" . $iterations . "\n";
+                
                 // Extract the stocks from the JSON
                 $companies = array();
+                echo "Extracting data\n";
                 $companies = ListCompanyExtractor::extractStocks($j, $client);
 
-                echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
+                // echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
 
             }
             catch (Exception $e) {
+                // TODO: How many timeouts to allow for
                 echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
             }
             try {
                 // Write the results to the database
                 $successCount = 0;
+                echo "Writing to DB\n";
                 foreach ($companies as $company) {
                     self::writeToDB($company);
                     $successCount++;
                 }
-                echo $successCount . " Succesful Writes\n";
+                echo "Done\n";
+                // echo $successCount . " Succesful Writes\n";
             }
             catch (Exception $e) {
                 echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
@@ -58,8 +65,12 @@ class CompanyGetter
                 if ($i + 1 == $iterations) {
                     continue;
                 }
-                $pageNumber++;    
+                $pageNumber++;
+
+                echo "Sending Request to investing.com\n";    
                 $response = RequestBuilder::requestScreener($pageNumber, $exchangeNumber, $client);
+                echo "Response Recieved from investing.com\n";
+
                 $j = json_decode($response->getBody(), true); 
                 $hits = $j['hits'];
                 $total += count($hits);   
@@ -75,6 +86,7 @@ class CompanyGetter
     // Creates and writes a new entry for the company database
     static function writeToDB($extracted)
     {
+
         // TODO write null not 0
 
         $tempCompany = Company::create();

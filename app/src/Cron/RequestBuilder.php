@@ -17,7 +17,8 @@ class RequestBuilder {
     const STOCK_SYMBOL = 'stock_symbol';
     const STOCK_EXCHANGE = 'exchange_trans';
     const SECTOR = 'sector_trans';
-    const ROA = 'aroapct';
+    // const ROA = 'aroapct';
+    const ROA = 'ttmroapct';
     const PE = 'eq_pe_ratio';
     const PRICE = 'last';
     const MARKET_CAP = 'eq_market_cap';
