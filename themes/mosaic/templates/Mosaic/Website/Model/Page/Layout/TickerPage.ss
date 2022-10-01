@@ -37,7 +37,7 @@
 		<% loop $TopCompanies %>
 			<div class="grid__row">
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
-				<div class="grid__item"><a class="grid__text" href="$link">$Name</p></div>
+				<div class="grid__item"><a class="grid__text" href="$link">$Name</a></div>
 				<div class="grid__item"><p class="grid__text">$Ticker</p></div>
 				<div class="grid__item"><p class="grid__text">$Exchange</p></div>
 				<div class="grid__item"><p class="grid__text">$Sector</p></div>
