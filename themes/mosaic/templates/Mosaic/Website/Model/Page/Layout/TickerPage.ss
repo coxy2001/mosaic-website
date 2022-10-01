@@ -37,9 +37,9 @@
 		<div class="grid__head"><h4 class="grid__text">PRICE TO BOOK</h4></div>
 	</div>
 
-	<% if $CompanyVersion %>
+	<% if $TopCompanies %>
     <!--TODO: Sort items by specified heading-->
-		<% loop $CompanyVersion %>
+		<% loop $TopCompanies %>
 			<div class="grid__row">
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
 				<div class="grid__item"><p class="grid__text">$Name</p></div>
