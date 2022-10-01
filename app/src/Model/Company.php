@@ -6,21 +6,32 @@ use SilverStripe\ORM\DataObject;
 
 class Company extends DataObject
 {
-    private static $db = [
+    // TODO: bad to have this public?
+    public const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
-        "Description" => "Text",
+        "Exchange" => "Varchar",
         "Rank" => "Int",
+        "RankROA" => "Int",
+        "RankPE" => "Int",
         "Sector" => "Varchar",
         "MarketCap" => "BigInt",
         "Price" => "Decimal",
-        "ROC" => "Decimal",
         "ROA" => "Decimal",
         "PE" => "Decimal",
-        "EarningsYield" => "Decimal",
+        "EPS" => "Decimal",
+        "AbsoluteValuePE" => "Decimal",
+        "FreeCashFlow" => "Int",
+        "DividendsYield" => "Decimal",
         "Link" => "Varchar",
+        "Flag" => "Varchar",
         "CustomCalculation" => "Boolean",
+        "CurrentRatio" => "Decimal",
+        "PriceToBook" => "Decimal",
+        // "CashHoldings" => "Int",
+        // "5yrPE" => "Int",
     ];
+    private static $db = self::DB_FIELDS;
 
     private static $table_name = 'Company';
     private static $singular_name = 'Company';
@@ -39,13 +50,9 @@ class Company extends DataObject
     private static $searchable_fields = [
         "Ticker",
         "Name",
-        "Sector"
+        "Sector",
+        "Link",
     ];
-
-    public static function getColumnHeaders() {
-        // TODO: make this actually query db for columns? Rather than hardcoded
-        return ['Ticker', 'Name', 'Description', 'Rank', 'Sector', 'MarketCap', 'Price', 'ROC', 'ROA', 'PE', 'EarningsYield', 'Link', 'CustomCalculation'];
-    }
 
     public function getDate()
     {

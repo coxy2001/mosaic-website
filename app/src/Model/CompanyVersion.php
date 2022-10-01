@@ -2,9 +2,11 @@
 
 namespace Mosaic\Website\Model;
 
-class CompanyVersion extends Company
+use SilverStripe\ORM\DataObject;
+
+class CompanyVersion extends DataObject
 {
-    private static $db = [];
+    private static $db = Company::DB_FIELDS;
 
     private static $has_one = [
         "TopCompanies" => TopCompanies::class
