@@ -1,5 +1,5 @@
-<div class="grid__row">
-	<div class="grid__head" id="date-picker">
+<div class="">
+	<div class="" id="date-picker">
 		<select name="history" id="history">
 			<% loop $HistoryOptions %>
 				<option value="$ID">$Name</option>
@@ -7,13 +7,13 @@
 		</select>
 	</div>
 
-	<div class="grid-head" id="country-picker">
+	<div class="-head" id="country-picker">
 		<select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select>
 	</div>
 
-	<div class="grid__blank"></div>
+	<div class=""></div>
 
-	<div class="grid__head" id="download">
+	<div class="" id="download">
 		<h3 class="grid__text">Download CSV</h3>
 		<!--TODO: download button-->
 	</div>
@@ -40,15 +40,18 @@
 	<% if $TopCompanies %>
     <!--TODO: Sort items by specified heading-->
 		<% loop $TopCompanies %>
-			<div class="grid__row">
+			<div class="grid__row"onclick="window.open('$Link', '_blank');">
+				<!--Common-->
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
-				<div class="grid__item"><a class="grid__text" href="$link">$Name</a></div>
+				<div class="grid__item"><p class="grid__text">$Name</p></div>
+				<!--Default-->
 				<div class="grid__item"><p class="grid__text">$Ticker</p></div>
 				<div class="grid__item"><p class="grid__text">$Exchange</p></div>
 				<div class="grid__item"><p class="grid__text">$Sector</p></div>
 				<div class="grid__item"><p class="grid__text">$MarketCap</p></div>
 				<div class="grid__item"><p class="grid__text">$Price</p></div>
 				<div class="grid__item"><p class="grid__text">$ROA</p></div>
+				<!--Side Scroll-->
 				<div class="grid__item"><p class="grid__text">$PE</p></div>
 				<div class="grid__item"><p class="grid__text">$EPS</p></div>
 				<div class="grid__item"><p class="grid__text">$FreeCashFlow</p></div>

@@ -262,11 +262,24 @@ p {
   padding: 0 1rem;
 }
 
+.grid {
+  overflow-x: scroll;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  justify-content: center;
+}
 .grid__row {
   display: grid;
-  grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
+  grid-auto-flow: column;
+  grid-template-columns: 7rem 20rem 8rem 12rem 20rem 15rem 12rem 8rem 8rem 8rem 12rem 12rem 12rem 12rem;
   padding: 0.5rem;
   padding-block: 0.25rem;
+}
+.grid__row:hover {
+  border-top: 2px solid white;
+  border-bottom: 2px solid white;
 }
 .grid__item {
   background-color: green;
