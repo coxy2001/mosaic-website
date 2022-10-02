@@ -3,7 +3,6 @@
 namespace Mosaic\Website\Model\Page;
 
 use Mosaic\Website\Controller\TickerPageController;
-use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\TopCompanies;
 use SilverStripe\Control\Controller;
 
@@ -13,18 +12,16 @@ class TickerPage extends \Page
     private static $controller_name = TickerPageController::class;
     private static $description = "Displays tickers";
 
-    public function getCompanies()
-    {
-        return Company::get()->filter("ClassName", Company::class);
-    }
-
     public function getTopCompanies()
     {
         $request = Controller::curr()->getRequest();
         $listID = $request->getVar("list");
+        return $listID ? TopCompanies::get_by_id($listID) : TopCompanies::get()->last();
+    }
 
-        $topCompanies = $listID ? TopCompanies::get_by_id($listID) : TopCompanies::get()->last();
-
+    public function getCompanies()
+    {
+        $topCompanies = $this->getTopCompanies();
         return $topCompanies ? $topCompanies->getPaginatedList() : null;
     }
 

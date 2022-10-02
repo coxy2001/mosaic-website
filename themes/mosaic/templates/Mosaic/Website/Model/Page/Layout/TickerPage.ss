@@ -14,8 +14,9 @@
 	<div class="grid__blank"></div>
 
 	<div class="grid__head" id="download">
-		<h3 class="grid__text">Download CSV</h3>
-		<!--TODO: download button-->
+		<h3 class="grid__text">
+			<a href="home/csv?list={$TopCompanies.ID}" download="mosaic_{$TopCompanies.Year}_{$TopCompanies.Name}.csv">Download CSV</a>
+		</h3>
 	</div>
 </div>
 
@@ -37,9 +38,8 @@
 		<div class="grid__head"><h4 class="grid__text">PRICE TO BOOK</h4></div>
 	</div>
 
-	<% if $TopCompanies %>
-    <!--TODO: Sort items by specified heading-->
-		<% loop $TopCompanies %>
+	<% if $Companies %>
+		<% loop $Companies %>
 			<div class="grid__row">
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
 				<div class="grid__item"><a class="grid__text" href="$link">$Name</a></div>
@@ -58,13 +58,14 @@
 			</div>
 		<% end_loop %>
 
-		<% if $TopCompanies.MoreThanOnePage %>
+		<% if $Companies.MoreThanOnePage %>
 			<div class="pagination">
-				<% if $TopCompanies.NotFirstPage %>
-					<a class="pagination__item" href="$TopCompanies.PrevLink">&lt;</a>
+				<% if $Companies.NotFirstPage %>
+					<a class="pagination__item" href="$Companies.FirstLink">&laquo;</a>
+					<a class="pagination__item" href="$Companies.PrevLink">&lsaquo;</a>
 				<% end_if %>
 	
-				<% loop $TopCompanies.PaginationSummary %>
+				<% loop $Companies.PaginationSummary %>
 					<% if $Link %>
 						<% if $CurrentBool %>
 							<span class="pagination__item pagination__item--current">$PageNum</span>
@@ -76,8 +77,9 @@
 					<% end_if %>
 				<% end_loop %>
 	
-				<% if $TopCompanies.NotLastPage %>
-					<a class="pagination__item" href="$TopCompanies.NextLink">&gt;</a>
+				<% if $Companies.NotLastPage %>
+					<a class="pagination__item" href="$Companies.NextLink">&rsaquo;</a>
+					<a class="pagination__item" href="$Companies.LastLink">&raquo;</a>
 				<% end_if %>
 			</div>
 		<% else %>

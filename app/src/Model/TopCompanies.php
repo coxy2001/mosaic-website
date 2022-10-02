@@ -3,7 +3,6 @@
 namespace Mosaic\Website\Model;
 
 use SilverStripe\Control\Controller;
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\PaginatedList;
 
@@ -38,6 +37,26 @@ class TopCompanies extends DataObject
         "LastEdited",
     ];
 
+    private static $csv_headers = [
+        "Rank",
+        "Ticker",
+        "Name",
+        "Exchange",
+        "Sector",
+        "MarketCap",
+        "Price",
+        "ROA",
+        "PE",
+        "EPS",
+        "FreeCashFlow",
+        "DividendsYield",
+        "CurrentRatio",
+        "PriceToBook",
+        "CustomCalculation",
+        "Flag",
+        "Link",
+    ];
+
     public function getPaginatedList()
     {
         $request = Controller::curr()->getRequest();
@@ -58,11 +77,17 @@ class TopCompanies extends DataObject
             ->setPageLength($request->getVar("length") ?: 50)
             ->setPaginationGetVar('p');
 
-        // if ($request->isAjax()) {
-        //     return $this->customise($paginatedList)
-        //         ->renderWith('Includes/PropertySold');
-        // }
-
         return $paginatedList;
+    }
+
+    public function getCSV()
+    {
+        $stream = fopen("php://output", 'w');
+        fputcsv($stream, self::$csv_headers);
+
+        $list = $this->Companies()->sort("Rank");
+        foreach ($list as $company) {
+            fputcsv($stream, $company->getXMLValues(self::$csv_headers));
+        }
     }
 }
