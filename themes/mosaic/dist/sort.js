@@ -12,3 +12,9 @@ function Sort(column) {
     url.searchParams.set('sort', column);
     window.location.replace(url);
 }
+
+function List() {
+    var url = new URL(window.location.href);
+    url.searchParams.set('list', document.querySelector("#history").value);
+    window.location.replace(url);
+}

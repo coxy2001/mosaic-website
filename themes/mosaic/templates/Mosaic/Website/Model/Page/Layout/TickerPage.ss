@@ -1,6 +1,6 @@
 <div class="grid__row">
 	<div class="grid__head" id="date-picker">
-		<select name="history" id="history">
+		<select name="history" id="history" onchange="List()">
 			<% loop $HistoryOptions %>
 				<option value="$ID">$Name</option>
 			<% end_loop %>
