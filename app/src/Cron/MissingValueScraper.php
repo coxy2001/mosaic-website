@@ -29,6 +29,8 @@ class MissingValueScraper
         $xpathRatioPage = null;
         try {
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
+            $ROA = self::extractROA($xpathRatioPage);
+            return $ROA;
         }
         catch(Exception $e) {
             // Get income statement html
@@ -58,13 +60,6 @@ class MissingValueScraper
             // Return ROA
             return $totalIncome / $assets * 100;
         }
-        try {
-            $ROA = self::extractROA($xpathRatioPage);
-            return $ROA;
-        }
-        catch(Exception $e) {
-            throw new Exception("ROA could not be extracted from ratio file. \n" . $e->getMessage() . "\n");
-        }
     }
 
 
@@ -73,6 +68,8 @@ class MissingValueScraper
         $xpathRatioPage = null;
         try {
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
+            $PE = self::extractPE($xpathRatioPage);
+            return $PE;
         }
         catch(Exception $e) {
             // Get income statement html
@@ -89,13 +86,6 @@ class MissingValueScraper
             
             // Return PE
             return $price / $totalEPS;
-        }
-        try {
-            $PE = self::extractPE($xpathRatioPage);
-            return $PE;
-        }
-        catch(Exception $e) {
-            throw new Exception("PE could not be extracted from ratio file. \n" . $e->getMessage() . "\n");
         }
     }
 
