@@ -1,4 +1,4 @@
-<div class="">
+<div class="buttons-row">
 	<div class="" id="date-picker">
 		<select name="history" id="history">
 			<% loop $HistoryOptions %>

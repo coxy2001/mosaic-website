@@ -39,7 +39,11 @@
         color: black;
     }
 }
-
+.buttons-row{
+    width:100%;
+    display: inline-block;
+    max-width:104.375rem;
+}
 #date-picker {
     grid-column: span 2;
     text-align: left;
