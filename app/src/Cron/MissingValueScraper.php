@@ -256,13 +256,6 @@ class MissingValueScraper
 
     // Returns the row based on the result from a search string
     private static function getTR($result) {
-        // Just use the closest result to the search (first if multiple)
-        if (sizeof($result) >= 1) {
-            $result = $result[0];
-        }
-        else {
-            throw new Exception('Page returned no results');
-        }
         // Navigate to the table row
         $TD = $result->parentNode;
         $TR = $TD->parentNode;
