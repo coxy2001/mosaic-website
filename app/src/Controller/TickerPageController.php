@@ -2,7 +2,7 @@
 
 namespace Mosaic\Website\Controller;
 
-use Mosaic\Website\Model\TopCompanies;
+use Mosaic\Website\Model\CompanyList;
 use SilverStripe\Control\Controller;
 
 class TickerPageController extends \PageController
@@ -16,8 +16,8 @@ class TickerPageController extends \PageController
         $request = Controller::curr()->getRequest();
         $listID = $request->getVar("list");
 
-        $topCompanies = $listID ? TopCompanies::get_by_id($listID) : TopCompanies::get()->last();
+        $CompanyList = $listID ? CompanyList::get_by_id($listID) : CompanyList::get()->last();
 
-        return $topCompanies ? $topCompanies->getCSV() : null;
+        return $CompanyList ? $CompanyList->getCSV() : null;
     }
 }

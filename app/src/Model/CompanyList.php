@@ -6,7 +6,7 @@ use SilverStripe\Control\Controller;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\PaginatedList;
 
-class TopCompanies extends DataObject
+class CompanyList extends DataObject
 {
     private static $db = [
         "Name" => "Varchar",
@@ -21,7 +21,7 @@ class TopCompanies extends DataObject
         "Companies"
     ];
 
-    private static $table_name = "TopCompanies";
+    private static $table_name = "CompanyList";
     private static $singular_name = "Top Companies List";
     private static $plural_name = "Top Companies List's";
 

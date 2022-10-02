@@ -15,7 +15,7 @@
 
 	<div class="grid__head" id="download">
 		<h3 class="grid__text">
-			<a href="home/csv?list={$TopCompanies.ID}" download="mosaic_{$TopCompanies.Year}_{$TopCompanies.Name}.csv">Download CSV</a>
+			<a href="home/csv?list={$CompanyList.ID}" download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv">Download CSV</a>
 		</h3>
 	</div>
 </div>

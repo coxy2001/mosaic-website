@@ -6,7 +6,7 @@ use Exception;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\CompanyVersion;
 use Mosaic\Website\Model\TemporaryCompany;
-use Mosaic\Website\Model\TopCompanies;
+use Mosaic\Website\Model\CompanyList;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
 class UpdateCompanies implements CronTask
@@ -32,8 +32,8 @@ class UpdateCompanies implements CronTask
     public function process()
     {
         try {
-            echo "Adding TopCompanies and Versioning\n";
-            $this->bundleTopCompanies();
+            echo "Adding CompanyList and Versioning\n";
+            $this->bundleCompanyList();
             echo "Done\n";
         }
         catch(Exception $e) {
@@ -44,7 +44,7 @@ class UpdateCompanies implements CronTask
     // Creates a new entry in top companies
     // Takes all the stocks currently in Company table 
     // Assigns them a version and puts the top 200 into the CompanyVersion table
-    public function bundleTopCompanies()
+    public function bundleCompanyList()
     {
         // Get all the companies currently in the Company table ordered by Rank
         $companies = Company::get()->sort("Rank")->limit(self::TOP_COMPANY_LIMIT);
@@ -52,14 +52,14 @@ class UpdateCompanies implements CronTask
         $count = $companies->count();;
         echo "Retrived: " . $count . " from the database, sorted by rank\n";
 
-        // Don't create a new topcompanies entry if data failed to get into Company table
+        // Don't create a new CompanyList entry if data failed to get into Company table
         if ($count == 0) {
             echo "No entries available to put into top companies. Aborting... \n";
             return;
         }
 
-        // Create new entry in TopCompanies table
-        $list = TopCompanies::create();
+        // Create new entry in CompanyList table
+        $list = CompanyList::create();
         $list->Name = date("Y F, d");
         $list->Year = "2022";
         $listID = $list->write();
@@ -83,7 +83,7 @@ class UpdateCompanies implements CronTask
         // Unset the ID as we want this to be done when the object is written to the database
         unset($values["ID"]);
         // Set the top companies ID
-        $values["TopCompaniesID"] = $listID;
+        $values["CompanyListID"] = $listID;
         // Set the rank (Important for this rank to be incremental)
         $values["Rank"] = $rank;
 
