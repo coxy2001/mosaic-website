@@ -13,6 +13,7 @@
     }
 
     &__head {
+        font-weight: 700;
         background-color: $heading-colour;
         border-color: $heading-darker;
         border-style: solid;
@@ -27,7 +28,7 @@
     }
 
     &__text {
-        font-family: $font-family-nunito;
+        
         margin: 0.5rem;
         color: black;
     }

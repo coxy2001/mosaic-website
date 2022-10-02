@@ -6,9 +6,9 @@ h4,
 h5,
 
 h6 {
-    font-family: $font-family-nunito;
+    font-family: $font-family;
     color: $heading-colour;
-    font-weight: 1000;
+    font-weight: 700;
     line-height: 1.5;
     margin: 0;
 }
@@ -36,7 +36,6 @@ h4 {
 }
 
 h5 {
-    font-family: $font-family-nunito;
     font-size: $h5-font-size;
     margin-bottom: $h5-font-size * 0.8;
 }

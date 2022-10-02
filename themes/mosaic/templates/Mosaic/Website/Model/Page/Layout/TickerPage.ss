@@ -21,20 +21,20 @@
 
 <div class="grid">
 	<div class="grid__row">
-		<div class="grid__head"><h4 class="grid__text">RANK</h4></div>
-		<div class="grid__head"><h4 class="grid__text">COMPANY NAME</h4></div>
-		<div class="grid__head"><h4 class="grid__text">TICKER</h4></div>
-		<div class="grid__head"><h4 class="grid__text">EXCHANGE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">SECTOR</h4></div>
-		<div class="grid__head"><h4 class="grid__text">MARKET CAP</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PRICE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">ROA</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">EPS</h4></div>
-		<div class="grid__head"><h4 class="grid__text">FREE CASH FLOW</h4></div>
-		<div class="grid__head"><h4 class="grid__text">DIVIDENDS YIELD</h4></div>
-		<div class="grid__head"><h4 class="grid__text">CURRENT RATIO</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PRICE TO BOOK</h4></div>
+		<div class="grid__head"><p class="grid__text">RANK</p></div>
+		<div class="grid__head"><p class="grid__text">COMPANY NAME</p></div>
+		<div class="grid__head"><p class="grid__text">TICKER</p></div>
+		<div class="grid__head"><p class="grid__text">EXCHANGE</p></div>
+		<div class="grid__head"><p class="grid__text">SECTOR</p></div>
+		<div class="grid__head"><p class="grid__text">MARKET CAP</p></div>
+		<div class="grid__head"><p class="grid__text">PRICE</p></div>
+		<div class="grid__head"><p class="grid__text">ROA</p></div>
+		<div class="grid__head"><p class="grid__text">PE</p></div>
+		<div class="grid__head"><p class="grid__text">EPS</p></div>
+		<div class="grid__head"><p class="grid__text">FREE CASH FLOW</p></div>
+		<div class="grid__head"><p class="grid__text">DIVIDENDS YIELD</p></div>
+		<div class="grid__head"><p class="grid__text">CURRENT RATIO</p></div>
+		<div class="grid__head"><p class="grid__text">PRICE TO BOOK</p></div>
 	</div>
 
 	<% if $TopCompanies %>
