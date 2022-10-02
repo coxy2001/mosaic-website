@@ -29,7 +29,7 @@
                 position: absolute;
                 right: 1rem;
                 top: 0.5rem;
-                content: "^";
+                content: '\25BC';
             }
         }
 
@@ -37,8 +37,8 @@
             ::after {
                 position: absolute;
                 right: 1rem;
-                top:0.5rem;
-                content: "V";
+                top: 0.5rem;
+                content: '\25B2';
             }
         }
     }
