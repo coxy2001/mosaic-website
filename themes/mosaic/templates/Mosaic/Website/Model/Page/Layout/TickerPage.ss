@@ -2,7 +2,7 @@
 	<div class="grid__head" id="date-picker">
 		<select name="history" id="history">
 			<% loop $HistoryOptions %>
-				<option value="$ID">$Year $Month</option>
+				<option value="$ID" <% if $Top.CurrentList == $ID %>selected<% end_if %>>$Year $Month</option>
 			<% end_loop %>
 		</select>
 	</div>
@@ -22,20 +22,20 @@
 
 <div class="grid">
 	<div class="grid__row">
-		<div class="grid__head"><h4 class="grid__text">RANK</h4></div>
-		<div class="grid__head"><h4 class="grid__text">COMPANY NAME</h4></div>
-		<div class="grid__head"><h4 class="grid__text">TICKER</h4></div>
-		<div class="grid__head"><h4 class="grid__text">EXCHANGE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">SECTOR</h4></div>
-		<div class="grid__head"><h4 class="grid__text">MARKET CAP</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PRICE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">ROA</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PE</h4></div>
-		<div class="grid__head"><h4 class="grid__text">EPS</h4></div>
-		<div class="grid__head"><h4 class="grid__text">FREE CASH FLOW</h4></div>
-		<div class="grid__head"><h4 class="grid__text">DIVIDENDS YIELD</h4></div>
-		<div class="grid__head"><h4 class="grid__text">CURRENT RATIO</h4></div>
-		<div class="grid__head"><h4 class="grid__text">PRICE TO BOOK</h4></div>
+		<div class="grid__head <% if $CurrentSort == Rank %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">RANK</h4></div>
+		<div class="grid__head <% if $CurrentSort == Name %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">COMPANY NAME</h4></div>
+		<div class="grid__head <% if $CurrentSort == Ticker %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">TICKER</h4></div>
+		<div class="grid__head <% if $CurrentSort == Exchange %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">EXCHANGE</h4></div>
+		<div class="grid__head <% if $CurrentSort == Sector %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">SECTOR</h4></div>
+		<div class="grid__head <% if $CurrentSort == MarketCap %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">MARKET CAP</h4></div>
+		<div class="grid__head <% if $CurrentSort == Price %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">PRICE</h4></div>
+		<div class="grid__head <% if $CurrentSort == ROA %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">ROA</h4></div>
+		<div class="grid__head <% if $CurrentSort == PE %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">PE</h4></div>
+		<div class="grid__head <% if $CurrentSort == EPS %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">EPS</h4></div>
+		<div class="grid__head <% if $CurrentSort == FreeCashFlow %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">FREE CASH FLOW</h4></div>
+		<div class="grid__head <% if $CurrentSort == DividendsYield %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">DIVIDENDS YIELD</h4></div>
+		<div class="grid__head <% if $CurrentSort == CurrentRatio %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">CURRENT RATIO</h4></div>
+		<div class="grid__head <% if $CurrentSort == PriceToBook %>grid__head--sorted-{$CurrentDirection}<% end_if %>"><h4 class="grid__text">PRICE TO BOOK</h4></div>
 	</div>
 
 	<% if $Companies %>

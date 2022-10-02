@@ -29,4 +29,19 @@ class TickerPage extends \Page
     {
         return CompanyList::get();
     }
+
+    public function getCurrentList()
+    {
+        return $this->getCompanyList()->ID;
+    }
+
+    public function getCurrentSort()
+    {
+        return Controller::curr()->getRequest()->getVar("sort") ?: "Rank";
+    }
+
+    public function getCurrentDirection()
+    {
+        return strtolower(Controller::curr()->getRequest()->getVar("direction")) ?: "asc";
+    }
 }
