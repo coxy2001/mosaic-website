@@ -13,13 +13,33 @@
     }
 
     &__head {
+        position: relative;
         font-weight: 700;
         background-color: $heading-colour;
         border-color: $heading-darker;
         border-style: solid;
         border-width: 1px;
+
         &:hover {
             background-color: $heading-darker;
+        }
+
+        &--sorted-asc {
+            ::after {
+                position: absolute;
+                right: 1rem;
+                top: 0.5rem;
+                content: "^";
+            }
+        }
+
+        &--sorted-desc {
+            ::after {
+                position: absolute;
+                right: 1rem;
+                top:0.5rem;
+                content: "V";
+            }
         }
     }
 
@@ -28,7 +48,7 @@
     }
 
     &__text {
-        
+
         margin: 0.5rem;
         color: black;
     }
