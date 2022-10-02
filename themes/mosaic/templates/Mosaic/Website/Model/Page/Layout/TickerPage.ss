@@ -21,20 +21,20 @@
 
 <div class="grid">
 	<div class="grid__row">
-		<div class="grid__head"><p class="grid__text">RANK</p></div>
-		<div class="grid__head"><p class="grid__text">COMPANY NAME</p></div>
-		<div class="grid__head"><p class="grid__text">TICKER</p></div>
-		<div class="grid__head"><p class="grid__text">EXCHANGE</p></div>
-		<div class="grid__head"><p class="grid__text">SECTOR</p></div>
-		<div class="grid__head"><p class="grid__text">MARKET CAP</p></div>
-		<div class="grid__head"><p class="grid__text">PRICE</p></div>
-		<div class="grid__head"><p class="grid__text">ROA</p></div>
-		<div class="grid__head"><p class="grid__text">PE</p></div>
-		<div class="grid__head"><p class="grid__text">EPS</p></div>
-		<div class="grid__head"><p class="grid__text">FREE CASH FLOW</p></div>
-		<div class="grid__head"><p class="grid__text">DIVIDENDS YIELD</p></div>
-		<div class="grid__head"><p class="grid__text">CURRENT RATIO</p></div>
-		<div class="grid__head"><p class="grid__text">PRICE TO BOOK</p></div>
+		<div onclick="Sort('Rank')" class="grid__head"><p class="grid__text">RANK</p></div>
+		<div onclick="Sort('Name')" class="grid__head"><p class="grid__text">COMPANY NAME</p></div>
+		<div onclick="Sort('Ticker')" class="grid__head"><p class="grid__text">TICKER</p></div>
+		<div onclick="Sort('Exchange')" class="grid__head"><p class="grid__text">EXCHANGE</p></div>
+		<div onclick="Sort('Sector')" class="grid__head"><p class="grid__text">SECTOR</p></div>
+		<div onclick="Sort('MarketCap')" class="grid__head"><p class="grid__text">MARKET CAP</p></div>
+		<div onclick="Sort('Price')" class="grid__head"><p class="grid__text">PRICE</p></div>
+		<div onclick="Sort('ROA')" class="grid__head"><p class="grid__text">ROA</p></div>
+		<div onclick="Sort('PE')" class="grid__head"><p class="grid__text">PE</p></div>
+		<div onclick="Sort('EPS')" class="grid__head"><p class="grid__text">EPS</p></div>
+		<div onclick="Sort('FreeCashFlow')" class="grid__head"><p class="grid__text">FREE CASH FLOW</p></div>
+		<div onclick="Sort('DividendsYield')" class="grid__head"><p class="grid__text">DIVIDENDS YIELD</p></div>
+		<div onclick="Sort('CurrentRatio')" class="grid__head"><p class="grid__text">CURRENT RATIO</p></div>
+		<div onclick="Sort('PriceToBook')" class="grid__head"><p class="grid__text">PRICE TO BOOK</p></div>
 	</div>
 
 	<% if $TopCompanies %>
