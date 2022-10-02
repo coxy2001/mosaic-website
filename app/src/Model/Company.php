@@ -41,38 +41,22 @@ class Company extends DataObject
         "Rank",
         "Ticker",
         "Name",
+        "Exchange",
         "Sector",
+        "MarketCap",
         "Price",
         "ROC",
-        "Link"
+        "PE",
     ];
 
     private static $searchable_fields = [
         "Ticker",
         "Name",
         "Sector",
-        "Link",
     ];
 
     public function getDate()
     {
         return date("d F, Y", strtotime($this->LastEdited));
     }
-
-    public function canView($member = null)
-    {
-        return True;
-    }
-
-    // public function canEdit($member = null)
-    // {
-    // }
-
-    // public function canCreate($member = null, $context = [])
-    // {
-    // }
-
-    // public function canDelete($member = null)
-    // {
-    // }
 }

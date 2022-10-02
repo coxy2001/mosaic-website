@@ -23,7 +23,7 @@ class UpdateCompanies implements CronTask
     }
 
     /**
-     * Create new TopCompany entry
+     * Create new CompanyList entry
      * Give top 200 rank of Company the version
      * Write the companies to CompanyVersion
      *
@@ -60,14 +60,14 @@ class UpdateCompanies implements CronTask
 
         // Create new entry in CompanyList table
         $list = CompanyList::create();
-        $list->Name = date("Y F, d");
-        $list->Year = "2022";
+        $list->Month = date("m");
+        $list->Year = date("Y");
         $listID = $list->write();
 
         // Set counter for relabling the Rank in an incremental fashion
         $counter = 1;
         // For each company in Company table
-        // Relable rank and put top 200 in TopCompany table
+        // Relable rank and put top 200 in CompanyList table
         foreach ($companies as $company) {
             $this->addCompanyToList($company, $listID, $counter);
             $counter++;

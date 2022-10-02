@@ -10,6 +10,7 @@ class CompanyList extends DataObject
 {
     private static $db = [
         "Name" => "Varchar",
+        "Month" => "Varchar",
         "Year" => "Varchar",
     ];
 
@@ -27,12 +28,14 @@ class CompanyList extends DataObject
 
     private static $summary_fields = [
         "Name",
+        "Month",
         "Year",
         "LastEdited",
     ];
 
     private static $searchable_fields = [
         "Name",
+        "Month",
         "Year",
         "LastEdited",
     ];

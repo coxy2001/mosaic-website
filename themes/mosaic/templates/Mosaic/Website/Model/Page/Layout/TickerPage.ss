@@ -2,7 +2,7 @@
 	<div class="grid__head" id="date-picker">
 		<select name="history" id="history">
 			<% loop $HistoryOptions %>
-				<option value="$ID">$Name</option>
+				<option value="$ID">$Year $Month</option>
 			<% end_loop %>
 		</select>
 	</div>
