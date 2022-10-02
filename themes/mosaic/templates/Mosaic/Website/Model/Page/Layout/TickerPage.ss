@@ -40,7 +40,13 @@
 
 	<% if $Companies %>
 		<% loop $Companies %>
-			<div class="grid__row">
+			<% if $Pos <= 10 %>
+				<div class="grid__row grid__row--gradient-{$Pos}">
+			<% else_if $Even %>
+				<div class="grid__row grid__row--even">
+			<% else %>
+				<div class="grid__row grid__row--odd">
+			<% end_if %>
 				<div class="grid__item"><p class="grid__text">$Rank</p></div>
 				<div class="grid__item"><a class="grid__text" href="$link">$Name</a></div>
 				<div class="grid__item"><p class="grid__text">$Ticker</p></div>

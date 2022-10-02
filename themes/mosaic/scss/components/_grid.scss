@@ -7,14 +7,34 @@
     }
 
     &__item {
-        background-color: green;
         margin-left: 0.25rem;
         margin-right: 0.25rem;
+        color: #fff;
+
+        .grid__row--even & {
+            background-color: $grid-bg-even;
+        }
+
+        .grid__row--odd & {
+            background-color: $grid-bg-odd;
+        }
+
+        @for $i from 1 through 10 {
+            .grid__row--gradient-#{$i} & {
+                color: #000;
+                background-color: mix(
+                    $grid-gradient-start,
+                    $grid-gradient-end,
+                    (10 - $i) * 10
+                );
+            }
+        }
     }
 
     &__head {
         background-color: $heading-colour;
         border-color: $heading-darker;
+        color: #000;
         border-style: solid;
         border-width: 1px;
         &:hover {
@@ -27,8 +47,7 @@
     }
 
     &__text {
-        margin: 0.5rem;
-        color: black;
+        padding: 0.5rem;
     }
 }
 
