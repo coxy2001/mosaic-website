@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;1000&family=Nunito&display=swap");
 body {
-  font-family: "Effra Light", sans-serif;
+  font-family: "Nunito", sans-serif;
   background-color: #3c4147;
   margin: 0;
 }
@@ -46,7 +47,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Effra Light", "Effra Light", sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #e8e8f4;
   font-weight: 1000;
   line-height: 1.5;
@@ -76,7 +77,7 @@ h4 {
 }
 
 h5 {
-  font-family: "Effra Light", "Effra Light", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-size: 1.25rem;
   margin-bottom: 1rem;
 }
@@ -286,6 +287,7 @@ p {
   grid-column: span 3;
 }
 .grid__text {
+  font-family: "Nunito", sans-serif;
   margin: 0.5rem;
   color: black;
 }
@@ -320,6 +322,7 @@ p {
 }
 .pagination__item {
   display: inline-block;
+  font-family: "Nunito", sans-serif;
   font-size: 1.8rem;
   font-weight: 600;
   color: white;

@@ -6,7 +6,7 @@ h4,
 h5,
 
 h6 {
-    font-family: 'Effra Light', $font-family-sans-serif;
+    font-family: $font-family-nunito;
     color: $heading-colour;
     font-weight: 1000;
     line-height: 1.5;
@@ -36,7 +36,7 @@ h4 {
 }
 
 h5 {
-    font-family: 'Effra Light', $font-family-sans-serif;
+    font-family: $font-family-nunito;
     font-size: $h5-font-size;
     margin-bottom: $h5-font-size * 0.8;
 }
