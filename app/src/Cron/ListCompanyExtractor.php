@@ -2,6 +2,7 @@
 namespace Mosaic\Website\Cron;
 
 use Exception;
+use GuzzleHttp\Psr7\Request;
 
 use function PHPUnit\Framework\isNull;
 
@@ -24,7 +25,7 @@ class ListCompanyExtractor
                 array_push($companies, $extracted);
             }
             catch (Exception $e) {
-                echo "\nSkipping company: " . $e->getMessage() . "\n";
+                echo "\nSkipping company: " . $e->getMessage() . "\n\n";
             }
         }
         // RETURN list of companies
@@ -84,6 +85,13 @@ class ListCompanyExtractor
                 // Get all the other features
                 else {
                     if (array_key_exists($feature, $company)) {
+                        if (strcmp($feature, RequestBuilder::ROA) == 0) {
+                            self::checkNull($company[$feature], RequestBuilder::ROA);
+                        }
+                        else if (strcmp($feature, RequestBuilder::PE) == 0) {
+                            self::checkNull($company[$feature], RequestBuilder::PE);
+                        }
+
                         $extracted += [$feature => $company[$feature]];
                     }
                     else {
@@ -100,7 +108,7 @@ class ListCompanyExtractor
             try {
                 // Check for required features
                 if (in_array(RequestBuilder::NAME, $missing) || in_array(RequestBuilder::STOCK_SYMBOL, $missing) || in_array(RequestBuilder::STOCK_EXCHANGE, $missing) || in_array(RequestBuilder::LINK, $missing) || in_array(RequestBuilder::PRICE, $missing)) {
-                    throw new Exception('Missing required stock features');
+                    throw new Exception("Missing required stock features\n");
                 }
                 else {
                     // If feature not required just leave it blank
@@ -113,20 +121,41 @@ class ListCompanyExtractor
                     $ROA = MissingValueScraper::getROA($extracted[RequestBuilder::LINK], $client);
                     $extracted[RequestBuilder::ROA]= $ROA;
                     $extracted[RequestBuilder::CUSTOM_CALC] = true;
+                    self::checkNull($ROA, RequestBuilder::ROA); 
                 }
                 // If PE missing try to find it using the missing value scraper and set the Custom Calc property
                 if (in_array(RequestBuilder::PE, $missing)) {
                     $PE = MissingValueScraper::getPE($extracted[RequestBuilder::LINK], $extracted[RequestBuilder::PRICE], $client);
                     $extracted[RequestBuilder::PE] = $PE;
                     $extracted[RequestBuilder::CUSTOM_CALC] = true;
+                    self::checkNull($PE, RequestBuilder::PE); 
                 }
             }
             // Catch the error if ROA/PE cannot be calculated
             catch (Exception $e) {
-                throw new Exception("ROA or PE could not be calculated! \nReason: " .$e->getMessage() . "\nStock: " . ($extracted[RequestBuilder::LINK] ?? null));
+                throw new Exception("ROA or PE could not be calculated! \nReason: " .$e->getMessage() . "Stock: " . ($extracted[RequestBuilder::LINK] ?? null . "\n"));
             }
-        }
+        } 
+        self::checkNullEnd($extracted[RequestBuilder::ROA], $extracted[RequestBuilder::PE]);
         // Return the extracted values as an array.
         return $extracted;
+    }
+
+    private static function checkNull($value, $valueName=" ") {
+        if (is_null($value)) {
+            throw new Exception($valueName . " was null.\n");
+        }
+        else if ($value == 0) {
+            throw new Exception($valueName . " was 0.\n");
+        }
+    }
+    private static function checkNullEnd($ROA, $PE) {
+        try {
+            self::checkNull($ROA);
+            self::checkNull($PE);
+        }
+        catch(Exception $e) {
+            throw new Exception("ROA or PE was still null or zero by the end\n");
+        }
     }
 }

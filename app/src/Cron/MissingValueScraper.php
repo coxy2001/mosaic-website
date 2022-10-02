@@ -4,6 +4,7 @@ namespace Mosaic\Website\Cron;
 use DOMDocument;
 use DOMXPath;
 use Exception;
+use PhpParser\Node\Expr\Cast\Double;
 
 use function PHPUnit\Framework\isNull;
 
@@ -33,33 +34,29 @@ class MissingValueScraper
             return $ROA;
         }
         catch(Exception $e) {
-            // Get income statement html
-            $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
-            // Transform html into a navigatable object
-            $xpath = self::getXPath($response->getBody());
-
-            if(!self::dateOk($xpath)) {
-                throw new Exception("Stock is too old, aborting...");
-            }
-            // Extract the total income
-            $totalIncome = self::getIncome($xpath);
-
-            // Get balance sheet html
-            $response = RequestBuilder::requestStockPage($companyUrl, self::BALANCE_SHEET, $client);
-            // Transofrm html
-            $xpath = self::getXPath($response->getBody());
-            // Extract Assets
-            $assets = self::getTotalAssets($xpath);
-
-            // TODO: is this the best idea?
-            if ($assets == 0) {
-                return 0;
-            }
-
-            // TODO: investigate floats
-            // Return ROA
-            return $totalIncome / $assets * 100;
+            echo("Could not get ROA from ratio page\n" . $e->getMessage() . "Now trying calculation\n");
         }
+        // Get income statement html
+        $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
+        // Transform html into a navigatable object
+        $xpath = self::getXPath($response->getBody());
+
+        if(!self::dateOk($xpath)) {
+            throw new Exception("Stock is too old, aborting...");
+        }
+        // Extract the total income
+        $totalIncome = self::getIncome($xpath);
+
+        // Get balance sheet html
+        $response = RequestBuilder::requestStockPage($companyUrl, self::BALANCE_SHEET, $client);
+        // Transofrm html
+        $xpath = self::getXPath($response->getBody());
+        // Extract Assets
+        $assets = self::getTotalAssets($xpath);
+
+        // TODO: investigate floats
+        // Return ROA
+        return $totalIncome / $assets * 100;
     }
 
 
@@ -72,21 +69,22 @@ class MissingValueScraper
             return $PE;
         }
         catch(Exception $e) {
-            // Get income statement html
-            $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
-            // transform html
-            $xpath = self::getXPath($response->getBody());
-
-            if(!self::dateOk($xpath)) {
-                throw new Exception("Stock is too old, aborting...");
-            }
-
-            // Get total eps
-            $totalEPS = self::getEPS($xpath);
-            
-            // Return PE
-            return $price / $totalEPS;
+           echo("Could not get PE from ratio page " . $e->getMessage() . "Now trying calculation\n");
         }
+        // Get income statement html
+        $response = RequestBuilder::requestStockPage($companyUrl, self::INCOME_STATEMENT, $client);
+        // transform html
+        $xpath = self::getXPath($response->getBody());
+
+        if(!self::dateOk($xpath)) {
+            throw new Exception("Stock is too old, aborting...");
+        }
+
+        // Get total eps
+        $totalEPS = self::getEPS($xpath);
+        
+        // Return PE
+        return $price / $totalEPS;
     }
 
     public static function useRatioPage($companyUrl, $client) {
@@ -102,8 +100,14 @@ class MissingValueScraper
         if(strcmp($ROAvals[0], self::ROA_TTM) == 0 && sizeof($ROAvals) > 1) {
             try {
                 $percent = explode("%", $ROAvals[1]);
-                $ROA = doubleval($percent[0]);
-                return $ROA;
+                $ROA = $percent[0];
+                // $ROA =("-a");
+                if(self::checkDouble($ROA)){
+                    return (Double)$ROA;
+                }
+                else {
+                    throw new Exception("Value was not a Double\n");
+                }
             }
             catch(Exception $e) {
                 throw new Exception("Could not find ROA in ratios tab\n" . $e->getMessage());
@@ -118,7 +122,14 @@ class MissingValueScraper
 
         if(strcmp($PEvals[0], self::PE_TTM) == 0 && sizeof($PEvals) > 1) {
             try {
-                $PE = doubleval($PEvals[1]);
+                $PE = ($PEvals[1]);
+                // $PE = ("-a");
+                if(self::checkDouble($PE)){
+                    return (Double)$PE;
+                }
+                else {
+                    throw new Exception("Value was not a Double\n");
+                }
                 return $PE;
             }
             catch(Exception $e) {
@@ -135,6 +146,9 @@ class MissingValueScraper
         if(strcmp($dates[0], self::PERIOD) == 0 && sizeof($dates) > 1) {
             $firstDate = $dates[1];
             $firstYear =  substr(trim($firstDate), 0, 4);
+            if(!self::checkInt($firstYear)) {
+                throw new Exception("Year was not an int");
+            }
             $firstYear = intval($firstYear);
 
             date_default_timezone_set('America/Los_Angeles');
@@ -155,7 +169,7 @@ class MissingValueScraper
                 return $ROAvals;
             }
         }
-        throw new Exception("No results found");
+        throw new Exception("No results found for " . $search . "\n");
     }
 
 
@@ -171,7 +185,12 @@ class MissingValueScraper
 
         // Add the values together if they are all present
         if(strcmp($incomeVals[0], self::NET_INCOME) == 0 && sizeof($incomeVals) == 5) {
-            try { 
+            try {
+                for($i = 1; $i < count($incomeVals); $i++) {
+                    if(!self::checkInt($incomeVals[$i])) {
+                        throw new Exception("Value " . $i . " was not an int\n");
+                    }
+                } 
                 $totalIncome = intVal($incomeVals[1]) + intVal($incomeVals[2]) + intVal($incomeVals[3]) + intVal($incomeVals[4]);
             }
             catch(Exception $e) {
@@ -196,6 +215,11 @@ class MissingValueScraper
         if(strcmp($epsVals[0], self::EPS) == 0 && sizeof($epsVals) == 5) {
             // TODO: watch out for floats!
             try {
+                for($i = 1; $i < count($epsVals); $i++) {
+                    if(!self::checkDouble($epsVals[$i])) {
+                        throw new Exception("Value " . $i . " was not an int\n");
+                    }
+                } 
                 $totalEPS = floatval($epsVals[1]) + floatval($epsVals[2]) + floatval($epsVals[3]) + floatval($epsVals[4]);
             }
             catch(Exception $e) {
@@ -203,10 +227,10 @@ class MissingValueScraper
             }
         }
         else {
-            throw new Exception("Could not find all EPS values");
+            throw new Exception("Could not find all EPS values\n");
         }
         if ($totalEPS == 0) {
-            throw new Exception("No EPS values");
+            throw new Exception("No EPS values\n");
         }
         return $totalEPS;
     }
@@ -220,18 +244,35 @@ class MissingValueScraper
     
         // Use the first value for assets if its available
         if(strcmp($assetVals[0],self::TOTAL_ASSETS) == 0 && count($assetVals) >= 2) {
-            try {
-                $assets = intVal($assetVals[1]);
+            if(!self::checkInt($assetVals[1])) {
+                throw new Exception("Assets not an integer\n");
             }
-            catch(Exception $e){
-                throw new Exception('Assets not an integer');
-            }
+            $assets = intVal($assetVals[1]);
         }
         else {
-            throw new Exception('Could not find total assets');
+            throw new Exception("Could not find total assets\n");
         }
 
+        if($assets == 0) {
+            throw new Exception("Assets was zero\n");
+        }
         return $assets;
+    }
+
+    private static function checkDouble($extractedNumber) {
+        $val = (Double)$extractedNumber;
+        if (strcmp(strval($val), $extractedNumber) != 0) {
+            return false;
+        }
+        return true;
+    }
+
+    private static function checkInt($extractedNumber) {
+        $val = (Int)$extractedNumber;
+        if (strcmp(strval($val), $extractedNumber) != 0) {
+            return false;
+        }
+        return true;
     }
 
     // Converts the html into an object that can be navigated
