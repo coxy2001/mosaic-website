@@ -54,8 +54,8 @@
 				<div class="grid__item"><p class="grid__text">$Ticker</p></div>
 				<div class="grid__item"><p class="grid__text">$Exchange</p></div>
 				<div class="grid__item"><p class="grid__text">$Sector</p></div>
-				<div class="grid__item"><p class="grid__text">$MarketCap</p></div>
-				<div class="grid__item"><p class="grid__text">$Price</p></div>
+				<div class="grid__item"><p class="grid__text">\${$MarketCap.Formatted}</p></div>
+				<div class="grid__item"><p class="grid__text">\${$Price.Nice}</p></div>
 				<div class="grid__item"><p class="grid__text">$ROA</p></div>
 				<!--Side Scroll-->
 				<div class="grid__item"><p class="grid__text">$PE</p></div>
