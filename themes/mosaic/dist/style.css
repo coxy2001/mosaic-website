@@ -272,7 +272,7 @@ p {
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 7rem 20rem 8rem 12rem 20rem 15rem 12rem 8rem 8rem 8rem 12rem 12rem 12rem 12rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 .grid__row:hover {
   border-top: 2px solid #fff;
