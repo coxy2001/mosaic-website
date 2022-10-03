@@ -271,7 +271,7 @@ p {
 .grid__row {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 6rem 16rem 7rem 9rem 16rem 12rem 8rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
+  grid-template-columns: 6rem 16rem 7rem 9rem 16rem 11rem 7rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
   margin-bottom: 0.5rem;
 }
 .grid__row:hover {
@@ -345,13 +345,13 @@ p {
 }
 .grid__head--sorted-asc ::after {
   position: absolute;
-  right: 1rem;
+  right: 0.6rem;
   top: 0.5rem;
   content: "▼";
 }
 .grid__head--sorted-desc ::after {
   position: absolute;
-  right: 1rem;
+  right: 0.6rem;
   top: 0.5rem;
   content: "▲";
 }
