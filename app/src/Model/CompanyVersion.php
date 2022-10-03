@@ -9,7 +9,7 @@ class CompanyVersion extends DataObject
     private static $db = Company::DB_FIELDS;
 
     private static $has_one = [
-        "TopCompanies" => TopCompanies::class
+        "CompanyList" => CompanyList::class
     ];
 
     private static $table_name = 'CompanyVersion';
