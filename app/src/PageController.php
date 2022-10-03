@@ -33,6 +33,7 @@ namespace {
             Requirements::javascript("https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
             Requirements::javascript("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js");
             Requirements::themedJavascript("dist/countrypicker");
+            Requirements::themedJavascript("dist/sort");
         }
     }
 }

@@ -40,13 +40,34 @@
     }
 
     &__head {
+        position: relative;
+        font-weight: 700;
         background-color: $heading-colour;
         border-color: $heading-darker;
         color: #000;
         border-style: solid;
         border-width: 1px;
+
         &:hover {
             background-color: $heading-darker;
+        }
+
+        &--sorted-asc {
+            ::after {
+                position: absolute;
+                right: 1rem;
+                top: 0.5rem;
+                content: '\25BC';
+            }
+        }
+
+        &--sorted-desc {
+            ::after {
+                position: absolute;
+                right: 1rem;
+                top: 0.5rem;
+                content: '\25B2';
+            }
         }
     }
 
