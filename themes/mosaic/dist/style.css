@@ -355,12 +355,8 @@ p {
   top: 0.5rem;
   content: "▲";
 }
-.grid__blank {
-  grid-column: span 3;
-}
 .grid__text {
   padding: 0.5rem;
-  margin: 0;
 }
 
 .buttons-row {
