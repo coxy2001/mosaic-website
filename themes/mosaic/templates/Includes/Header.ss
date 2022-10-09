@@ -1,6 +1,5 @@
 <header class="header">
-    <div class="container">
-        
+    <div class="header__logo-container">
         <a class="header__link" href="$BaseHref" title="Return to homepage">
             <% if $SiteConfig.Logo %>
                 <img class="header__logo" height="81" src="$SiteConfig.Logo.URL" alt="$SiteConfig.Logo.Title">
@@ -9,8 +8,5 @@
             <% end_if %>
         </a>
     </div>
-    <div>
     <% include Navigation %>
-    </div>
-
 </header>

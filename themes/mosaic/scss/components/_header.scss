@@ -1,5 +1,6 @@
 .header {
     background-color: $header-bg;
+    display: flex;
 
     &__link {
         text-align: center;
@@ -11,4 +12,18 @@
         padding: 0.5rem;
         color: $header-colour;
     }
+
+
+    &__logo{
+        padding-top: 0.5rem;
+        padding-left: 2rem;
+        padding-bottom: 0.5rem;
+        padding-right:0.5rem;
+    }
+
+    &__logo-container{
+        width: 30%;
+    }
+
+
 }

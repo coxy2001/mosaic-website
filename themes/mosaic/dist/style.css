@@ -103,7 +103,8 @@ p {
 }
 
 .header {
-  background-color: #000;
+  background-color: #3c4147;
+  display: flex;
 }
 .header__link {
   text-align: center;
@@ -114,13 +115,28 @@ p {
   padding: 0.5rem;
   color: #fff;
 }
+.header__logo {
+  padding-top: 0.5rem;
+  padding-left: 2rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem;
+}
+.header__logo-container {
+  width: 30%;
+}
 
 .nav {
+  justify-content: right;
+  align-items: flex-end;
   display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
-  position: relative;
+  padding-top: 0.5rem;
+  width: 89%;
+}
+.nav__item {
+  display: block;
 }
 .nav__item--current {
   background-color: #3c4147;
@@ -132,10 +148,12 @@ p {
   text-decoration: none;
 }
 .nav__link:hover {
-  color: #00a6ff;
+  background-color: #ddd;
+  color: #1a9815;
 }
 .nav__link--current {
-  color: #000;
+  background-color: #1a9815;
+  color: #fff;
 }
 
 #footer {
