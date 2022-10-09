@@ -86,32 +86,3 @@
         }
     }
 }
-
-.buttons-row {
-    width: 100%;
-    max-width: 136rem;
-    margin: auto;
-}
-#date-picker {
-    grid-column: span 2;
-    text-align: left;
-}
-
-#country-picker {
-    grid-column: span 2;
-    background-color: #00000000;
-    border-style: none;
-}
-
-#country-picker-button {
-    width: auto;
-    align-self: center;
-}
-
-#download {
-    grid-column: span 2;
-}
-
-#history {
-    padding: 0.5rem;
-}

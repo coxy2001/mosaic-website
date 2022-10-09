@@ -28,7 +28,7 @@ $grid-bg-odd: #7c94b3;
 $grid-gradient-start: #0f830f;
 $grid-gradient-end: #59ef59;
 
-$primary: #007bff;
+$primary: $grid-gradient-start;
 $secondary: #f7ff00;
 $success: #00cc00;
 $danger: #cc0000;

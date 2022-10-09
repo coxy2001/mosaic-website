@@ -992,12 +992,12 @@ $(function () {
 
             //for each build list with flag
             $.each(countries, function (index, country) {
-                var flagIcon = FLAG_PATH + country.code + ".png";
+                var flagIcon = FLAG_PATH + country.code.toLowerCase() + ".png";
                 countryList +=
                     "<option data-country-code='" +
-                    country.code +
+                    country.code.toLowerCase() +
                     "' data-tokens='" +
-                    country.code +
+                    country.code.toLowerCase() +
                     " " +
                     country.name +
                     "' style='padding-left:25px; background-position: 4px 7px; background-image:url(" +
@@ -1041,9 +1041,9 @@ $(function () {
             $.each(countries, function (index, country) {
                 countryList +=
                     "<option data-country-code='" +
-                    country.code +
+                    country.code.toLowerCase() +
                     "' data-tokens='" +
-                    country.code +
+                    country.code.toLowerCase() +
                     " " +
                     country.name +
                     "' value='" +
