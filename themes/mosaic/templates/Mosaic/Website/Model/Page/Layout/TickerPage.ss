@@ -29,7 +29,7 @@
 <div class="grid">
     <div class="grid__row">
         <% loop $TableHeaders %>
-            <div onclick="Sort('$Key')" class="grid__head <% if $Top.CurrentSort == $Key %>grid__head--sorted-{$Top.CurrentDirection}<% end_if %>">
+            <div onclick="Sort('$Key')" class="grid__head <% if $Top.CurrentSort == $Key %>$Top.CurrentDirectionClass<% end_if %>">
                 <div class="grid__text">$Value</div>
             </div>
         <% end_loop %>
