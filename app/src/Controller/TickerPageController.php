@@ -56,6 +56,8 @@ class TickerPageController extends \PageController
             "LengthOptions" => self::viewableArray(self::$lengthOptions),
             "HistoryOptions" => CompanyList::get(),
             "CurrentLength" => $request->getVar("length") ?: CompanyList::DEFAULT_LENGTH,
+            "CurrentCountries" => $request->getVar("countries") ?: null,
+            "CurrentSectors" => $request->getVar("sectors") ?: null,
             "CurrentSort" => $request->getVar("sort") ?: CompanyList::DEFAULT_SORT,
             "CurrentDirectionClass" => "grid__head--sorted-" . strtolower(
                 $request->getVar("direction") ?: CompanyList::DEFAULT_DIRECTION
