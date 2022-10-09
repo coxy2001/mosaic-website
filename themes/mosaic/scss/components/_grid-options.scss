@@ -2,9 +2,14 @@
     display: flex;
     max-width: 136rem;
     margin: auto;
-    justify-content: space-around;
-    padding:1rem
+    padding: 1rem;
+    align-items: center;
+
+    &__download {
+        margin-left: auto;
+    }
 }
+
 %input {
     display: inline;
     width: 100%;
@@ -20,6 +25,7 @@
         margin-right: 0.5rem;
     }
 }
+
 input,
 select {
     @extend %input;

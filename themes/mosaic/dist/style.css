@@ -379,8 +379,11 @@ p {
   display: flex;
   max-width: 136rem;
   margin: auto;
-  justify-content: space-around;
   padding: 1rem;
+  align-items: center;
+}
+.buttons-row__download {
+  margin-left: auto;
 }
 
 input,

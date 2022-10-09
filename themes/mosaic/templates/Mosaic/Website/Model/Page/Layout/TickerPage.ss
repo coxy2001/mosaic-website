@@ -21,11 +21,13 @@
         <p>COUNTRY PICKER</p>
     </div>
 
-    <div class=""></div>
 
-    <a class="btn-primary" href="home/csv?list={$CompanyList.ID}" download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv">
-    Download CSV
-    </a>
+    <div class="buttons-row__download">
+        <a class="btn-primary" href="home/csv?list={$CompanyList.ID}"
+            download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv"
+        >
+            Download CSV
+        </a>
     </div>
 </div>
 
