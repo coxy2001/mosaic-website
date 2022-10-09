@@ -8,7 +8,7 @@ use SilverStripe\ORM\PaginatedList;
 
 class CompanyList extends DataObject
 {
-    public const DEFAULT_LENGTH = 50;
+    public const DEFAULT_LENGTH = 30;
     public const DEFAULT_SORT = "Rank";
     public const DEFAULT_DIRECTION = "ASC";
 

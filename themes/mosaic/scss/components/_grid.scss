@@ -8,20 +8,22 @@
         display: grid;
         grid-auto-flow: column;
         grid-template-columns: 6rem 16rem 7rem 9rem 16rem 11rem 7rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
+        width: fit-content;
         margin-bottom: 0.5rem;
 
         &:hover {
-            border-top: 2px solid #fff;
-            border-bottom: 2px solid #fff;
+            border-top: 2px solid $body-colour;
+            border-bottom: 2px solid $body-colour;
             margin-top: -2px;
             margin-bottom: calc(0.5rem - 2px);
         }
     }
 
     &__item {
+        color: $body-colour;
         margin-left: 0.25rem;
         margin-right: 0.25rem;
-        color: #fff;
+        padding: 0.5rem;
 
         .grid__row--even & {
             background-color: $grid-bg-even;
@@ -45,12 +47,13 @@
 
     &__head {
         position: relative;
+        color: #000;
         font-weight: 700;
         background-color: $heading-colour;
         border-color: $heading-darker;
-        color: #000;
         border-style: solid;
         border-width: 1px;
+        padding: 0.5rem;
 
         &:hover {
             background-color: $heading-darker;
@@ -75,14 +78,18 @@
         }
     }
 
-    &__text {
-        padding: 0.5rem;
+    &__link {
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 }
 
 .buttons-row {
     width: 100%;
-    max-width: 104.375rem;
+    max-width: 136rem;
     margin: auto;
 }
 #date-picker {

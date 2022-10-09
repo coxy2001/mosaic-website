@@ -20,9 +20,7 @@
     <div class=""></div>
 
     <div class="grid__head" id="download">
-        <h3 class="grid__text">
-            <a href="home/csv?list={$CompanyList.ID}" download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv">Download CSV</a>
-        </h3>
+        <a href="home/csv?list={$CompanyList.ID}" download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv">Download CSV</a>
     </div>
 </div>
 
@@ -43,24 +41,25 @@
                 <% else %>
                     grid__row--odd
                 <% end_if %>"
-                onclick="window.open('$Link', '_blank');"
             >
-                <div class="grid__item"><div class="grid__text">$Rank</div></div>
-                <div class="grid__item"><div class="grid__text">$Name</div></div>
+                <div class="grid__item">$Rank</div>
+                <div class="grid__item">
+                    <a class="grid__link" href="$Link" target="_blank">$Name</a>
+                </div>
                 <!--Default-->
-                <div class="grid__item"><div class="grid__text">$Ticker</div></div>
-                <div class="grid__item"><div class="grid__text">$Exchange</div></div>
-                <div class="grid__item"><div class="grid__text">$Sector</div></div>
-                <div class="grid__item"><div class="grid__text">\${$MarketCap.Formatted}</div></div>
-                <div class="grid__item"><div class="grid__text">\${$Price.Nice}</div></div>
-                <div class="grid__item"><div class="grid__text">$ROA</div></div>
+                <div class="grid__item">$Ticker</div>
+                <div class="grid__item">$Exchange</div>
+                <div class="grid__item">$Sector</div>
+                <div class="grid__item">\${$MarketCap.Formatted}</div>
+                <div class="grid__item">\${$Price.Nice}</div>
+                <div class="grid__item">$ROA</div>
                 <!--Side Scroll-->
-                <div class="grid__item"><div class="grid__text">$PE</div></div>
-                <div class="grid__item"><div class="grid__text">$EPS</div></div>
-                <div class="grid__item"><div class="grid__text">$FreeCashFlow</div></div>
-                <div class="grid__item"><div class="grid__text">$DividendsYield</div></div>
-                <div class="grid__item"><div class="grid__text">$CurrentRatio</div></div>
-                <div class="grid__item"><div class="grid__text">$PriceToBook</div></div>
+                <div class="grid__item">$PE</div>
+                <div class="grid__item">$EPS</div>
+                <div class="grid__item">$FreeCashFlow</div>
+                <div class="grid__item">$DividendsYield</div>
+                <div class="grid__item">$CurrentRatio</div>
+                <div class="grid__item">$PriceToBook</div>
             </div>
         <% end_loop %>
     <% end_if %>
@@ -69,8 +68,7 @@
 <% if $Companies.MoreThanOnePage %>
     <div class="pagination">
         <% if $Companies.NotFirstPage %>
-            <a class="pagination__item" href="$Companies.FirstLink">&laquo;</a>
-            <a class="pagination__item" href="$Companies.PrevLink">&lsaquo;</a>
+            <a class="pagination__item" href="$Companies.PrevLink">&laquo;</a>
         <% end_if %>
 
         <% loop $Companies.PaginationSummary %>
@@ -81,13 +79,12 @@
                     <a class="pagination__item" href="$Link">$PageNum</a>
                 <% end_if %>
             <% else %>
-                <span class="pagination__item">...</span>
+                <span class="pagination__item pagination__item--dots">. . .</span>
             <% end_if %>
         <% end_loop %>
 
         <% if $Companies.NotLastPage %>
-            <a class="pagination__item" href="$Companies.NextLink">&rsaquo;</a>
-            <a class="pagination__item" href="$Companies.LastLink">&raquo;</a>
+            <a class="pagination__item" href="$Companies.NextLink">&raquo;</a>
         <% end_if %>
     </div>
 <% end_if %>
