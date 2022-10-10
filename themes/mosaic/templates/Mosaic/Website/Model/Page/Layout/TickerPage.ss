@@ -1,5 +1,6 @@
-<div class="buttons-row">
-    <div class="" id="date-picker">
+<div class="grid-options">
+    <div class="grid-options__item">
+        Date:
         <select name="history" id="history" onchange="List()">
             <% loop $HistoryOptions %>
                 <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Year $Month</option>
@@ -7,20 +8,30 @@
         </select>
     </div>
 
-    <select name="length" id="length" onchange="Length()">
-        <% loop $LengthOptions %>
-            <option value="$Value" <% if $Top.CurrentLength == $Value %>selected<% end_if %>>$Value</option>
-        <% end_loop %>
-    </select>
+    <div class="grid-options__item">
+        Page Length: 
+        <select name="length" id="length" onchange="Length()">
+            <% loop $LengthOptions %>
+                <option value="$Value" <% if $Top.CurrentLength == $Value %>selected<% end_if %>>$Value</option>
+            <% end_loop %>
+        </select>
+    </div>
 
-    <div class="-head" id="country-picker">
+    <div class="grid-options__item">
+        Country Filter:
         <%-- <select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select> --%>
     </div>
 
-    <div class=""></div>
+    <div class="grid-options__item">
+        Sector Filter:
+    </div>
 
-    <div class="grid__head" id="download">
-        <a href="home/csv?list={$CompanyList.ID}" download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv">Download CSV</a>
+    <div class="grid-options__item grid-options__item--download">
+        <a class="btn-primary" href="home/csv?list={$CompanyList.ID}"
+            download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv"
+        >
+            Download CSV
+        </a>
     </div>
 </div>
 
@@ -44,7 +55,7 @@
             >
                 <div class="grid__item">$Rank</div>
                 <div class="grid__item">
-                    <a class="grid__link" href="$Link" target="_blank">$Name</a>
+                <a class="grid__link" href="$Link" target="_blank">$Name</a>
                 </div>
                 <!--Default-->
                 <div class="grid__item">$Ticker</div>

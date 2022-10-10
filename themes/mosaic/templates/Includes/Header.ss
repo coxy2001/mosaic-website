@@ -1,5 +1,5 @@
 <header class="header">
-    <div class="header__logo-container">
+    <div class="header__left">
         <a class="header__link" href="$BaseHref" title="Return to homepage">
             <% if $SiteConfig.Logo %>
                 <img class="header__logo" height="81" src="$SiteConfig.Logo.URL" alt="$SiteConfig.Logo.Title">

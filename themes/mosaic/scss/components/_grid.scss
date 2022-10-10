@@ -63,7 +63,8 @@
             ::after {
                 position: absolute;
                 right: 0.6rem;
-                top: 0.5rem;
+                top: 50%;
+                transform: translateY(-50%);
                 content: "\25BC";
             }
         }
@@ -72,7 +73,8 @@
             ::after {
                 position: absolute;
                 right: 0.6rem;
-                top: 0.5rem;
+                top: 50%;
+                transform: translateY(-50%);
                 content: "\25B2";
             }
         }
@@ -85,33 +87,4 @@
             text-decoration: none;
         }
     }
-}
-
-.buttons-row {
-    width: 100%;
-    max-width: 136rem;
-    margin: auto;
-}
-#date-picker {
-    grid-column: span 2;
-    text-align: left;
-}
-
-#country-picker {
-    grid-column: span 2;
-    background-color: #00000000;
-    border-style: none;
-}
-
-#country-picker-button {
-    width: auto;
-    align-self: center;
-}
-
-#download {
-    grid-column: span 2;
-}
-
-#history {
-    padding: 0.5rem;
 }

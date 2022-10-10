@@ -1,15 +1,14 @@
 .nav {
+    display: flex;
+    width: 40%;
+    margin: 0;
+    padding: 0;
+    padding-top: 0.5rem;
     justify-content: right;
     align-items: flex-end;
-    display: flex;
-    margin: 0;
-    padding   : 0;
-    list-style: none;
-  
-        padding-top: 0.5rem;
-        width: 89%;
+
     &__item {
-      display: block;
+        display: block;
         &--current {
             background-color: $body-bg;
         }
@@ -31,7 +30,4 @@
             color: $nav-link-colour;
         }
     }
-
-
-
 }

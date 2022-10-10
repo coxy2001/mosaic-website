@@ -3,27 +3,24 @@
     display: flex;
 
     &__link {
-        text-align: center;
         text-decoration: none;
     }
 
     &__title {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
+        margin: 0;
+        padding: 0.5rem 2rem;
         color: $header-colour;
     }
 
-
-    &__logo{
-        padding-top: 0.5rem;
-        padding-left: 2rem;
-        padding-bottom: 0.5rem;
-        padding-right:0.5rem;
+    &__logo {
+        padding: 0.5rem 2rem;
     }
 
-    &__logo-container{
-        width: 30%;
+    &__left {
+        width: 60%;
     }
 
-
+    &__right {
+        width: 40%;
+    }
 }

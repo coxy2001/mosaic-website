@@ -1,0 +1,36 @@
+.grid-options {
+    display: flex;
+    max-width: 136rem;
+    margin: auto;
+    padding: 1rem;
+    align-items: center;
+
+    &__item {
+        padding: 0 0.5rem;
+
+        &--download {
+            margin-left: auto;
+        }
+    }
+}
+
+%input {
+    display: inline;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #000;
+    border-radius: 0.25rem;
+
+    @media (min-width: $sm) {
+        width: auto;
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+    }
+}
+
+input,
+select {
+    @extend %input;
+}
