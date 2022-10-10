@@ -359,13 +359,15 @@ p {
 .grid__head--sorted-asc ::after {
   position: absolute;
   right: 0.6rem;
-  top: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
   content: "▼";
 }
 .grid__head--sorted-desc ::after {
   position: absolute;
   right: 0.6rem;
-  top: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
   content: "▲";
 }
 .grid__link {
