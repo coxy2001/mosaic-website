@@ -426,6 +426,42 @@ select {
   }
 }
 
+.multipleSelection {
+  width: 500px;
+  display: inline-block;
+  position: relative;
+}
+
+.selectBox {
+  position: relative;
+  width: 100%;
+}
+
+.selectBox select {
+  width: 100%;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+#checkBoxes label {
+  display: block;
+}
+
+#checkBoxes label:hover {
+  background-color: lightgreen;
+}
+
+.flag-icon {
+  width: 15px;
+  height: auto;
+}
+
 .pagination {
   display: flex;
   justify-content: center;

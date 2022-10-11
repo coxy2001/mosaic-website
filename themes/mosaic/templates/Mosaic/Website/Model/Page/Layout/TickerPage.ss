@@ -19,7 +19,17 @@
 
     <div class="grid-options__item">
         Country Filter:
-        <%-- <select class="selectpicker countrypicker" id="country-picker-button" multiple data-live-search="true" data-flag="true"></select> --%>
+        <form>
+            <div class="multipleSelection">
+                <div class="selectBox" 
+                    onclick="showCheckboxes()">
+                    <select id="checkBoxes">
+                        <option>Select Countries</option>
+                    </select>
+                </div>
+            </div>
+            <button>Filter</button>
+        </form>
     </div>
 
     <div class="grid-options__item">
