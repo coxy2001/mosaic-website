@@ -51,7 +51,7 @@ class TickerPageController extends \PageController
 
         return [
             "CompanyList" => $companyList,
-            "Companies" => $companyList ? $companyList->getPaginatedList() : null,
+            "Companies" => $companyList ? $companyList->getPaginatedList($request) : null,
             "TableHeaders" => self::viewableArray(self::$tableHeaders),
             "LengthOptions" => self::viewableArray(self::$lengthOptions),
             "HistoryOptions" => CompanyList::get(),
@@ -69,6 +69,10 @@ class TickerPageController extends \PageController
     {
         $listID = $request->getVar("list");
         $companyList = $listID ? CompanyList::get_by_id($listID) : CompanyList::get()->last();
-        return $companyList ? $companyList->getCSV() : null;
+
+        if ($companyList)
+            $companyList->getCSV();
+        else
+            $this->httpError(404);;
     }
 }

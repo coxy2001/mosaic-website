@@ -3,7 +3,7 @@
         Date:
         <select name="history" id="history" onchange="List()">
             <% loop $HistoryOptions %>
-                <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Year $Month</option>
+                <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Name</option>
             <% end_loop %>
         </select>
     </div>
@@ -28,7 +28,7 @@
 
     <div class="grid-options__item grid-options__item--download">
         <a class="btn-primary" href="home/csv?list={$CompanyList.ID}"
-            download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv"
+            download="mosaic_{$CompanyList.Year}_{$CompanyList.Month}.csv"
         >
             Download CSV
         </a>
