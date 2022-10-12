@@ -41,16 +41,6 @@
         @include button($primary);
     }
 
-    &-secondary {
-        @extend %btn;
-        @include button($secondary);
-    }
-
-    &-success {
-        @extend %btn;
-        @include button($success);
-    }
-
     &-danger {
         @extend %btn;
         @include button($danger);

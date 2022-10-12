@@ -1,33 +1,21 @@
 .nav {
     display: flex;
-    width: 40%;
-    margin: 0;
-    padding: 0;
-    padding-top: 0.5rem;
     justify-content: right;
     align-items: flex-end;
-
-    &__item {
-        display: block;
-        &--current {
-            background-color: $body-bg;
-        }
-    }
+    width: 40%;
 
     &__link {
-        display: block;
-        padding: 0.5rem 1rem;
         color: $nav-link-colour;
+        padding: 0.5rem 1rem;
         text-decoration: none;
 
         &:hover {
-            background-color: $nav-link-background-color;
-            color: $nav-link-box-color;
+            background-color: $nav-link-hover-bg-colour;
+            color: $nav-link-hover-colour;
         }
 
         &--current {
-            background-color: $nav-link-box-color;
-            color: $nav-link-colour;
+            background-color: $nav-link-current-bg-colour;
         }
     }
 }

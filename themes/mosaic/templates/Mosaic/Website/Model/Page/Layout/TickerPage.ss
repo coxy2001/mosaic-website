@@ -26,6 +26,10 @@
         Sector Filter:
     </div>
 
+    <div class="grid-options__item">
+        <a class="btn-primary" href="$BaseHref">Reset Filters</a>
+    </div>
+
     <div class="grid-options__item grid-options__item--download">
         <a class="btn-primary" href="home/csv?list={$CompanyList.ID}"
             download="mosaic_{$CompanyList.Year}_{$CompanyList.Month}.csv"
