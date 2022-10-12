@@ -1,12 +1,20 @@
 .grid-options {
     display: flex;
+    flex-wrap: wrap;
     max-width: 136rem;
     margin: auto;
     padding: 1rem;
+    padding-bottom: 0.5rem;
     align-items: center;
 
     &__item {
+        width: 100%;
+        margin-bottom: 0.5rem;
         padding: 0 0.5rem;
+
+        @media (min-width: $sm) {
+            width: auto;
+        }
 
         &--download {
             margin-left: auto;
@@ -17,7 +25,6 @@
 %input {
     display: inline;
     width: 100%;
-    margin-bottom: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border: 1px solid #000;
@@ -25,8 +32,6 @@
 
     @media (min-width: $sm) {
         width: auto;
-        margin-bottom: 0;
-        margin-right: 0.5rem;
     }
 }
 

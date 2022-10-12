@@ -1,8 +1,13 @@
 .nav {
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: flex-end;
-    width: 40%;
+    width: 100%;
+
+    @media (min-width: $sm) {
+        width: 40%;
+        justify-content: right;
+    }
 
     &__link {
         color: $nav-link-colour;

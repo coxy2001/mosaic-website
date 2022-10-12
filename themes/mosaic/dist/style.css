@@ -105,9 +105,16 @@ p {
 .header {
   background-color: #3c4147;
   display: flex;
+  flex-wrap: wrap;
 }
 .header__link {
   text-decoration: none;
+  text-align: center;
+}
+@media (min-width: 576px) {
+  .header__link {
+    text-align: left;
+  }
 }
 .header__title {
   margin: 0;
@@ -118,17 +125,25 @@ p {
   padding: 0.5rem 2rem;
 }
 .header__left {
-  width: 60%;
+  width: 100%;
 }
-.header__right {
-  width: 40%;
+@media (min-width: 576px) {
+  .header__left {
+    width: 60%;
+  }
 }
 
 .nav {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: flex-end;
-  width: 40%;
+  width: 100%;
+}
+@media (min-width: 576px) {
+  .nav {
+    width: 40%;
+    justify-content: right;
+  }
 }
 .nav__link {
   color: #fff;
@@ -185,7 +200,7 @@ p {
 }
 
 .btn-danger, .btn-primary {
-  display: inline;
+  display: inline-block;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -368,13 +383,22 @@ p {
 
 .grid-options {
   display: flex;
+  flex-wrap: wrap;
   max-width: 136rem;
   margin: auto;
   padding: 1rem;
+  padding-bottom: 0.5rem;
   align-items: center;
 }
 .grid-options__item {
+  width: 100%;
+  margin-bottom: 0.5rem;
   padding: 0 0.5rem;
+}
+@media (min-width: 576px) {
+  .grid-options__item {
+    width: auto;
+  }
 }
 .grid-options__item--download {
   margin-left: auto;
@@ -384,7 +408,6 @@ input,
 select {
   display: inline;
   width: 100%;
-  margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   border: 1px solid #000;
@@ -394,8 +417,6 @@ select {
   input,
 select {
     width: auto;
-    margin-bottom: 0;
-    margin-right: 0.5rem;
   }
 }
 
