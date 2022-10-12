@@ -1,11 +1,14 @@
 .nav {
     display: flex;
+    width: 40%;
     margin: 0;
     padding: 0;
-    list-style: none;
-    justify-content: center;
+    padding-top: 0.5rem;
+    justify-content: right;
+    align-items: flex-end;
 
     &__item {
+        display: block;
         &--current {
             background-color: $body-bg;
         }
@@ -18,11 +21,13 @@
         text-decoration: none;
 
         &:hover {
-            color: $nav-link-hover-colour;
+            background-color: $nav-link-background-color;
+            color: $nav-link-box-color;
         }
 
         &--current {
-            color: $nav-link-current-colour;
+            background-color: $nav-link-box-color;
+            color: $nav-link-colour;
         }
     }
 }

@@ -2,16 +2,20 @@
 
 namespace Mosaic\Website\Model;
 
-use SilverStripe\Control\Controller;
+use DateTime;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\PaginatedList;
 
 class CompanyList extends DataObject
 {
+    public const DEFAULT_LENGTH = 30;
+    public const DEFAULT_SORT = "Rank";
+    public const DEFAULT_DIRECTION = "ASC";
+
     private static $db = [
-        "Name" => "Varchar",
-        "Month" => "Varchar",
-        "Year" => "Varchar",
+        "Month" => "Int",
+        "Year" => "Int",
     ];
 
     private static $has_many = [
@@ -60,24 +64,27 @@ class CompanyList extends DataObject
         "Link",
     ];
 
-    public function getPaginatedList()
+    public function getPaginatedList(HTTPRequest $request)
     {
-        $request = Controller::curr()->getRequest();
-
-        $sort = [$request->getVar("sort") ?: "Rank" => $request->getVar("direction") ?: "ASC"];
-        if ($request->getVar("sort") && $request->getVar("sort") !== "Rank")
-            $sort["Rank"] = "ASC";
+        // Sort list by the 'sort' and 'direction' get arguments using DEFAULT_SORT and DEFAULT_DIRECTION as fallbacks
+        $sort = [$request->getVar("sort") ?: self::DEFAULT_SORT => $request->getVar("direction") ?: self::DEFAULT_DIRECTION];
+        // If there is a sort column given and it's not the default sort, add the default sort and direction as a secondary sort
+        if ($request->getVar("sort") && $request->getVar("sort") !== self::DEFAULT_SORT)
+            $sort[self::DEFAULT_SORT] = self::DEFAULT_DIRECTION;
 
         $filter = [];
         if ($request->getVar("countries")) {
-            $filter["Sector"] = explode(',', $request->getVar("countries"));
+            $filter["Flag"] = explode(',', $request->getVar("countries"));
+        }
+        if ($request->getVar("sectors")) {
+            $filter["Sector"] = explode(',', $request->getVar("sectors"));
         }
 
         $paginatedList = PaginatedList::create(
             $this->Companies()->sort($sort)->filter($filter),
             $request
         )
-            ->setPageLength($request->getVar("length") ?: 50)
+            ->setPageLength($request->getVar("length") ?: self::DEFAULT_LENGTH)
             ->setPaginationGetVar('p');
 
         return $paginatedList;
@@ -88,9 +95,17 @@ class CompanyList extends DataObject
         $stream = fopen("php://output", 'w');
         fputcsv($stream, self::$csv_headers);
 
-        $list = $this->Companies()->sort("Rank");
+        $list = $this->Companies()->sort(self::DEFAULT_SORT, self::DEFAULT_DIRECTION);
         foreach ($list as $company) {
             fputcsv($stream, $company->getXMLValues(self::$csv_headers));
         }
+    }
+
+    public function getName()
+    {
+        $dateObj   = DateTime::createFromFormat('!m', $this->Month);
+        $month = $dateObj->format('F');
+        $year = $this->Year;
+        return  "$year, $month";
     }
 }
