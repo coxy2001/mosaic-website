@@ -20,20 +20,41 @@
     <div class="grid-options__item">
         Country Filter:
         <form>
-            <div class="multipleSelection">
-                <div class="selectBox" 
-                    onclick="showCheckboxes()">
-                    <select id="checkBoxes">
-                        <option>Select Countries</option>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                        <option>All Countries</option>
                     </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
                 </div>
             </div>
-            <button>Filter</button>
         </form>
+        <button onclick="sendCountries()">Filter</button>
+
     </div>
 
     <div class="grid-options__item">
         Sector Filter:
+        <form>
+            <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                    <select>
+                        <option>All Sectors</option>
+                    </select>
+                    <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes">
+                    <label for="one">
+                        <input type="checkbox" id="one" />First checkbox</label>
+                    <label for="two">
+                        <input type="checkbox" id="two" />Second checkbox</label>
+                    <label for="three">
+                        <input type="checkbox" id="three" />Third checkbox</label>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="grid-options__item grid-options__item--download">

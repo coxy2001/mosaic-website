@@ -36,19 +36,17 @@ select {
 }
 
 
-.multipleSelection {
-  width: 500px;
-  display: inline-block;
-  position: relative;
+.multiselect {
+  width: 200px;
 }
 
 .selectBox {
   position: relative;
-  width: 100%;
 }
 
 .selectBox select {
   width: 100%;
+  font-weight: bold;
 }
 
 .overSelect {
@@ -59,15 +57,21 @@ select {
   bottom: 0;
 }
 
-#checkBoxes label {
+#checkboxes {
+  display: none;
+  position: absolute;
+  z-index: 50;
+  background-color: white;
+  color: black;
+  border: 1px #dadada solid;
+  height: 500px;
+  overflow: auto;
+}
+
+#checkboxes label {
   display: block;
 }
 
-#checkBoxes label:hover {
-  background-color: lightgreen;
-}
-
-.flag-icon{
-  width: 15px;
-  height: auto;
+#checkboxes label:hover {
+  background-color: #1e90ff;
 }
