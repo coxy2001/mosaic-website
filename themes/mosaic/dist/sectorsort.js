@@ -69,8 +69,6 @@ function updateCheckboxSector(){
     for (let i = 1; i < inputElementsSectors.length; i++) {            //Ignore the first one since its all countries
         document.getElementById(inputElementsSectors[i].id).checked = sectors[inputElementsSectors[i].id.substring(4)].selected;
     }
-
-    console.log(sectors);
 }
 
 function getSelectedSectors(){
@@ -117,7 +115,6 @@ function sendSectors() {                      //Refresh the website with the cou
 
     }else{
         url.searchParams.set("sector", getSelectedSectors());
-        console.log(url);
         window.location.replace(url);
     }
 }

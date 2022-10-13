@@ -455,11 +455,13 @@ select {
   color: black;
   border: 1px #dadada solid;
   height: 500px;
+  width: auto;
   overflow: auto;
 }
 
 #checkboxes label {
   display: block;
+  padding: 3px;
 }
 
 #checkboxes label:hover {
@@ -480,6 +482,7 @@ select {
 
 #checkboxes-sector label {
   display: block;
+  padding: 5px;
 }
 
 #checkboxes-sector label:hover {
