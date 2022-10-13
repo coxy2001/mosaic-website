@@ -221,7 +221,6 @@ select {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.2;
@@ -239,8 +238,6 @@ select {
 @media (min-width: 576px) {
   .btn-danger, .btn-primary {
     width: auto;
-    margin-bottom: 0;
-    margin-right: 0.5rem;
   }
 }
 
@@ -446,7 +443,10 @@ select {
   bottom: 0;
   padding: 0.5rem 1rem;
   color: #000;
+}
+.multiselect__text {
   overflow: hidden;
+  max-height: 1.4rem;
 }
 .multiselect__options {
   display: none;

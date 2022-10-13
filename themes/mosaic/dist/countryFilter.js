@@ -921,7 +921,8 @@ var countryData = [
     },
     {
         name: "United States",
-        flag: "USA",
+        flag: "us",
+        tag: "USA",
     },
     {
         name: "United States Minor Outlying Islands",
@@ -993,7 +994,10 @@ function renderCountries() {
     // Create country options
     countryData.forEach((country) => {
         countryOptions.innerHTML += `<label>
-            <input data-country="${country.flag}" type="checkbox" checked />
+            <input data-flag="${country.flag}" 
+                data-country="${country.tag || country.flag}"
+                type="checkbox" checked
+            />
             <img src="${FLAG_PATH + country.flag}.png" loading="lazy">
             ${country.name}
         </label>`;
@@ -1054,7 +1058,7 @@ function selectedCountryFlags() {
     countries.forEach((country) => {
         if (country.checked && selected.length < 8) {
             selected.push(
-                `<img src="${FLAG_PATH + country.dataset.country}.png">`
+                `<img src="${FLAG_PATH + country.dataset.flag}.png" loading="lazy">`
             );
         }
     });

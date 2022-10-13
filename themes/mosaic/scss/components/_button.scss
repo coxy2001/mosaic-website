@@ -17,7 +17,6 @@
     display: inline-block;
     width: 100%;
     height: fit-content;
-    margin-bottom: 0.5rem;
     padding: 0.5rem 1rem;
     font-size: 1rem;
     line-height: 1.2;
@@ -32,8 +31,6 @@
 
     @media (min-width: $sm) {
         width: auto;
-        margin-bottom: 0;
-        margin-right: 0.5rem;
     }
 }
 
