@@ -1,4 +1,6 @@
 .multiselect {
+    user-select: none;
+
     @media (min-width: $sm) {
         display: inline-block;
     }
@@ -22,11 +24,11 @@
         top: 0;
         bottom: 0;
         padding: 0.5rem 1rem;
-        color: #000;
     }
 
     &__text {
         overflow: hidden;
+        color: #000;
         max-height: 1.4rem;
     }
 

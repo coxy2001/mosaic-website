@@ -1,3 +1,4 @@
+const sectorSelect = document.getElementById("sector-select");
 const sectorOptions = document.getElementById("sector-options");
 const sectorText = document.getElementById("sector-text");
 const sectorAll = document.querySelector('[data-sector="all"]');
@@ -5,8 +6,11 @@ const sectors = document.querySelectorAll("[data-sector]");
 
 function renderSectors() {
     // Toggle expand click event
-    document.getElementById("sector-select").addEventListener("click", () => {
+    sectorSelect.addEventListener("click", () => {
         sectorOptions.classList.toggle("multiselect__options--expanded");
+        document
+            .getElementById("country-options")
+            .classList.remove("multiselect__options--expanded");
     });
 
     // All Sectors click event

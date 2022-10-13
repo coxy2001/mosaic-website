@@ -421,6 +421,12 @@ select {
   margin-left: auto;
 }
 
+.multiselect {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 @media (min-width: 576px) {
   .multiselect {
     display: inline-block;
@@ -444,10 +450,10 @@ select {
   top: 0;
   bottom: 0;
   padding: 0.5rem 1rem;
-  color: #000;
 }
 .multiselect__text {
   overflow: hidden;
+  color: #000;
   max-height: 1.4rem;
 }
 .multiselect__options {

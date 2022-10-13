@@ -980,6 +980,7 @@ var countryData = [
 
 const FLAG_PATH = "_resources/themes/mosaic/dist/flags/";
 
+const countrySelect = document.getElementById("country-select");
 const countryOptions = document.getElementById("country-options");
 const countryText = document.getElementById("country-text");
 let countryAll, countries;
@@ -1007,8 +1008,11 @@ function renderCountries() {
     countries = document.querySelectorAll("[data-country]");
 
     // Toggle expand click event
-    document.getElementById("country-select").addEventListener("click", () => {
+    countrySelect.addEventListener("click", () => {
         countryOptions.classList.toggle("multiselect__options--expanded");
+        document
+            .getElementById("sector-options")
+            .classList.remove("multiselect__options--expanded");
     });
 
     // All Countries click event
@@ -1058,7 +1062,9 @@ function selectedCountryFlags() {
     countries.forEach((country) => {
         if (country.checked && selected.length < 8) {
             selected.push(
-                `<img src="${FLAG_PATH + country.dataset.flag}.png" loading="lazy">`
+                `<img src="${
+                    FLAG_PATH + country.dataset.flag
+                }.png" loading="lazy">`
             );
         }
     });
