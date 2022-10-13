@@ -1,9 +1,15 @@
 .header {
     background-color: $header-bg;
     display: flex;
+    flex-wrap: wrap;
 
     &__link {
         text-decoration: none;
+        text-align: center;
+
+        @media (min-width: $sm) {
+            text-align: left;
+        }
     }
 
     &__title {
@@ -17,10 +23,10 @@
     }
 
     &__left {
-        width: 60%;
-    }
+        width: 100%;
 
-    &__right {
-        width: 40%;
+        @media (min-width: $sm) {
+            width: 60%;
+        }
     }
 }

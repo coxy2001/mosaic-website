@@ -14,7 +14,7 @@
 }
 
 %btn {
-    display: inline;
+    display: inline-block;
     width: 100%;
     height: fit-content;
     margin-bottom: 0.5rem;
@@ -39,16 +39,6 @@
     &-primary {
         @extend %btn;
         @include button($primary);
-    }
-
-    &-secondary {
-        @extend %btn;
-        @include button($secondary);
-    }
-
-    &-success {
-        @extend %btn;
-        @include button($success);
     }
 
     &-danger {

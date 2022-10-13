@@ -1,33 +1,26 @@
 .nav {
     display: flex;
-    width: 40%;
-    margin: 0;
-    padding: 0;
-    padding-top: 0.5rem;
-    justify-content: right;
+    justify-content: center;
     align-items: flex-end;
+    width: 100%;
 
-    &__item {
-        display: block;
-        &--current {
-            background-color: $body-bg;
-        }
+    @media (min-width: $sm) {
+        width: 40%;
+        justify-content: right;
     }
 
     &__link {
-        display: block;
-        padding: 0.5rem 1rem;
         color: $nav-link-colour;
+        padding: 0.5rem 1rem;
         text-decoration: none;
 
         &:hover {
-            background-color: $nav-link-background-color;
-            color: $nav-link-box-color;
+            background-color: $nav-link-hover-bg-colour;
+            color: $nav-link-hover-colour;
         }
 
         &--current {
-            background-color: $nav-link-box-color;
-            color: $nav-link-colour;
+            background-color: $nav-link-current-bg-colour;
         }
     }
 }

@@ -2,7 +2,8 @@
 
 namespace Mosaic\Website\Model;
 
-use SilverStripe\Control\Controller;
+use DateTime;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\PaginatedList;
 
@@ -13,9 +14,8 @@ class CompanyList extends DataObject
     public const DEFAULT_DIRECTION = "ASC";
 
     private static $db = [
-        "Name" => "Varchar",
-        "Month" => "Varchar",
-        "Year" => "Varchar",
+        "Month" => "Int",
+        "Year" => "Int",
     ];
 
     private static $has_many = [
@@ -64,10 +64,8 @@ class CompanyList extends DataObject
         "Link",
     ];
 
-    public function getPaginatedList()
+    public function getPaginatedList(HTTPRequest $request)
     {
-        $request = Controller::curr()->getRequest();
-
         // Sort list by the 'sort' and 'direction' get arguments using DEFAULT_SORT and DEFAULT_DIRECTION as fallbacks
         $sort = [$request->getVar("sort") ?: self::DEFAULT_SORT => $request->getVar("direction") ?: self::DEFAULT_DIRECTION];
         // If there is a sort column given and it's not the default sort, add the default sort and direction as a secondary sort
@@ -101,5 +99,13 @@ class CompanyList extends DataObject
         foreach ($list as $company) {
             fputcsv($stream, $company->getXMLValues(self::$csv_headers));
         }
+    }
+
+    public function getName()
+    {
+        $dateObj   = DateTime::createFromFormat('!m', $this->Month);
+        $month = $dateObj->format('F');
+        $year = $this->Year;
+        return  "$year, $month";
     }
 }

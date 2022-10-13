@@ -28,19 +28,16 @@ $grid-bg-odd: #7c94b3;
 $grid-gradient-start: #0f830f;
 $grid-gradient-end: #59ef59;
 
-$primary: $grid-gradient-start;
-$secondary: #f7ff00;
-$success: #00cc00;
+$primary: #1a9815;
 $danger: #cc0000;
 
 $header-colour: #fff;
 $header-bg: #3c4147;
 
 $nav-link-colour: #fff;
-$nav-link-current-colour: #1a9815;
-$nav-link-hover-colour: #fff;
-$nav-link-background-color: #ddd;
-$nav-link-box-color: #1a9815;
+$nav-link-current-bg-colour: $primary;
+$nav-link-hover-colour: $primary;
+$nav-link-hover-bg-colour: #ddd;
 
 $footer-bg: #3c4147;
 $footer-colour: #fff;

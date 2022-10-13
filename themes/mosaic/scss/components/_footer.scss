@@ -1,32 +1,47 @@
-#footer {
-    background-color: $footer-bg;
-    color: $footer-colour;
+.footer {
     display: flex;
-}
+    flex-wrap: wrap;
+    color: $footer-colour;
+    background-color: $footer-bg;
 
-#investing {
-    height: 100%;
-    width: 25%;
-    float: left;
-}
+    &__images {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
 
-.img {
-    width: 100%;
-}
+        @media (min-width: $sm) {
+            width: 40%;
+        }
+    }
 
-#logo {
-    height: 100%;
-    width: 15%;
-}
+    &__investing,
+    &__logo,
+    &__disclaimer {
+        width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
 
-#disclaimer {
-    float: right;
-    width: 60%;
-    padding: 1rem;
-}
+    &__investing {
+        @media (min-width: $xl) {
+            width: 60%;
+        }
+    }
 
-.selectpicker {
-    position: relative;
-    float: right;
-    left: 20%;
+    &__logo {
+        @media (min-width: $xl) {
+            width: 40%;
+        }
+    }
+
+    &__disclaimer {
+        @media (min-width: $sm) {
+            width: 60%;
+        }
+    }
+
+    &__img {
+        width: 100%;
+    }
 }

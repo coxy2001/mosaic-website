@@ -3,7 +3,7 @@
         Date:
         <select name="history" id="history" onchange="List()">
             <% loop $HistoryOptions %>
-                <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Year $Month</option>
+                <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Name</option>
             <% end_loop %>
         </select>
     </div>
@@ -51,9 +51,13 @@
         <button onclick="sendSectors()">Filter</button>
     </div>
 
+    <div class="grid-options__item">
+        <a class="btn-primary" href="$BaseHref">Reset Filters</a>
+    </div>
+
     <div class="grid-options__item grid-options__item--download">
         <a class="btn-primary" href="home/csv?list={$CompanyList.ID}"
-            download="mosaic_{$CompanyList.Year}_{$CompanyList.Name}.csv"
+            download="mosaic_{$CompanyList.Year}_{$CompanyList.Month}.csv"
         >
             Download CSV
         </a>
@@ -102,7 +106,7 @@
 </div>
 
 <% if $Companies.MoreThanOnePage %>
-    <div class="pagination">
+    <div class="pagination pagination--desktop">
         <% if $Companies.NotFirstPage %>
             <a class="pagination__item" href="$Companies.PrevLink">&laquo;</a>
         <% end_if %>
@@ -116,6 +120,26 @@
                 <% end_if %>
             <% else %>
                 <span class="pagination__item pagination__item--dots">. . .</span>
+            <% end_if %>
+        <% end_loop %>
+
+        <% if $Companies.NotLastPage %>
+            <a class="pagination__item" href="$Companies.NextLink">&raquo;</a>
+        <% end_if %>
+    </div>
+
+    <div class="pagination pagination--mobile">
+        <% if $Companies.NotFirstPage %>
+            <a class="pagination__item" href="$Companies.PrevLink">&laquo;</a>
+        <% end_if %>
+
+        <% loop $Companies.Pages(5) %>
+            <% if $Link %>
+                <% if $CurrentBool %>
+                    <span class="pagination__item pagination__item--current">$PageNum</span>
+                <% else %>
+                    <a class="pagination__item" href="$Link">$PageNum</a>
+                <% end_if %>
             <% end_if %>
         <% end_loop %>
 
