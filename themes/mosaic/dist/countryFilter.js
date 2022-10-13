@@ -921,7 +921,7 @@ var countryData = [
     },
     {
         name: "United States",
-        flag: "us",
+        flag: "USA",
     },
     {
         name: "United States Minor Outlying Islands",
