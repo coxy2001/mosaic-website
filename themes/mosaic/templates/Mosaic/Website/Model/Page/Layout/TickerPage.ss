@@ -24,7 +24,6 @@
                 <select class="multiselect__select"></select>
                 <div class="multiselect__select-cover" id="country-text"></div>
             </div>
-            <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filter</button>
             <div class="multiselect__options" id="country-options"></div>
         </div>
     </div>
@@ -38,7 +37,6 @@
                 </select>
                 <div class="multiselect__select-cover"></div>
             </div>
-            <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filter</button>
             <div class="multiselect__options" id="sector-options">
                 <label>
                     <input data-sector="all" type="checkbox" checked/>
@@ -55,7 +53,11 @@
     </div>
 
     <div class="grid-options__item">
-        <a class="btn-primary" href="$BaseHref">Reset Filters</a>
+        <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filters</button>
+    </div>
+
+    <div class="grid-options__item">
+        <a class="btn-danger" href="$BaseHref">Reset Filters</a>
     </div>
 
     <div class="grid-options__item grid-options__item--download">

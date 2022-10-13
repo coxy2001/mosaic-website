@@ -1,5 +1,7 @@
 .multiselect {
-    width: 12rem;
+    @media (min-width: $sm) {
+        display: inline-block;
+    }
 
     &__select-container {
         position: relative;
@@ -7,6 +9,10 @@
 
     &__select {
         width: 100%;
+
+        @media (min-width: $sm) {
+            width: 12rem;
+        }
     }
 
     &__select-cover {

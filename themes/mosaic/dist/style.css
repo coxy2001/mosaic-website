@@ -96,7 +96,7 @@ p {
 
 input,
 select {
-  display: inline;
+  display: inline-block;
   width: 100%;
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -224,6 +224,8 @@ select {
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
   cursor: pointer;
   text-decoration: none;
   -webkit-user-select: none;
@@ -255,16 +257,16 @@ select {
   border-color: #0b3e09;
 }
 .btn-danger {
-  border: 1px solid #cc0000;
-  background-color: #cc0000;
+  border: 1px solid #be1414;
+  background-color: #be1414;
 }
 .btn-danger:hover:not(.btn--disabled) {
-  background-color: #990000;
-  border-color: #990000;
+  background-color: #900f0f;
+  border-color: #900f0f;
 }
 .btn-danger:active:not(.btn--disabled) {
-  background-color: #660000;
-  border-color: #660000;
+  background-color: #620a0a;
+  border-color: #620a0a;
 }
 .btn--disabled {
   cursor: default;
@@ -420,14 +422,21 @@ select {
   margin-left: auto;
 }
 
-.multiselect {
-  width: 12rem;
+@media (min-width: 576px) {
+  .multiselect {
+    display: inline-block;
+  }
 }
 .multiselect__select-container {
   position: relative;
 }
 .multiselect__select {
   width: 100%;
+}
+@media (min-width: 576px) {
+  .multiselect__select {
+    width: 12rem;
+  }
 }
 .multiselect__select-cover {
   position: absolute;
