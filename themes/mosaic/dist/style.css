@@ -455,14 +455,37 @@ select {
   color: black;
   border: 1px #dadada solid;
   height: 500px;
+  width: auto;
   overflow: auto;
 }
 
 #checkboxes label {
   display: block;
+  padding: 3px;
 }
 
 #checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+#checkboxes-sector {
+  display: none;
+  position: absolute;
+  z-index: 50;
+  background-color: white;
+  color: black;
+  border: 1px #dadada solid;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+#checkboxes-sector label {
+  display: block;
+  padding: 5px;
+}
+
+#checkboxes-sector label:hover {
   background-color: #1e90ff;
 }
 
