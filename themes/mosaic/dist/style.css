@@ -94,6 +94,22 @@ p {
   margin-bottom: 1rem;
 }
 
+input,
+select {
+  display: inline;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #000;
+  border-radius: 0.25rem;
+}
+@media (min-width: 576px) {
+  input,
+select {
+    width: auto;
+  }
+}
+
 .element {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -404,83 +420,48 @@ p {
   margin-left: auto;
 }
 
-input,
-select {
-  display: inline;
-  width: 100%;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #000;
-  border-radius: 0.25rem;
-}
-@media (min-width: 576px) {
-  input,
-select {
-    width: auto;
-  }
-}
-
 .multiselect {
-  width: 200px;
+  width: 12rem;
 }
-
-.selectBox {
+.multiselect__select-container {
   position: relative;
 }
-
-.selectBox select {
+.multiselect__select {
   width: 100%;
-  font-weight: bold;
 }
-
-.overSelect {
+.multiselect__select-cover {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+  padding: 0.5rem 1rem;
+  color: #000;
+  overflow: hidden;
 }
-
-#checkboxes {
+.multiselect__options {
   display: none;
   position: absolute;
   z-index: 50;
-  background-color: white;
-  color: black;
-  border: 1px #dadada solid;
-  height: 500px;
   width: auto;
+  max-height: 500px;
   overflow: auto;
+  color: #000;
+  background-color: white;
+  border: 1px #dadada solid;
 }
-
-#checkboxes label {
+.multiselect__options--expanded {
   display: block;
-  padding: 3px;
 }
-
-#checkboxes label:hover {
+.multiselect__options label {
+  display: block;
+  padding: 0.25rem;
+}
+.multiselect__options label :hover {
   background-color: #1e90ff;
 }
-
-#checkboxes-sector {
-  display: none;
-  position: absolute;
-  z-index: 50;
-  background-color: white;
-  color: black;
-  border: 1px #dadada solid;
-  height: auto;
+.multiselect__options input {
   width: auto;
-  overflow: auto;
-}
-
-#checkboxes-sector label {
-  display: block;
-  padding: 5px;
-}
-
-#checkboxes-sector label:hover {
-  background-color: #1e90ff;
 }
 
 .pagination {

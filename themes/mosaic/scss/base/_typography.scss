@@ -47,3 +47,17 @@ p {
     margin: 0;
     margin-bottom: 1rem;
 }
+
+input,
+select {
+    display: inline;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #000;
+    border-radius: 0.25rem;
+
+    @media (min-width: $sm) {
+        width: auto;
+    }
+}

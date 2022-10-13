@@ -19,36 +19,39 @@
 
     <div class="grid-options__item">
         Country Filter:
-        <form>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckboxes()">
-                    <select>
-                        <option>All Countries</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkboxes">
-                </div>
+        <div class="multiselect">
+            <div class="multiselect__select-container" id="country-select">
+                <select class="multiselect__select"></select>
+                <div class="multiselect__select-cover" id="country-text"></div>
             </div>
-        </form>
-        <button onclick="sendCountries()">Filter</button>
+            <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filter</button>
+            <div class="multiselect__options" id="country-options"></div>
+        </div>
     </div>
 
     <div class="grid-options__item">
         Sector Filter:
-        <form>
-            <div class="multiselect">
-                <div class="selectBox" onclick="showCheckboxesSector()">
-                    <select>
-                        <option>All Sectors</option>
-                    </select>
-                    <div class="overSelect"></div>
-                </div>
-                <div id="checkboxes-sector">
-                </div>
+        <div class="multiselect">
+            <div class="multiselect__select-container" id="sector-select">
+                <select class="multiselect__select">
+                    <option id="sector-text"></option>
+                </select>
+                <div class="multiselect__select-cover"></div>
             </div>
-        </form>
-        <button onclick="sendSectors()">Filter</button>
+            <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filter</button>
+            <div class="multiselect__options" id="sector-options">
+                <label>
+                    <input data-sector="all" type="checkbox" checked/>
+                    All Sectors
+                </label>
+                <% loop $SectorOptions %>
+                    <label>
+                        <input data-sector="$Value" type="checkbox" checked/>
+                        $Value
+                    </label>
+                <% end_loop %>
+            </div>
+        </div>
     </div>
 
     <div class="grid-options__item">
