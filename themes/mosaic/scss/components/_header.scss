@@ -1,7 +1,9 @@
 .header {
-    background-color: $header-bg;
     display: flex;
     flex-wrap: wrap;
+    margin: auto;
+    max-width: $grid-width;
+    background-color: $header-bg;
 
     &__link {
         text-decoration: none;

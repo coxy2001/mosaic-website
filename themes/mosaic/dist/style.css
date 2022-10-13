@@ -119,9 +119,11 @@ select {
 }
 
 .header {
-  background-color: #3c4147;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+  max-width: 136rem;
+  background-color: #3c4147;
 }
 .header__link {
   text-decoration: none;
