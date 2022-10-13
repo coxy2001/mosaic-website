@@ -54,6 +54,7 @@ class TickerPageController extends \PageController
             "Companies" => $companyList ? $companyList->getPaginatedList($request) : null,
             "TableHeaders" => self::viewableArray(self::$tableHeaders),
             "LengthOptions" => self::viewableArray(self::$lengthOptions),
+            "SectorOptions" => self::viewableArray($companyList->Companies()->sort("Sector")->columnUnique("Sector")),
             "HistoryOptions" => CompanyList::get(),
             "CurrentLength" => $request->getVar("length") ?: CompanyList::DEFAULT_LENGTH,
             "CurrentCountries" => $request->getVar("countries") ?: null,
