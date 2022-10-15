@@ -8,7 +8,7 @@ class RequestBuilder {
     const BASE_INVESTING_URL = 'https://www.investing.com';
     const SCREENER_PATH = '/stock-screener/Service/SearchStocks';
     const TIMEOUT = 15;
-    const COUNTRY = 5;
+    const COUNTRY = ',';
 
     // Constants for obtaining values from Investing.com 
     // consider ttm pe? ttmpehigh, ttmpelow

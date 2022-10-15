@@ -7,9 +7,18 @@ use Mosaic\Website\Model\Company;
 use Mosaic\Website\Tasks\Util\CompanyGetter;
 use SilverStripe\Dev\BuildTask;
 
-class UpdateCompaniesTask extends BuildTask
+class UpdateCompaniesTestTask extends BuildTask
 {
     private static $segment = "UpdateCompaniesTask";
+    private $pageLimit = null;
+    private $exchanges = [","];
+
+    public function setLimits(int $pageLimit, $exchanges) {
+        $this->pageLimit = $pageLimit;
+        $this->exchanges = $exchanges;
+        return $this;
+    }
+
     /**
      * Update company data
      *
@@ -25,7 +34,10 @@ class UpdateCompaniesTask extends BuildTask
                 throw new Exception("Company table should be empty before getting new ones");
             }
             // Add data into Company table
-            CompanyGetter::getAll();
+            foreach($this->exchanges as $exchange) {
+                print("\n GETTING FROM EXCHAGE: " . $exchange . "\n PAGE LIMIT: " . $this->pageLimit . "\n");
+                CompanyGetter::getAll($this->pageLimit, $exchange);
+            }
         }
         catch(Exception $e) {
             echo "\n\nError while getting new Company data\n" . $e->getMessage() . "\n\n";

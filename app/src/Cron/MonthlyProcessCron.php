@@ -18,7 +18,7 @@ class MonthlyProcessCron implements CronTask
      */
     public function getSchedule()
     {
-        return "* * * * *";
+        return null;
     }
 
 
