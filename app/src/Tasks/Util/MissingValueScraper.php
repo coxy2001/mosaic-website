@@ -81,6 +81,8 @@ class MissingValueScraper
         // Get total eps
         $totalEPS = self::getEPS($xpath);
 
+        print("Done\n\n");
+
         // Return PE
         return $price / $totalEPS;
     }
@@ -184,14 +186,19 @@ class MissingValueScraper
         // Add the values together if they are all present
         if (strcmp($incomeVals[0], self::NET_INCOME) == 0 && sizeof($incomeVals) == 5) {
             try {
+                $totalIncome = 0;
+                $output = "";
                 for ($i = 1; $i < count($incomeVals); $i++) {
-                    if (!self::checkInt($incomeVals[$i])) {
-                        throw new Exception("Value " . $i . " was not an int\n");
+                    if (self::checkDouble($incomeVals[$i])) {
+                        $totalIncome += floatval($incomeVals[$i]);
                     }
+                    $output = $output . $incomeVals[$i] . ", ";
                 }
-                $totalIncome = intVal($incomeVals[1]) + intVal($incomeVals[2]) + intVal($incomeVals[3]) + intVal($incomeVals[4]);
+                if ($totalIncome == 0) {
+                    throw new Exception("Income was zero\nNet Income vals: " . $output . "\n");
+                }
             } catch (Exception $e) {
-                throw new Exception("Not all income values were numbers\n" . $e->getMessage());
+                throw new Exception("No value for income found\n" . $e->getMessage());
             }
         } else {
             throw new Exception("Could not find all income values");
@@ -212,14 +219,19 @@ class MissingValueScraper
         if (strcmp($epsVals[0], self::EPS) == 0 && sizeof($epsVals) == 5) {
             // TODO: watch out for floats!
             try {
+                $totalEPS = 0;
+                $output = "";
                 for ($i = 1; $i < count($epsVals); $i++) {
-                    if (!self::checkDouble($epsVals[$i])) {
-                        throw new Exception("Value " . $i . " was not an int\n");
+                    if (self::checkDouble($epsVals[$i])) {
+                        $totalEPS = floatval($epsVals[$i]);
                     }
+                    $output = $output . $epsVals[$i] . ", ";
                 }
-                $totalEPS = floatval($epsVals[1]) + floatval($epsVals[2]) + floatval($epsVals[3]) + floatval($epsVals[4]);
+                if ($totalEPS == 0) {
+                    throw new Exception("EPS is 0.\nEPS vals: " . $output . "\n");
+                }
             } catch (Exception $e) {
-                throw new Exception("Not all EPS values were numbers\n" . $e->getMessage());
+                throw new Exception("No EPS values were numbers\n" . $e->getMessage());
             }
         } else {
             throw new Exception("Could not find all EPS values\n");
@@ -240,16 +252,25 @@ class MissingValueScraper
 
         // Use the first value for assets if its available
         if (strcmp($assetVals[0], self::TOTAL_ASSETS) == 0 && count($assetVals) >= 2) {
-            if (!self::checkInt($assetVals[1])) {
-                throw new Exception("Assets not an integer\n");
+            $assets = 0;
+            try{
+                $output = "";
+                // Get first available value for assets
+                for ($i = 1; $i < count($assetVals); $i++) {
+                    if (self::checkDouble($assetVals[$i])) {
+                        $assets = floatval($assetVals[$i]);
+                        break;
+                    }
+                    $output = $output . $assetVals[$i] . ", ";
+                }
+                if ($assets == 0) {
+                    throw new Exception("Assets was 0 was zero\nAsset vals: " .  $output . "\n");
+                }
+            } catch (Exception $e) {
+                throw new Exception("No value for assets found\n" . $e->getMessage());
             }
-            $assets = intVal($assetVals[1]);
         } else {
             throw new Exception("Could not find total assets\n");
-        }
-
-        if ($assets == 0) {
-            throw new Exception("Assets was zero\n");
         }
         return $assets;
     }
