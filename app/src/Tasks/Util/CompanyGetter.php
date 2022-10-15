@@ -80,6 +80,9 @@ class CompanyGetter
                 echo "Response Recieved from investing.com\n";
 
                 $j = json_decode($response->getBody(), true);
+                if(!array_key_exists('hits', $j)) {
+                    throw new Exception("Stocks list not found in response!\n");
+                }
                 $hits = $j['hits'];
                 $total += count($hits);
             } catch (Exception $e) {

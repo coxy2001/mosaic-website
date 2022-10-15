@@ -12,6 +12,8 @@ class RequestBuilder
     const SCREENER_PATH = '/stock-screener/Service/SearchStocks';
     const TIMEOUT = 15;
     const COUNTRY = ',';
+    const MARKET_CAP_MIN = 1;
+    const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
     // Constants for obtaining values from Investing.com 
     // consider ttm pe? ttmpehigh, ttmpelow
@@ -103,6 +105,8 @@ class RequestBuilder
         return [
             'country[]' => self::COUNTRY,
             'exchange[]' => $ex,
+            'eq_market_cap[min]' => self::MARKET_CAP_MIN,
+            'eq_market_cap[max]' => self::MARKET_CAP_MAX,
             'pn' => $pn,
             'order[col]' => 'eq_market_cap',
             'order[dir]' => 'd'
