@@ -8,7 +8,7 @@ use Mosaic\Website\Model\Company;
 class CompanyGetter
 {
     // Gets all the stock data into the company database
-    public static function getAll($pageLimit = null, $exchange = ",")
+    public static function getAll($pageLimit = -1, $exchange = ",")
     {
         $pageNumber = 1;
         if (is_null($exchange)) {
