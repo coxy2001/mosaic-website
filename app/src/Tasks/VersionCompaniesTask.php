@@ -26,8 +26,7 @@ class VersionCompaniesTask extends BuildTask
             echo "Adding CompanyList and Versioning\n";
             $this->bundleCompanyList();
             echo "Done\n";
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\n\nError while adding top companies\n" . $e->getMessage() . "\n\n";
         }
     }

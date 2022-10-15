@@ -1,14 +1,17 @@
 <?php
+
 namespace Mosaic\Website\Tasks\Util;
+
 use Exception;
 use Mosaic\Website\Model\Company;
 
-class CompanyGetter 
-{   
+class CompanyGetter
+{
     // Gets all the stock data into the company database
-    public static function getAll($pageLimit=null, $exchange=",") {
+    public static function getAll($pageLimit = null, $exchange = ",")
+    {
         $pageNumber = 1;
-        if(is_null($exchange)) {
+        if (is_null($exchange)) {
             $exchange = ",";
         }
         $exchangeNumber = $exchange;
@@ -25,21 +28,19 @@ class CompanyGetter
             $hits = $j['hits'];
             $iterations = ceil($totalCount / count($hits));
             echo "Iterations for this batch: " . ($iterations) . "\n";
-
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\nEror recieveing response from investing.com: " . $e->getMessage() . "\n";
             echo $e->getMessage() . "\n";
         }
         $total = count($hits);
-        for ($i = 0; $i < $iterations; $i++){
+        for ($i = 0; $i < $iterations; $i++) {
             if (!is_null($pageLimit) && $i == $pageLimit) {
                 break;
             }
             try {
                 // Print current page
                 echo "\nPage: " . ($i + 1) . "/" . $iterations . "\n";
-                
+
                 // Extract the stocks from the JSON
                 $companies = array();
                 echo "Extracting data\n";
@@ -47,8 +48,7 @@ class CompanyGetter
 
                 // echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
 
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 // TODO: How many timeouts to allow for
                 echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
             }
@@ -62,8 +62,7 @@ class CompanyGetter
                 }
                 echo "Done\n";
                 // echo $successCount . " Succesful Writes\n";
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
             }
             try {
@@ -73,30 +72,25 @@ class CompanyGetter
                 }
                 $pageNumber++;
 
-                echo "Sending Request to investing.com\n";    
+                echo "Sending Request to investing.com\n";
                 $response = RequestBuilder::requestScreener($pageNumber, $exchangeNumber, $client);
                 echo "Response Recieved from investing.com\n";
 
-                $j = json_decode($response->getBody(), true); 
+                $j = json_decode($response->getBody(), true);
                 $hits = $j['hits'];
-                $total += count($hits);   
-            }
-            catch(Exception $e) {
+                $total += count($hits);
+            } catch (Exception $e) {
                 echo "\nEror recieveing response from investing.com: " . $e->getMessage() . "\n";
                 echo $e->getMessage() . "\n";
             }
         }
         echo "\n\nTotal: " . $total . "\n\n";
-    }    
-    
+    }
+
     // Creates and writes a new entry for the company database
     static function writeToDB($extracted)
     {
-
-        // TODO write null not 0
-
         $tempCompany = Company::create();
-
         $tempCompany->update([
             "Ticker" => $extracted[RequestBuilder::STOCK_SYMBOL],
             "Name" => $extracted[RequestBuilder::NAME],

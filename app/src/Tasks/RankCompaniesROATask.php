@@ -19,23 +19,22 @@ class RankCompaniesROATask extends BuildTask
     {
         try {
             $this->addRoaRank();
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\n\nError while assigning ROA and PE rank to company table\n" . $e->getMessage() . "\n\n";
         }
-
     }
 
     // Get all companies in Company table ordered by ROA
     // Use the order to assign an ROA rank and update the entry 
-    private function addRoaRank() {
+    private function addRoaRank()
+    {
         echo "Rank Companies Task Running \n";
         echo "Getting Companies Sorted by ROA\n";
         $companiesROA = Company::get()->sort("ROA", "DESC")->chunkedFetch();
 
         echo "Adding ROA rank\n";
         $counter = 1;
-        foreach($companiesROA as $company) {
+        foreach ($companiesROA as $company) {
             $company->RankROA = $counter;
             $company->write();
             $counter++;

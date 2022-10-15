@@ -21,7 +21,6 @@ class MonthlyProcessCron implements CronTask
         return null;
     }
 
-
     public function process()
     {
         DeleteCompaniesTask::create()->run(null);

@@ -19,22 +19,21 @@ class RankCompaniesPETask extends BuildTask
     {
         try {
             $this->addPeRank();
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\n\nError while assigning ROA and PE rank to company table\n" . $e->getMessage() . "\n\n";
         }
-
     }
 
     // Get all companies in Company table ordered by PE
     // Use the order to asign a PE rank
     // Use the ROA rank to give an overall rank
-    private function addPeRank() {
+    private function addPeRank()
+    {
         echo "Adding PE rank and overall rank\n";
         $companiesPE = Company::get()->sort("AbsoluteValuePE", "ASC")->chunkedFetch();
 
         $counter = 1;
-        foreach($companiesPE as $company) {
+        foreach ($companiesPE as $company) {
             $rank = $counter + $company->RankROA;
             $company->RankPE = $counter;
             $company->Rank = $rank;

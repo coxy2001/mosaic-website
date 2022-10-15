@@ -11,8 +11,8 @@ use SilverStripe\CronTask\Interfaces\CronTask;
 
 class TestProcessCron implements CronTask
 {
-    private const PAGE_LIMIT = 4;
-    private const EXCHANGES = ["2","83"];
+    private const PAGE_LIMIT = -1;
+    private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
 
     /**
      * Run this task every 5 minutes
@@ -23,7 +23,6 @@ class TestProcessCron implements CronTask
     {
         return "* * * * *";
     }
-
 
     public function process()
     {

@@ -1,8 +1,11 @@
 <?php
+
 namespace Mosaic\Website\Tasks\Util;
-use GuzzleHttp\Psr7\Request;
+
 use GuzzleHttp\Client;
-class RequestBuilder {
+
+class RequestBuilder
+{
     const INCOME_STATEMENT = '-income-statement';
     const BALANCE_SHEET = '-balance-sheet';
     const BASE_INVESTING_URL = 'https://www.investing.com';
@@ -40,12 +43,15 @@ class RequestBuilder {
     const PARENT_PAIR_ID = 'parent_pair_ID';
 
     // List of features to extract
-    const FEATURES = [self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE,
+    const FEATURES = [
+        self::NAME, self::STOCK_SYMBOL, self::STOCK_EXCHANGE, self::SECTOR, self::PE, self::ROA, self::PRICE,
         self::MARKET_CAP, self::FREE_CASH_FLOW, self::DIVIDENDS_YIELD, self::VIEWDATA, self::CURRENT_RATIO, self::PRICE_TO_BOOK,
-        self::EPS, self::PARENT_PAIR_ID];
+        self::EPS, self::PARENT_PAIR_ID
+    ];
 
     // Client object for making requests
-    public static function getClient() {
+    public static function getClient()
+    {
         return new Client([
             'timeout' => self::TIMEOUT
         ]);
@@ -53,14 +59,16 @@ class RequestBuilder {
 
     // Requests data for 50 stocks based on the page number. Can filter by exchange
     // Returns JSON
-    public static function requestScreener($pageNumber, $exchangeNumber, $client) {
-        $response = $client->request('POST',  (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
+    public static function requestScreener($pageNumber, $exchangeNumber, $client)
+    {
+        $response = $client->request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
         return $response;
     }
 
     // Gets the HTML of a specified stock page on Investing.com 
     // Returns HTML
-    public static function requestStockPage($url, $page, $client) {
+    public static function requestStockPage($url, $page, $client)
+    {
         // Insert the page time (income statement or balance sheet)
         $url = self::addPageToUrl($url, $page);
         // Get the HTML
@@ -69,27 +77,29 @@ class RequestBuilder {
     }
 
     // Inserts a given page into the url
-    static function addPageToUrl($url, $page) {
+    static function addPageToUrl($url, $page)
+    {
         $stringParts = explode('?', $url);
         $p1 = $stringParts[0];
         if (sizeof($stringParts) > 1) {
             $p2 = '?' . $stringParts[1];
-        }
-        else {
+        } else {
             $p2 = '';
         }
         return $p1 . $page . $p2;
     }
-    
+
     // Properties for screener post request
-    static function getScreenerRequestOptions($pagenumber, $exchange) {
+    static function getScreenerRequestOptions($pagenumber, $exchange)
+    {
         return [
             'headers' => self::getScreenerHeaders(),
             'form_params' => self::getScreenerBody($pagenumber, $exchange),
         ];
     }
-    
-    static function getScreenerBody($pn, $ex) {
+
+    static function getScreenerBody($pn, $ex)
+    {
         return [
             'country[]' => self::COUNTRY,
             'exchange[]' => $ex,
@@ -98,8 +108,9 @@ class RequestBuilder {
             'order[dir]' => 'd'
         ];
     }
-    
-    static function getScreenerHeaders() {
+
+    static function getScreenerHeaders()
+    {
         return [
             'accept' => 'application/json, text/javascript, */*; q=0.01',
             'accept-language' => 'en-US,en;q=0.9',

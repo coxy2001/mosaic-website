@@ -17,18 +17,16 @@ class DeleteCompaniesTask extends BuildTask
      */
     public function run($request)
     {
-        try{
+        try {
             echo "Delete Companies Task Running \n";
             // TODO: way to just drop the table and add it again?
             $companies = Company::get();
-            foreach($companies as $company) {
+            foreach ($companies as $company) {
                 $company->delete();
             }
             echo "Done!\n";
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\n\nError while clearing Company Table\n" . $e->getMessage() . "\n\n";
         }
-
     }
 }
