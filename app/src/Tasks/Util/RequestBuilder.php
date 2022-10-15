@@ -1,5 +1,5 @@
 <?php
-namespace Mosaic\Website\Cron;
+namespace Mosaic\Website\Tasks\Util;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client;
 class RequestBuilder {

@@ -1,5 +1,5 @@
 <?php
-namespace Mosaic\Website\Cron;
+namespace Mosaic\Website\Tasks\Util;
 use Exception;
 use Mosaic\Website\Model\Company;
 

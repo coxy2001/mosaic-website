@@ -1,9 +1,10 @@
 <?php
 
-namespace Mosaic\Website\Cron;
+namespace Mosaic\Website\Tasks;
 
 use Exception;
 use Mosaic\Website\Model\Company;
+use Mosaic\Website\Tasks\Util\CompanyGetter;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
 class UpdateCompaniesCron implements CronTask
