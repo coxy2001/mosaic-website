@@ -1,28 +1,26 @@
 .nav {
     display: flex;
-    margin: 0;
-    padding: 0;
-    list-style: none;
     justify-content: center;
+    align-items: flex-end;
+    width: 100%;
 
-    &__item {
-        &--current {
-            background-color: $body-bg;
-        }
+    @media (min-width: $sm) {
+        width: 40%;
+        justify-content: right;
     }
 
     &__link {
-        display: block;
-        padding: 0.5rem 1rem;
         color: $nav-link-colour;
+        padding: 0.5rem 1rem;
         text-decoration: none;
 
         &:hover {
+            background-color: $nav-link-hover-bg-colour;
             color: $nav-link-hover-colour;
         }
 
         &--current {
-            color: $nav-link-current-colour;
+            background-color: $nav-link-current-bg-colour;
         }
     }
 }

@@ -29,10 +29,11 @@ namespace {
             parent::init();
 
             Requirements::themedCSS("dist/style");
-            Requirements::javascript("https://code.jquery.com/jquery-1.12.4.min.js");
-            Requirements::javascript("https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js");
-            Requirements::javascript("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js");
-            Requirements::themedJavascript("dist/countrypicker");
+            Requirements::combine_files("main.js", [
+                "themes/mosaic/dist/sort.js",
+                "themes/mosaic/dist/countryFilter.js",
+                "themes/mosaic/dist/sectorFilter.js",
+            ]);
         }
     }
 }

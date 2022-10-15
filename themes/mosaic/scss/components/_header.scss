@@ -1,14 +1,34 @@
 .header {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: $grid-width;
     background-color: $header-bg;
 
     &__link {
-        text-align: center;
         text-decoration: none;
+        text-align: center;
+
+        @media (min-width: $sm) {
+            text-align: left;
+        }
     }
 
     &__title {
-        margin-bottom: 0.5rem;
-        padding: 0.5rem;
+        margin: 0;
+        padding: 0.5rem 2rem;
         color: $header-colour;
+    }
+
+    &__logo {
+        padding: 0.5rem 2rem;
+    }
+
+    &__left {
+        width: 100%;
+
+        @media (min-width: $sm) {
+            width: 60%;
+        }
     }
 }

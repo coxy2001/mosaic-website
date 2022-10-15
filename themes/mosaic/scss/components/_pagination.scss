@@ -1,24 +1,48 @@
 .pagination {
     display: flex;
     justify-content: center;
+    padding: 0.5rem;
+
+    &--desktop {
+        display: none;
+
+        @media (min-width: $sm) {
+            display: flex;
+        }
+    }
+
+    &--mobile {
+        @media (min-width: $sm) {
+            display: none;
+        }
+    }
 
     &__item {
-        display: inline-block;
-        font-size: 1.8rem;
+        font-size: 1.2rem;
         font-weight: 600;
-        color: white;
-        padding: 8px 16px;
+        color: $body-colour;
+        padding: 0.5rem 0.8rem;
         text-decoration: none;
 
+        @media (min-width: $sm) {
+            padding: 0.5rem 1rem;
+        }
+
         &:hover {
-            color: darken(white, 30%);
+            color: darken($body-colour, 30%);
         }
 
         &--current {
             text-decoration: underline;
 
             &:hover {
-                color: white;
+                color: $body-colour;
+            }
+        }
+
+        &--dots {
+            &:hover {
+                color: $body-colour;
             }
         }
     }

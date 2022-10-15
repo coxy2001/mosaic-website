@@ -6,7 +6,6 @@ use SilverStripe\ORM\DataObject;
 
 class Company extends DataObject
 {
-    // TODO: bad to have this public?
     public const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
@@ -28,9 +27,8 @@ class Company extends DataObject
         "CustomCalculation" => "Boolean",
         "CurrentRatio" => "Decimal",
         "PriceToBook" => "Decimal",
-        // "CashHoldings" => "Int",
-        // "5yrPE" => "Int",
     ];
+
     private static $db = self::DB_FIELDS;
 
     private static $table_name = 'Company';
@@ -41,38 +39,17 @@ class Company extends DataObject
         "Rank",
         "Ticker",
         "Name",
+        "Exchange",
         "Sector",
+        "MarketCap",
         "Price",
         "ROC",
-        "Link"
+        "PE",
     ];
 
     private static $searchable_fields = [
         "Ticker",
         "Name",
         "Sector",
-        "Link",
     ];
-
-    public function getDate()
-    {
-        return date("d F, Y", strtotime($this->LastEdited));
-    }
-
-    public function canView($member = null)
-    {
-        return True;
-    }
-
-    // public function canEdit($member = null)
-    // {
-    // }
-
-    // public function canCreate($member = null, $context = [])
-    // {
-    // }
-
-    // public function canDelete($member = null)
-    // {
-    // }
 }

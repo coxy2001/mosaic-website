@@ -1,4 +1,5 @@
-$font-family-sans-serif: "Effra Light", sans-serif;
+$font-family-sans-serif: sans-serif;
+$font-family: "Nunito", sans-serif;
 
 // Breakpoints
 $sm: 576px;
@@ -15,24 +16,31 @@ $h4-font-size: 1.5rem;
 $h5-font-size: 1.25rem;
 $h6-font-size: 1rem;
 
+// Grid Width
+$grid-width: 136rem;
+
 // Colours
-$body-colour: #000;
+$body-colour: #fff;
 $body-bg: #3c4147;
 
 $heading-colour: #e8e8f4;
 $heading-darker: #999ca5;
 
-$primary: #007bff;
-$secondary: #f7ff00;
-$success: #00cc00;
-$danger: #cc0000;
+$grid-bg-even: #516886;
+$grid-bg-odd: #7c94b3;
+$grid-gradient-start: #0f830f;
+$grid-gradient-end: #59ef59;
+
+$primary: #1a9815;
+$danger: #be1414;
 
 $header-colour: #fff;
-$header-bg: #000;
-$nav-link-colour: #fff;
-$nav-link-current-colour: #000;
-$nav-link-hover-colour: #00a6ff;
+$header-bg: #3c4147;
 
-$footer-bg: #000;
+$nav-link-colour: #fff;
+$nav-link-current-bg-colour: $primary;
+$nav-link-hover-colour: $primary;
+$nav-link-hover-bg-colour: #ddd;
+
+$footer-bg: #3c4147;
 $footer-colour: #fff;
-$footer-link-colour: #00c4ff;

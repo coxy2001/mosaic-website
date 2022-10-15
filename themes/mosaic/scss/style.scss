@@ -1,5 +1,5 @@
 // Fonts
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Nunito&display=swap");
 
 @import "variables";
 
@@ -15,4 +15,6 @@
 @import "components/button";
 @import "components/company";
 @import "components/grid";
+@import "components/grid-options";
+@import "components/multi-selector";
 @import "components/pagination";

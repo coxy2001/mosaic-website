@@ -1,57 +1,90 @@
 .grid {
+    overflow-x: auto;
+    width: fit-content;
+    max-width: 100%;
+    margin: auto;
+
     &__row {
         display: grid;
-        grid-template-columns: 6% 15% 15% 7% 7% 17% 11% 11% 11%;
-        padding: 0.5rem;
-        padding-block: 0.25rem;
+        grid-auto-flow: column;
+        grid-template-columns: 6rem 16rem 7rem 9rem 16rem 11rem 7rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
+        width: fit-content;
+        margin-bottom: 0.5rem;
+
+        &:hover {
+            border-top: 2px solid $body-colour;
+            border-bottom: 2px solid $body-colour;
+            margin-top: -2px;
+            margin-bottom: calc(0.5rem - 2px);
+        }
     }
 
     &__item {
-        background-color: green;
+        color: $body-colour;
         margin-left: 0.25rem;
         margin-right: 0.25rem;
+        padding: 0.5rem;
+
+        .grid__row--even & {
+            background-color: $grid-bg-even;
+        }
+
+        .grid__row--odd & {
+            background-color: $grid-bg-odd;
+        }
+
+        @for $i from 1 through 10 {
+            .grid__row--gradient-#{$i} & {
+                color: #000;
+                background-color: mix(
+                    $grid-gradient-start,
+                    $grid-gradient-end,
+                    (10 - $i) * 10
+                );
+            }
+        }
     }
 
     &__head {
+        position: relative;
+        color: #000;
+        font-weight: 700;
         background-color: $heading-colour;
         border-color: $heading-darker;
         border-style: solid;
         border-width: 1px;
+        padding: 0.5rem;
+
         &:hover {
             background-color: $heading-darker;
         }
+
+        &--sorted-asc {
+            ::after {
+                position: absolute;
+                right: 0.6rem;
+                top: 50%;
+                transform: translateY(-50%);
+                content: "\25BC";
+            }
+        }
+
+        &--sorted-desc {
+            ::after {
+                position: absolute;
+                right: 0.6rem;
+                top: 50%;
+                transform: translateY(-50%);
+                content: "\25B2";
+            }
+        }
     }
 
-    &__blank {
-        grid-column: span 3;
+    &__link {
+        color: inherit;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
-
-    &__text {
-        margin: 0.5rem;
-        color: black;
-    }
-}
-
-#date-picker {
-    grid-column: span 2;
-    text-align: left;
-}
-
-#country-picker {
-    grid-column: span 2;
-    background-color: #00000000;
-    border-style: none;
-}
-
-#country-picker-button {
-    width: auto;
-    align-self: center;
-}
-
-#download {
-    grid-column: span 2;
-}
-
-#history {
-    padding: 0.5rem;
 }

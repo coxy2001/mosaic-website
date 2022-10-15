@@ -14,11 +14,13 @@
 }
 
 %btn {
-    display: inline;
+    display: inline-block;
     width: 100%;
-    margin-bottom: 0.5rem;
+    height: fit-content;
     padding: 0.5rem 1rem;
     font-size: 1rem;
+    line-height: 1.2;
+    text-align: center;
     cursor: pointer;
     text-decoration: none;
     user-select: none;
@@ -29,8 +31,6 @@
 
     @media (min-width: $sm) {
         width: auto;
-        margin-bottom: 0;
-        margin-right: 0.5rem;
     }
 }
 
@@ -38,16 +38,6 @@
     &-primary {
         @extend %btn;
         @include button($primary);
-    }
-
-    &-secondary {
-        @extend %btn;
-        @include button($secondary);
-    }
-
-    &-success {
-        @extend %btn;
-        @include button($success);
     }
 
     &-danger {

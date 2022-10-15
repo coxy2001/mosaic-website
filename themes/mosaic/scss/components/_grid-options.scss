@@ -1,0 +1,23 @@
+.grid-options {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $grid-width;
+    margin: auto;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    align-items: center;
+
+    &__item {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        padding: 0 0.5rem;
+
+        @media (min-width: $sm) {
+            width: auto;
+        }
+
+        &--download {
+            margin-left: auto;
+        }
+    }
+}
