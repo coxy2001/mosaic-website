@@ -7,7 +7,7 @@ use Mosaic\Website\Model\Company;
 use Mosaic\Website\Tasks\Util\CompanyGetter;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class UpdateCompaniesCron implements CronTask
+class UpdateCompaniesTask implements CronTask
 {
     /**
      * Run this task every 5 minutes

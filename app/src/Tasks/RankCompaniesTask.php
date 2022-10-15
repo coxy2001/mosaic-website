@@ -6,7 +6,7 @@ use Exception;
 use Mosaic\Website\Model\Company;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class UzRankCompaniesCron implements CronTask
+class RankCompaniesTask implements CronTask
 {
     /**
      * Run this task every 5 minutes

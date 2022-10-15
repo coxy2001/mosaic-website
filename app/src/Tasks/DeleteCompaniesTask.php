@@ -6,7 +6,7 @@ use Exception;
 use Mosaic\Website\Model\Company;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class UaDeleteCompaniesCron implements CronTask
+class DeleteCompaniesTask implements CronTask
 {
     /**
      * 

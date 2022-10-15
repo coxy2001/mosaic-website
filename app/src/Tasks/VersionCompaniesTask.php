@@ -9,7 +9,7 @@ use Mosaic\Website\Model\TemporaryCompany;
 use Mosaic\Website\Model\CompanyList;
 use SilverStripe\CronTask\Interfaces\CronTask;
 
-class UpdateCompanies implements CronTask
+class VersionCompaniesTask implements CronTask
 {
     const TOP_COMPANY_LIMIT = 200;
     /**
