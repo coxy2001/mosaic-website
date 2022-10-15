@@ -10,6 +10,14 @@ use SilverStripe\Dev\BuildTask;
 class UpdateCompaniesTask extends BuildTask
 {
     private static $segment = "UpdateCompaniesTask";
+    private $pageLimit = null;
+    private $exchanges = [","];
+
+    public function setLimits(int $pageLimit, array $exchanges) {
+        $this->pageLimit = $pageLimit;
+        $this->$exchanges = $exchanges;
+        return $this;
+    }
 
     /**
      * Update company data
@@ -26,7 +34,7 @@ class UpdateCompaniesTask extends BuildTask
                 throw new Exception("Company table should be empty before getting new ones");
             }
             // Add data into Company table
-            CompanyGetter::getAll();
+            CompanyGetter::getAll($this->pageLimit, $this->exchanges);
         }
         catch(Exception $e) {
             echo "\n\nError while getting new Company data\n" . $e->getMessage() . "\n\n";
