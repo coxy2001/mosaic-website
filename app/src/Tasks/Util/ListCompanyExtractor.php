@@ -101,13 +101,16 @@ class ListCompanyExtractor
             // echo "Fixing missing features \n";
             try {
                 // Check for required features
-                if (in_array(RequestBuilder::NAME, $missing) || in_array(RequestBuilder::STOCK_SYMBOL, $missing) || in_array(RequestBuilder::STOCK_EXCHANGE, $missing) || in_array(RequestBuilder::LINK, $missing) || in_array(RequestBuilder::PRICE, $missing)) {
+                if (in_array(RequestBuilder::NAME, $missing) || in_array(RequestBuilder::STOCK_SYMBOL, $missing) || in_array(RequestBuilder::STOCK_EXCHANGE, $missing) || in_array(RequestBuilder::LINK, $missing) || in_array(RequestBuilder::PRICE, $missing) || in_array(RequestBuilder::MARKET_CAP, $missing)) {
                     throw new Exception("Missing required stock features\n");
                 } else {
                     // If feature not required just leave it blank
                     foreach ($missing as $feature) {
                         $extracted += [$feature => null];
                     }
+                }
+                if (intval($extracted[RequestBuilder::MARKET_CAP]) == 0) {
+                    throw new Exception("Market Cap is Zero\n");
                 }
                 // If ROA missing try to find it using the missing value scraper and set the Custom Calc property
                 if (in_array(RequestBuilder::ROA, $missing)) {

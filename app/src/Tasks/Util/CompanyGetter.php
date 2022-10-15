@@ -25,6 +25,9 @@ class CompanyGetter
             $totalCount = $j['totalCount'];
             echo "count from total count: ";
             echo $totalCount . "\n";
+            if(!array_key_exists('hits', $j)) {
+                throw new Exception("Stocks list not found in response!\n");
+            }
             $hits = $j['hits'];
             $iterations = ceil($totalCount / count($hits));
             echo "Iterations for this batch: " . ($iterations) . "\n";
