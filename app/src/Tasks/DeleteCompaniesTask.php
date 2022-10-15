@@ -4,26 +4,18 @@ namespace Mosaic\Website\Tasks;
 
 use Exception;
 use Mosaic\Website\Model\Company;
-use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\Dev\BuildTask;
 
-class DeleteCompaniesTask implements CronTask
+class DeleteCompaniesTask extends BuildTask
 {
-    /**
-     * 
-     *
-     * @return string
-     */
-    public function getSchedule()
-    {
-        return "* * * * *";
-    }
+    private static $segment = "DeleteCompaniesTask";
 
     /**
      * Deletes everything in the Company Table
      *
      * @return void
      */
-    public function process()
+    public function run($request)
     {
         try{
             echo "Delete Companies Task Running \n";

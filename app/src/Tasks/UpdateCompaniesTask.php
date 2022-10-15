@@ -5,26 +5,18 @@ namespace Mosaic\Website\Tasks;
 use Exception;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Tasks\Util\CompanyGetter;
-use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\Dev\BuildTask;
 
-class UpdateCompaniesTask implements CronTask
+class UpdateCompaniesTask extends BuildTask
 {
-    /**
-     * Run this task every 5 minutes
-     *
-     * @return string
-     */
-    public function getSchedule()
-    {
-        return "* * * * *";
-    }
+    private static $segment = "UpdateCompaniesTask";
 
     /**
      * Update company data
      *
      * @return void
      */
-    public function process()
+    public function run($request)
     {
         try{
             // Abort if there are already entries in Company

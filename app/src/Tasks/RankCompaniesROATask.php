@@ -4,31 +4,21 @@ namespace Mosaic\Website\Tasks;
 
 use Exception;
 use Mosaic\Website\Model\Company;
-use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\Dev\BuildTask;
 
-class RankCompaniesTask implements CronTask
+class RankCompaniesROATask extends BuildTask
 {
-    /**
-     * Run this task every 5 minutes
-     *
-     * @return string
-     */
-    public function getSchedule()
-    {
-        return "* * * * *";
-    }
-
+    private static $segment = "RankCompaniesROATask";
     /**
      * Assign ROArank PErank and Rank
      *
      * @return void
      */
     // TODO: Error handling
-    public function process()
+    public function run($request)
     {
         try {
             $this->addRoaRank();
-            $this->addPeRank();
         }
         catch(Exception $e) {
             echo "\n\nError while assigning ROA and PE rank to company table\n" . $e->getMessage() . "\n\n";
@@ -47,24 +37,6 @@ class RankCompaniesTask implements CronTask
         $counter = 1;
         foreach($companiesROA as $company) {
             $company->RankROA = $counter;
-            $company->write();
-            $counter++;
-        }
-        echo "Done\n";
-    }
-
-    // Get all companies in Company table ordered by PE
-    // Use the order to asign a PE rank
-    // Use the ROA rank to give an overall rank
-    private function addPeRank() {
-        echo "Adding PE rank and overall rank\n";
-        $companiesPE = Company::get()->sort("AbsoluteValuePE", "ASC")->chunkedFetch();
-
-        $counter = 1;
-        foreach($companiesPE as $company) {
-            $rank = $counter + $company->RankROA;
-            $company->RankPE = $counter;
-            $company->Rank = $rank;
             $company->write();
             $counter++;
         }

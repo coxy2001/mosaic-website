@@ -5,22 +5,13 @@ namespace Mosaic\Website\Tasks;
 use Exception;
 use Mosaic\Website\Model\Company;
 use Mosaic\Website\Model\CompanyVersion;
-use Mosaic\Website\Model\TemporaryCompany;
 use Mosaic\Website\Model\CompanyList;
-use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\Dev\BuildTask;
 
-class VersionCompaniesTask implements CronTask
+class VersionCompaniesTask extends BuildTask
 {
     const TOP_COMPANY_LIMIT = 200;
-    /**
-     * Run this task every 5 minutes
-     *
-     * @return string
-     */
-    public function getSchedule()
-    {
-        return "* * * * *";
-    }
+    private static $segment = 'VersionCompaniesTask';
 
     /**
      * Create new CompanyList entry
@@ -29,7 +20,7 @@ class VersionCompaniesTask implements CronTask
      *
      * @return void
      */
-    public function process()
+    public function run($request)
     {
         try {
             echo "Adding CompanyList and Versioning\n";
