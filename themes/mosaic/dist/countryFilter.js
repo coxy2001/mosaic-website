@@ -42,6 +42,7 @@ var countryData = [
     {
         name: "Argentina",
         flag: "ar",
+        tag: "Argentina",
     },
     {
         name: "Armenia",
@@ -54,10 +55,12 @@ var countryData = [
     {
         name: "Australia",
         flag: "au",
+        tag: "Australia",
     },
     {
         name: "Austria",
         flag: "at",
+        tag: "Austria",
     },
     {
         name: "Azerbaijan",
@@ -70,10 +73,12 @@ var countryData = [
     {
         name: "Bahrain",
         flag: "bh",
+        tag: "Bahrain",
     },
     {
         name: "Bangladesh",
         flag: "bd",
+        tag: "Bangladesh",
     },
     {
         name: "Barbados",
@@ -86,6 +91,7 @@ var countryData = [
     {
         name: "Belgium",
         flag: "be",
+        tag: "Belgium",
     },
     {
         name: "Belize",
@@ -114,6 +120,7 @@ var countryData = [
     {
         name: "Botswana",
         flag: "bw",
+        tag: "Botswana",
     },
     {
         name: "Bouvet Island",
@@ -122,6 +129,7 @@ var countryData = [
     {
         name: "Brazil",
         flag: "br",
+        tag: "Brazil",
     },
     {
         name: "British Indian Ocean Territory",
@@ -134,6 +142,7 @@ var countryData = [
     {
         name: "Bulgaria",
         flag: "bg",
+        tag: "Bulgaria",
     },
     {
         name: "Burkina Faso",
@@ -154,6 +163,7 @@ var countryData = [
     {
         name: "Canada",
         flag: "ca",
+        tag: "Canada",
     },
     {
         name: "Cape Verde",
@@ -174,10 +184,12 @@ var countryData = [
     {
         name: "Chile",
         flag: "cl",
+        tag: "Chile",
     },
     {
         name: "China",
         flag: "cn",
+        tag: "China",
     },
     {
         name: "Christmas Island",
@@ -190,6 +202,7 @@ var countryData = [
     {
         name: "Colombia",
         flag: "co",
+        tag: "Colombia",
     },
     {
         name: "Comoros",
@@ -210,14 +223,17 @@ var countryData = [
     {
         name: "Costa Rica",
         flag: "cr",
+        tag: "Costa_Rica",
     },
     {
         name: 'Cote D"Ivoire',
         flag: "ci",
+        tag: "Cote_dIvoire",
     },
     {
         name: "Croatia",
         flag: "hr",
+        tag: "Croatia",
     },
     {
         name: "Cuba",
@@ -226,14 +242,17 @@ var countryData = [
     {
         name: "Cyprus",
         flag: "cy",
+        tag: "Cyprus",
     },
     {
         name: "Czech Republic",
         flag: "cz",
+        tag: "Czech_Republic",
     },
     {
         name: "Denmark",
         flag: "dk",
+        tag: "Denmark",
     },
     {
         name: "Djibouti",
@@ -254,6 +273,7 @@ var countryData = [
     {
         name: "Egypt",
         flag: "eg",
+        tag: "Egypt",
     },
     {
         name: "El Salvador",
@@ -290,10 +310,12 @@ var countryData = [
     {
         name: "Finland",
         flag: "fi",
+        tag: "Finland",
     },
     {
         name: "France",
         flag: "fr",
+        tag: "France",
     },
     {
         name: "French Guiana",
@@ -322,6 +344,7 @@ var countryData = [
     {
         name: "Germany",
         flag: "de",
+        tag: "Germany",
     },
     {
         name: "Ghana",
@@ -334,6 +357,7 @@ var countryData = [
     {
         name: "Greece",
         flag: "gr",
+        tag: "Greece",
     },
     {
         name: "Greenland",
@@ -390,22 +414,27 @@ var countryData = [
     {
         name: "Hong Kong",
         flag: "hk",
+        tag: "Hong_Kong",
     },
     {
         name: "Hungary",
         flag: "hu",
+        tag: "Hungary",
     },
     {
         name: "Iceland",
         flag: "is",
+        tag: "Iceland",
     },
     {
         name: "India",
         flag: "in",
+        tag: "India",
     },
     {
         name: "Indonesia",
         flag: "id",
+        tag: "Indonesia",
     },
     {
         name: "Iran, Islamic Republic Of",
@@ -414,10 +443,12 @@ var countryData = [
     {
         name: "Iraq",
         flag: "iq",
+        tag: "Iraq",
     },
     {
         name: "Ireland",
         flag: "ie",
+        tag: "Ireland",
     },
     {
         name: "Isle of Man",
@@ -426,18 +457,22 @@ var countryData = [
     {
         name: "Israel",
         flag: "il",
+        tag: "Israel",
     },
     {
         name: "Italy",
         flag: "it",
+        tag: "Italy",
     },
     {
         name: "Jamaica",
         flag: "jm",
+        tag: "Jamaica",
     },
     {
         name: "Japan",
         flag: "jp",
+        tag: "Japan",
     },
     {
         name: "Jersey",
@@ -446,14 +481,17 @@ var countryData = [
     {
         name: "Jordan",
         flag: "jo",
+        tag: "Jordan",
     },
     {
         name: "Kazakhstan",
         flag: "kz",
+        tag: "Kazakhstan",
     },
     {
         name: "Kenya",
         flag: "ke",
+        tag: "Kenya",
     },
     {
         name: "Kiribati",
@@ -466,10 +504,12 @@ var countryData = [
     {
         name: "Korea, Republic of",
         flag: "kr",
+        tag: "South_Korea",
     },
     {
         name: "Kuwait",
         flag: "kw",
+        tag: "Kuwait",
     },
     {
         name: "Kyrgyzstan",
@@ -486,6 +526,7 @@ var countryData = [
     {
         name: "Lebanon",
         flag: "lb",
+        tag: "Lebanon",
     },
     {
         name: "Lesotho",
@@ -510,6 +551,7 @@ var countryData = [
     {
         name: "Luxembourg",
         flag: "lu",
+        tag: "Luxembourg",
     },
     {
         name: "Macao",
@@ -526,10 +568,12 @@ var countryData = [
     {
         name: "Malawi",
         flag: "mw",
+        tag: "Malawi",
     },
     {
         name: "Malaysia",
         flag: "my",
+        tag: "Malaysia",
     },
     {
         name: "Maldives",
@@ -542,6 +586,7 @@ var countryData = [
     {
         name: "Malta",
         flag: "mt",
+        tag: "Malta",
     },
     {
         name: "Marshall Islands",
@@ -558,6 +603,7 @@ var countryData = [
     {
         name: "Mauritius",
         flag: "mu",
+        tag: "Mauritius",
     },
     {
         name: "Mayotte",
@@ -566,6 +612,7 @@ var countryData = [
     {
         name: "Mexico",
         flag: "mx",
+        tag: "Mexico",
     },
     {
         name: "Micronesia, Federated States of",
@@ -584,12 +631,18 @@ var countryData = [
         flag: "mn",
     },
     {
+        name: "Montenegro",
+        flag: "me",
+        tag: "Montenegro",
+    },
+    {
         name: "Montserrat",
         flag: "ms",
     },
     {
         name: "Morocco",
         flag: "ma",
+        tag: "Morocco",
     },
     {
         name: "Mozambique",
@@ -602,6 +655,7 @@ var countryData = [
     {
         name: "Namibia",
         flag: "na",
+        tag: "Namibia",
     },
     {
         name: "Nauru",
@@ -614,6 +668,7 @@ var countryData = [
     {
         name: "Netherlands",
         flag: "nl",
+        tag: "Netherlands",
     },
     {
         name: "Netherlands Antilles",
@@ -626,6 +681,7 @@ var countryData = [
     {
         name: "New Zealand",
         flag: "nz",
+        tag: "New_Zealand",
     },
     {
         name: "Nicaragua",
@@ -638,6 +694,7 @@ var countryData = [
     {
         name: "Nigeria",
         flag: "ng",
+        tag: "Nigeria",
     },
     {
         name: "Niue",
@@ -654,22 +711,26 @@ var countryData = [
     {
         name: "Norway",
         flag: "no",
+        tag: "Norway",
     },
     {
         name: "Oman",
         flag: "om",
+        tag: "Oman",
     },
     {
         name: "Pakistan",
         flag: "pk",
+        tag: "Pakistan",
     },
     {
         name: "Palau",
         flag: "pw",
     },
     {
-        name: "Palestinian Territory, Occupied",
+        name: "Palestine",
         flag: "ps",
+        tag: "Palestine",
     },
     {
         name: "Panama",
@@ -686,10 +747,12 @@ var countryData = [
     {
         name: "Peru",
         flag: "pe",
+        tag: "Peru",
     },
     {
         name: "Philippines",
         flag: "ph",
+        tag: "Philippines",
     },
     {
         name: "Pitcairn",
@@ -698,10 +761,12 @@ var countryData = [
     {
         name: "Poland",
         flag: "pl",
+        tag: "Poland",
     },
     {
         name: "Portugal",
         flag: "pt",
+        tag: "Portugal",
     },
     {
         name: "Puerto Rico",
@@ -710,6 +775,7 @@ var countryData = [
     {
         name: "Qatar",
         flag: "qa",
+        tag: "Qatar",
     },
     {
         name: "Reunion",
@@ -718,14 +784,17 @@ var countryData = [
     {
         name: "Romania",
         flag: "ro",
+        tag: "Romania",
     },
     {
         name: "Russian Federation",
         flag: "ru",
+        tag: "Russian_Federation",
     },
     {
-        name: "RWANDA",
+        name: "Rwanda",
         flag: "rw",
+        tag: "Rwanda",
     },
     {
         name: "Saint Helena",
@@ -762,6 +831,7 @@ var countryData = [
     {
         name: "Saudi Arabia",
         flag: "sa",
+        tag: "Saudi Arabia",
     },
     {
         name: "Senegal",
@@ -770,10 +840,7 @@ var countryData = [
     {
         name: "Serbia",
         flag: "rs",
-    },
-    {
-        name: "Montenegro",
-        flag: "me",
+        tag: "Serbia",
     },
     {
         name: "Seychelles",
@@ -786,14 +853,17 @@ var countryData = [
     {
         name: "Singapore",
         flag: "sg",
+        tag: "Singapore",
     },
     {
         name: "Slovakia",
         flag: "sk",
+        tag: "Slovakia",
     },
     {
         name: "Slovenia",
         flag: "si",
+        tag: "Slovenia",
     },
     {
         name: "Solomon Islands",
@@ -806,6 +876,7 @@ var countryData = [
     {
         name: "South Africa",
         flag: "za",
+        tag: "South_Africa",
     },
     {
         name: "South Georgia and the South Sandwich Islands",
@@ -814,10 +885,12 @@ var countryData = [
     {
         name: "Spain",
         flag: "es",
+        tag: "Spain",
     },
     {
         name: "Sri Lanka",
         flag: "lk",
+        tag: "Sri_Lanka",
     },
     {
         name: "Sudan",
@@ -838,18 +911,21 @@ var countryData = [
     {
         name: "Sweden",
         flag: "se",
+        tag: "Sweden",
     },
     {
         name: "Switzerland",
         flag: "ch",
+        tag: "Switzerland",
     },
     {
         name: "Syrian Arab Republic",
         flag: "sy",
     },
     {
-        name: "Taiwan, Province of China",
+        name: "Taiwan",
         flag: "tw",
+        tag: "Taiwan",
     },
     {
         name: "Tajikistan",
@@ -858,10 +934,12 @@ var countryData = [
     {
         name: "Tanzania, United Republic of",
         flag: "tz",
+        tag: "Tanzania",
     },
     {
         name: "Thailand",
         flag: "th",
+        tag: "Thailand",
     },
     {
         name: "Timor-Leste",
@@ -886,10 +964,12 @@ var countryData = [
     {
         name: "Tunisia",
         flag: "tn",
+        tag: "Tunisia",
     },
     {
         name: "Turkey",
         flag: "tr",
+        tag: "Turkey",
     },
     {
         name: "Turkmenistan",
@@ -906,18 +986,22 @@ var countryData = [
     {
         name: "Uganda",
         flag: "ug",
+        tag: "Uganda",
     },
     {
         name: "Ukraine",
         flag: "ua",
+        tag: "Ukraine",
     },
     {
         name: "United Arab Emirates",
         flag: "ae",
+        tag: "Dubai",
     },
     {
         name: "United Kingdom",
         flag: "gb",
+        tag: "uk",
     },
     {
         name: "United States",
@@ -943,10 +1027,12 @@ var countryData = [
     {
         name: "Venezuela",
         flag: "ve",
+        tag: "Venezuela",
     },
     {
         name: "Viet Nam",
         flag: "vn",
+        tag: "VietNam",
     },
     {
         name: "Virgin Islands, British",
@@ -971,10 +1057,12 @@ var countryData = [
     {
         name: "Zambia",
         flag: "zm",
+        tag: "Zambia",
     },
     {
         name: "Zimbabwe",
         flag: "zw",
+        tag: "Zimbabwe",
     },
 ];
 
@@ -994,14 +1082,15 @@ function renderCountries() {
 
     // Create country options
     countryData.forEach((country) => {
-        countryOptions.innerHTML += `<label>
-            <input data-flag="${country.flag}" 
-                data-country="${country.tag || country.flag}"
-                type="checkbox" checked
-            />
-            <img src="${FLAG_PATH + country.flag}.png" loading="lazy">
-            ${country.name}
-        </label>`;
+        if (country.tag)
+            countryOptions.innerHTML += `<label>
+                <input data-flag="${country.flag}" 
+                    data-country="${country.tag}"
+                    type="checkbox" checked
+                />
+                <img src="${FLAG_PATH + country.flag}.png" loading="lazy">
+                ${country.name}
+            </label>`;
     });
 
     countryAll = document.querySelector('[data-country="all"]');
