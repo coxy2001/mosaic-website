@@ -122,7 +122,7 @@ select {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  max-width: 136rem;
+  max-width: 134rem;
   background-color: #3c4147;
 }
 .header__link {
@@ -300,7 +300,7 @@ select {
 .grid__row {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 6rem 16rem 7rem 9rem 16rem 11rem 7rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
+  grid-template-columns: 6rem 16rem 7rem 9rem 16rem 9rem 6rem 6rem 6rem 6rem 12rem 12rem 11rem 11rem;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -401,7 +401,7 @@ select {
 .grid-options {
   display: flex;
   flex-wrap: wrap;
-  max-width: 136rem;
+  max-width: 134rem;
   margin: auto;
   padding: 1rem;
   padding-bottom: 0.5rem;

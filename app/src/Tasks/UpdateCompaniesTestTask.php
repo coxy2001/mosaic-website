@@ -9,7 +9,7 @@ use SilverStripe\Dev\BuildTask;
 
 class UpdateCompaniesTestTask extends BuildTask
 {
-    private static $segment = "UpdateCompaniesTask";
+    private static $segment = "UpdateCompaniesTestTask";
     private $pageLimit = -1;
     private $exchanges = [","];
 

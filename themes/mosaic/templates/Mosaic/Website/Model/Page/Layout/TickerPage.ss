@@ -91,24 +91,38 @@
                     grid__row--odd
                 <% end_if %>"
             >
-                <div class="grid__item">$Rank</div>
                 <div class="grid__item">
-                <a class="grid__link" href="$Link" target="_blank">$Name</a>
+                    $Rank <% if $CustomCalculation %>*<% end_if %>
                 </div>
-                <!--Default-->
+                <div class="grid__item">
+                    <a class="grid__link" href="$Link" target="_blank">$Name</a>
+                </div>
                 <div class="grid__item">$Ticker</div>
                 <div class="grid__item">$Exchange</div>
                 <div class="grid__item">$Sector</div>
-                <div class="grid__item">\${$MarketCap.Formatted}</div>
-                <div class="grid__item">\${$Price.Nice}</div>
-                <div class="grid__item">$ROA</div>
-                <!--Side Scroll-->
-                <div class="grid__item">$PE</div>
-                <div class="grid__item">$EPS</div>
-                <div class="grid__item">$FreeCashFlow</div>
-                <div class="grid__item">$DividendsYield</div>
-                <div class="grid__item">$CurrentRatio</div>
-                <div class="grid__item">$PriceToBook</div>
+                <div class="grid__item">$MarketCapFormatted</div>
+                <div class="grid__item">$PriceFormatted</div>
+                <div class="grid__item">
+                    $ROA <% if $CustomCalculation %>*<% end_if %>
+                </div>
+                <div class="grid__item">
+                    $PE <% if $CustomCalculation %>*<% end_if %>
+                </div>
+                <div class="grid__item">
+                    <% if $EPS %> $EPS <% else %> - <% end_if %>
+                </div>
+                <div class="grid__item">
+                    <% if $FreeCashFlow %> $FreeCashFlow.Formatted <% else %> - <% end_if %>
+                </div>
+                <div class="grid__item">
+                    <% if $DividendsYield %> $DividendsYield <% else %> - <% end_if %>
+                </div>
+                <div class="grid__item">
+                    <% if $CurrentRatio %> $CurrentRatio <% else %> - <% end_if %>
+                </div>
+                <div class="grid__item">
+                    <% if $PriceToBook %> $PriceToBook <% else %> - <% end_if %>
+                </div>
             </div>
         <% end_loop %>
     <% end_if %>
