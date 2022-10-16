@@ -5,6 +5,7 @@ namespace Mosaic\Website\Tasks;
 use Exception;
 use Mosaic\Website\Model\Company;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\ORM\DB;
 
 class DeleteCompaniesTask extends BuildTask
 {
@@ -24,7 +25,9 @@ class DeleteCompaniesTask extends BuildTask
             foreach ($companies as $company) {
                 $company->delete();
             }
-            echo "Done!\n";
+            echo "Finished deleting, resetting increment... \n";
+            $alter = DB::query('ALTER TABLE `Company` AUTO_INCREMENT =0')->value();
+            echo "Done!\n\n";
         } catch (Exception $e) {
             echo "\n\nError while clearing Company Table\n" . $e->getMessage() . "\n\n";
         }

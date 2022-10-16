@@ -8,7 +8,7 @@ use Mosaic\Website\Model\Company;
 class CompanyGetter
 {
     // Gets all the stock data into the company database
-    public static function getAll($pageLimit = null, $exchange = ",")
+    public static function getAll($pageLimit = -1, $exchange = ",")
     {
         $pageNumber = 1;
         if (is_null($exchange)) {
@@ -25,6 +25,9 @@ class CompanyGetter
             $totalCount = $j['totalCount'];
             echo "count from total count: ";
             echo $totalCount . "\n";
+            if(!array_key_exists('hits', $j)) {
+                throw new Exception("Stocks list not found in response!\n");
+            }
             $hits = $j['hits'];
             $iterations = ceil($totalCount / count($hits));
             echo "Iterations for this batch: " . ($iterations) . "\n";
@@ -77,6 +80,9 @@ class CompanyGetter
                 echo "Response Recieved from investing.com\n";
 
                 $j = json_decode($response->getBody(), true);
+                if(!array_key_exists('hits', $j)) {
+                    throw new Exception("Stocks list not found in response!\n");
+                }
                 $hits = $j['hits'];
                 $total += count($hits);
             } catch (Exception $e) {
