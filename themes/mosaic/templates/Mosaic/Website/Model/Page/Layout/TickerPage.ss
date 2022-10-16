@@ -40,15 +40,17 @@
                 <div class="multiselect__select-cover"></div>
             </div>
             <div class="multiselect__options" id="sector-options">
-                <label>
+                <label class="multiselect__option">
                     <input data-sector="all" type="checkbox" checked/>
                     All Sectors
                 </label>
                 <% loop $SectorOptions %>
-                    <label>
-                        <input data-sector="$Value" type="checkbox" checked/>
-                        $Value
-                    </label>
+                    <% if $Value%>
+                        <label class="multiselect__option">
+                            <input data-sector="$Value" type="checkbox" checked/>
+                            $Value
+                        </label>
+                    <% end_if %>
                 <% end_loop %>
             </div>
         </div>

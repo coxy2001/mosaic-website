@@ -470,14 +470,11 @@ select {
 .multiselect__options--expanded {
   display: block;
 }
-.multiselect__options label {
+.multiselect__option {
   display: block;
   padding: 0.25rem;
 }
-.multiselect__options label :hover {
-  background-color: #1e90ff;
-}
-.multiselect__options input {
+.multiselect__option input {
   width: auto;
 }
 

@@ -1075,7 +1075,7 @@ let countryAll, countries;
 
 function renderCountries() {
     // Create All Countries option
-    countryOptions.innerHTML += `<label>
+    countryOptions.innerHTML += `<label class="multiselect__option">
         <input data-country="all" type="checkbox" checked />
         All Countries
     </label>`;
@@ -1083,7 +1083,7 @@ function renderCountries() {
     // Create country options
     countryData.forEach((country) => {
         if (country.tag)
-            countryOptions.innerHTML += `<label>
+            countryOptions.innerHTML += `<label class="multiselect__option">
                 <input data-flag="${country.flag}" 
                     data-country="${country.tag}"
                     type="checkbox" checked

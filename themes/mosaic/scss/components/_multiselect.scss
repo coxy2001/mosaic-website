@@ -46,15 +46,11 @@
         &--expanded {
             display: block;
         }
+    }
 
-        label {
-            display: block;
-            padding: 0.25rem;
-
-            :hover {
-                background-color: #1e90ff;
-            }
-        }
+    &__option {
+        display: block;
+        padding: 0.25rem;
 
         input {
             width: auto;
