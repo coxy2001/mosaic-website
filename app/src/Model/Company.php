@@ -43,13 +43,15 @@ class Company extends DataObject
         "Sector",
         "MarketCap",
         "Price",
-        "ROC",
+        "ROA",
         "PE",
     ];
 
     private static $searchable_fields = [
         "Ticker",
         "Name",
+        "Flag",
+        "Exchange",
         "Sector",
     ];
 }

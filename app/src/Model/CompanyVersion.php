@@ -24,20 +24,22 @@ class CompanyVersion extends DataObject
         "Sector",
         "MarketCap",
         "Price",
-        "ROC",
+        "ROA",
         "PE",
     ];
 
     private static $searchable_fields = [
         "Ticker",
         "Name",
+        "Flag",
+        "Exchange",
         "Sector",
     ];
 
     private function shortenNumber($num)
     {
         $units = ['', 'K', 'M', 'B', 'T'];
-        for ($i = 0; $num >= 1000; $i++) {
+        for ($i = 0; $num >= 1000 && $i < count($units); $i++) {
             $num /= 1000;
         }
         return round($num, 2) . $units[$i];
