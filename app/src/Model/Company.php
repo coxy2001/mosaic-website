@@ -54,4 +54,9 @@ class Company extends DataObject
         "Exchange",
         "Sector",
     ];
+
+    public function canView($member = null)
+    {
+        return true;
+    }
 }

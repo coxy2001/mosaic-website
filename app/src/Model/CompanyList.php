@@ -106,4 +106,9 @@ class CompanyList extends DataObject
             return  "$year, $month";
         } else return "No Name";
     }
+
+    public function canView($member = null)
+    {
+        return true;
+    }
 }

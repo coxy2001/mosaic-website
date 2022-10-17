@@ -54,4 +54,9 @@ class CompanyVersion extends DataObject
     {
         return self::shortenNumber($this->Price);
     }
+
+    public function canView($member = null)
+    {
+        return true;
+    }
 }
