@@ -27,21 +27,17 @@ class CompanyList extends DataObject
     ];
 
     private static $table_name = "CompanyList";
-    private static $singular_name = "Top Companies List";
-    private static $plural_name = "Top Companies List's";
+    private static $singular_name = "Company List";
+    private static $plural_name = "Company List's";
 
     private static $summary_fields = [
-        "Name",
-        "Month",
         "Year",
-        "LastEdited",
+        "Month",
     ];
 
     private static $searchable_fields = [
-        "Name",
-        "Month",
         "Year",
-        "LastEdited",
+        "Month",
     ];
 
     private static $csv_headers = [
@@ -103,9 +99,11 @@ class CompanyList extends DataObject
 
     public function getName()
     {
-        $dateObj   = DateTime::createFromFormat('!m', $this->Month);
-        $month = $dateObj->format('F');
-        $year = $this->Year;
-        return  "$year, $month";
+        if ($this->Year && $this->Month) {
+            $dateObj = DateTime::createFromFormat('!m', $this->Month);
+            $month = $dateObj->format('F');
+            $year = $this->Year;
+            return  "$year, $month";
+        } else return "No Name";
     }
 }
