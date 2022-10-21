@@ -1149,7 +1149,7 @@ function selectedCountryFlags() {
     var selected = [];
 
     countries.forEach((country) => {
-        if (country.checked && selected.length < 8) {
+        if (country.checked && selected.length < 16) {
             selected.push(
                 `<img src="${
                     FLAG_PATH + country.dataset.flag

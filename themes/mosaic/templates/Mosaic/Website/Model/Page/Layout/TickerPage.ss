@@ -22,9 +22,7 @@
         <div class="multiselect">
             <div class="multiselect__select-container" id="country-select">
                 <select class="multiselect__select"></select>
-                <div class="multiselect__select-cover">
-                    <div class="multiselect__text" id="country-text"></div>
-                </div>
+                <div class="multiselect__select-cover" id="country-text"></div>
             </div>
             <div class="multiselect__options" id="country-options"></div>
         </div>
@@ -34,10 +32,8 @@
         Sector Filter:
         <div class="multiselect">
             <div class="multiselect__select-container" id="sector-select">
-                <select class="multiselect__select">
-                    <option id="sector-text"></option>
-                </select>
-                <div class="multiselect__select-cover"></div>
+                <select class="multiselect__select"></select>
+                <div class="multiselect__select-cover"  id="sector-text"></div>
             </div>
             <div class="multiselect__options" id="sector-options">
                 <label class="multiselect__option">
