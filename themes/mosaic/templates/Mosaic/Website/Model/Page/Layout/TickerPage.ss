@@ -1,7 +1,7 @@
 <div class="grid-options">
     <div class="grid-options__item">
         Date:
-        <select name="history" id="history" onchange="List()">
+        <select name="history" id="history" onchange="list()">
             <% loop $HistoryOptions %>
                 <option value="$ID" <% if $Top.CompanyList.ID == $ID %>selected<% end_if %>>$Name</option>
             <% end_loop %>
@@ -10,7 +10,7 @@
 
     <div class="grid-options__item">
         Page Length: 
-        <select name="length" id="length" onchange="Length()">
+        <select name="length" id="length" onchange="pageLength()">
             <% loop $LengthOptions %>
                 <option value="$Value" <% if $Top.CurrentLength == $Value %>selected<% end_if %>>$Value</option>
             <% end_loop %>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="grid-options__item">
-        <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();location.reload();">Apply Filters</button>
+        <button class="btn-primary" onclick="applyCountryFilter();applySectorFilter();pageReset();">Apply Filters</button>
     </div>
 
     <div class="grid-options__item">
@@ -72,7 +72,7 @@
 <div class="grid">
     <div class="grid__row">
         <% loop $TableHeaders %>
-            <div onclick="Sort('$Key')" class="grid__head <% if $Top.CurrentSort == $Key %>$Top.CurrentDirectionClass<% end_if %>">
+            <div onclick="sort('$Key')" class="grid__head <% if $Top.CurrentSort == $Key %>$Top.CurrentDirectionClass<% end_if %>">
                 <div class="grid__text">$Value</div>
             </div>
         <% end_loop %>

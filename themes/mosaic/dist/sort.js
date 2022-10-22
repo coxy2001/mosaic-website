@@ -1,4 +1,4 @@
-function Sort(column) {
+function sort(column) {
     var url = new URL(window.location.href);
 
     // If the same column has been clicked again, reverse the sort direction
@@ -15,14 +15,22 @@ function Sort(column) {
     window.location.replace(url);
 }
 
-function List() {
+function list() {
     var url = new URL(window.location.href);
     url.searchParams.set("list", document.querySelector("#history").value);
+    url.searchParams.set("p", 0);
     window.location.replace(url);
 }
 
-function Length() {
+function pageLength() {
     var url = new URL(window.location.href);
     url.searchParams.set("length", document.querySelector("#length").value);
+    url.searchParams.set("p", 0);
+    window.location.replace(url);
+}
+
+function pageReset() {
+    var url = new URL(window.location.href);
+    url.searchParams.set("p", 0);
     window.location.replace(url);
 }
