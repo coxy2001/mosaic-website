@@ -376,6 +376,10 @@ select {
 }
 .grid__head:hover {
   background-color: #999ca5;
+  cursor: pointer;
+}
+.grid__head:active {
+  background-color: #656973;
 }
 .grid__head--sorted-asc ::after {
   position: absolute;

@@ -57,6 +57,11 @@
 
         &:hover {
             background-color: $heading-darker;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-color: darken($heading-darker, 20%);
         }
 
         &--sorted-asc {
