@@ -12,6 +12,7 @@ class RequestBuilder
     const SCREENER_PATH = '/stock-screener/Service/SearchStocks';
     const TIMEOUT = 15;
     const COUNTRY = ',';
+    const COUNTRY_TO_GET_EXCHANGES = '1';
     const MARKET_CAP_MIN = 1;
     const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
@@ -61,9 +62,9 @@ class RequestBuilder
 
     // Requests data for 50 stocks based on the page number. Can filter by exchange
     // Returns JSON
-    public static function requestScreener($pageNumber, $exchangeNumber, $client)
+    public static function requestScreener($pageNumber, $exchangeNumber, $client, $country=self::COUNTRY)
     {
-        $response = $client->request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber));
+        $response = $client->request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber, $country));
         return $response;
     }
 
@@ -92,18 +93,23 @@ class RequestBuilder
     }
 
     // Properties for screener post request
-    static function getScreenerRequestOptions($pagenumber, $exchange)
+    static function getScreenerRequestOptions($pagenumber, $exchange, $country)
     {
         return [
             'headers' => self::getScreenerHeaders(),
-            'form_params' => self::getScreenerBody($pagenumber, $exchange),
+            'form_params' => self::getScreenerBody($pagenumber, $exchange, $country),
         ];
     }
 
-    static function getScreenerBody($pn, $ex)
+    static function getScreenerBody($pn, $ex, $country)
     {
+        if(strcmp($country, self::COUNTRY_TO_GET_EXCHANGES) == 0) {
+            return [
+                'country[]' => $country
+            ];
+        }
         return [
-            'country[]' => self::COUNTRY,
+            'country[]' => $country,
             'exchange[]' => $ex,
             'eq_market_cap[min]' => self::MARKET_CAP_MIN,
             'eq_market_cap[max]' => self::MARKET_CAP_MAX,

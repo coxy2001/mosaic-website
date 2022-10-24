@@ -12,7 +12,10 @@ use SilverStripe\CronTask\Interfaces\CronTask;
 class TestProcessCron implements CronTask
 {
     private const PAGE_LIMIT = -1;
-    private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
+    // private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];    
+    // private const EXCHANGES = ["51"];
+    private const EXCHANGES = null;
+
 
     /**
      * Run this task every 5 minutes
