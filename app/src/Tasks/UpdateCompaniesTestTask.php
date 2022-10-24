@@ -11,7 +11,7 @@ class UpdateCompaniesTestTask extends BuildTask
 {
     private static $segment = "UpdateCompaniesTestTask";
     private $pageLimit = -1;
-    private $exchanges = [","];
+    private $exchanges = null;
 
     public function setLimits(int $pageLimit, $exchanges)
     {
@@ -35,10 +35,7 @@ class UpdateCompaniesTestTask extends BuildTask
                 throw new Exception("Company table should be empty before getting new ones");
             }
             // Add data into Company table
-            foreach ($this->exchanges as $exchange) {
-                print("\n GETTING FROM EXCHAGE: " . $exchange . "\n PAGE LIMIT: " . $this->pageLimit . "\n");
-                CompanyGetter::getAll($this->pageLimit, $exchange);
-            }
+            CompanyGetter::getAll($this->pageLimit, $this->exchanges);
         } catch (Exception $e) {
             echo "\n\nError while getting new Company data\n" . $e->getMessage() . "\n\n";
         }

@@ -11,14 +11,9 @@ use SilverStripe\CronTask\Interfaces\CronTask;
 
 class MonthlyProcessCron implements CronTask
 {
-    /**
-     * Run this task every 5 minutes
-     *
-     * @return string
-     */
     public function getSchedule()
     {
-        return null;
+        return "* * * * *";
     }
 
     public function process()

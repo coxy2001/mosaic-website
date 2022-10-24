@@ -9,6 +9,7 @@ use SilverStripe\Dev\BuildTask;
 class RankCompaniesPETask extends BuildTask
 {
     private static $segment = "RankCompaniesPETask";
+
     /**
      * Assign ROArank PErank and Rank
      *
