@@ -10,7 +10,8 @@ use SilverStripe\Dev\BuildTask;
 
 class VersionCompaniesTask extends BuildTask
 {
-    const TOP_COMPANY_LIMIT = 200;
+    const TOP_COMPANY_LIMIT = 2000;
+
     private static $segment = 'VersionCompaniesTask';
 
     /**

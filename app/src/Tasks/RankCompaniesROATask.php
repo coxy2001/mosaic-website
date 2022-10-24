@@ -9,12 +9,12 @@ use SilverStripe\Dev\BuildTask;
 class RankCompaniesROATask extends BuildTask
 {
     private static $segment = "RankCompaniesROATask";
+
     /**
      * Assign ROArank PErank and Rank
      *
      * @return void
      */
-    // TODO: Error handling
     public function run($request)
     {
         try {

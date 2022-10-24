@@ -7,27 +7,21 @@ use Mosaic\Website\Tasks\RankCompaniesPETask;
 use Mosaic\Website\Tasks\RankCompaniesROATask;
 use Mosaic\Website\Tasks\UpdateCompaniesTestTask;
 use Mosaic\Website\Tasks\VersionCompaniesTask;
-use SilverStripe\CronTask\Interfaces\CronTask;
+use SilverStripe\Dev\BuildTask;
 
-class TestProcessCron implements CronTask
+class TestProcessTask implements BuildTask
 {
-    private const PAGE_LIMIT = -1;
-    // private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];    
-    // private const EXCHANGES = ["51"];
-    private const EXCHANGES = null;
+    private const PAGE_LIMIT = 4;
+    private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
 
+    private static $segment = "TestProcessTask";
 
     /**
-     * Run this task every 5 minutes
+     * Test full process with a limited set of exchanges and a page limit
      *
-     * @return string
+     * @return void
      */
-    public function getSchedule()
-    {
-        return "* * * * *";
-    }
-
-    public function process()
+    public function run($request)
     {
         DeleteCompaniesTask::create()->run(null);
         UpdateCompaniesTestTask::create()->setLimits(self::PAGE_LIMIT, self::EXCHANGES)->run(null);

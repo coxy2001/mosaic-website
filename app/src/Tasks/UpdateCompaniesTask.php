@@ -10,6 +10,7 @@ use SilverStripe\Dev\BuildTask;
 class UpdateCompaniesTask extends BuildTask
 {
     private static $segment = "UpdateCompaniesTask";
+
     /**
      * Update company data
      *
