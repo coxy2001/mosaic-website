@@ -75,6 +75,9 @@ class CompanyList extends DataObject
         if ($request->getVar("sectors")) {
             $filter["Sector"] = explode(',', $request->getVar("sectors"));
         }
+        if ($request->getVar("custom")) {
+            $filter["CustomCalculation"] = $request->getVar("custom");
+        }
 
         $paginatedList = PaginatedList::create(
             $this->Companies()->sort($sort)->filter($filter),
