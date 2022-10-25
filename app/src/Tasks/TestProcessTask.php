@@ -1,6 +1,6 @@
 <?php
 
-namespace Mosaic\Website\Cron;
+namespace Mosaic\Website\Tasks;
 
 use Mosaic\Website\Tasks\DeleteCompaniesTask;
 use Mosaic\Website\Tasks\RankCompaniesPETask;
@@ -9,7 +9,7 @@ use Mosaic\Website\Tasks\UpdateCompaniesTestTask;
 use Mosaic\Website\Tasks\VersionCompaniesTask;
 use SilverStripe\Dev\BuildTask;
 
-class TestProcessTask implements BuildTask
+class TestProcessTask extends BuildTask
 {
     private const PAGE_LIMIT = 4;
     private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
