@@ -41,7 +41,7 @@ class CompanyVersion extends DataObject
         $units = ['', 'K', 'M', 'B', 'T'];
         for ($i = 0; $num >= 1000; $i++) {
             if ($i >= count($units)) {
-                $i--;
+                $i = count($units) - 2;
                 break;
             } else {
                 $num /= 1000;
