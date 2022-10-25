@@ -40,7 +40,7 @@ class MissingValueScraper
         $xpath = self::getXPath($response->getBody());
 
         if (!self::dateOk($xpath)) {
-            throw new Exception("Stock is too old, aborting...");
+            throw new Exception("Stock is too old, aborting...\n");
         }
         // Extract the total income
         $totalIncome = self::getIncome($xpath);
@@ -77,7 +77,7 @@ class MissingValueScraper
         $xpath = self::getXPath($response->getBody());
 
         if (!self::dateOk($xpath)) {
-            throw new Exception("Stock is too old, aborting...");
+            throw new Exception("Stock is too old, aborting...\n");
         }
 
         // Get total eps
@@ -142,6 +142,7 @@ class MissingValueScraper
 
     private static function dateOk($xpath)
     {
+        echo "----- CHECKING THE DATE -----\n";
         $results = $xpath->evaluate('//parent::span[text()="' . self::PERIOD . '"]');
         $dates = self::checkMultipleResults($results, self::PERIOD);
 
@@ -154,12 +155,13 @@ class MissingValueScraper
             $firstYear = intval($firstYear);
 
             date_default_timezone_set('America/Los_Angeles');
-            $currentYear = date('y');
+            $currentYear = date('Y');
             $currentYear = intval($currentYear);
 
             if ($currentYear > $firstYear + 1) {
                 return false;
             }
+            echo ("Year: " . $firstYear . "\n" . "Current Year: " . $currentYear . "\n");
             return true;
         }
     }
@@ -203,7 +205,7 @@ class MissingValueScraper
                 throw new Exception("No value for income found\n" . $e->getMessage());
             }
         } else {
-            throw new Exception("Could not find all income values");
+            throw new Exception("Could not find all income values\n");
         }
         // Return Total Income
         return $totalIncome;
