@@ -20,13 +20,8 @@ class DeleteCompaniesTask extends BuildTask
     {
         try {
             echo "Delete Companies Task Running \n";
-            // TODO: way to just drop the table and add it again?
-            $companies = Company::get();
-            foreach ($companies as $company) {
-                $company->delete();
-            }
-            echo "Finished deleting, resetting increment... \n";
-            $alter = DB::query('ALTER TABLE `Company` AUTO_INCREMENT =0')->value();
+            $alter = DB::query("DELETE FROM `Company`");
+            $alter = DB::query("ALTER TABLE `Company` AUTO_INCREMENT = 0");
             echo "Done!\n\n";
         } catch (Exception $e) {
             echo "\n\nError while clearing Company Table\n" . $e->getMessage() . "\n\n";

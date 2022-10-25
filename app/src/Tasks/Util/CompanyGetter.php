@@ -16,11 +16,13 @@ class CompanyGetter
             $exchanges = self::getAllExchanges($client);
             print("Done\n");
         }
-        echo("Exchanges: " . json_encode($exchanges) . "\n");
+
+        echo ("Exchanges: " . json_encode($exchanges) . "\n");
         $overallCount = 0;
         $overallSuccessCount = 0;
         $exchangeLoopCount = 1;
-        foreach ($exchanges as $exchangeNumber){
+
+        foreach ($exchanges as $exchangeNumber) {
             $pageNumber = 1;
             print("Getting Exchange " . $exchangeNumber . " (" . $exchangeLoopCount . " of " . sizeof($exchanges) . ")" . "\n");
             $exchangeLoopCount++;
@@ -34,7 +36,7 @@ class CompanyGetter
                 $successCount = 0;
                 echo "count from total count: ";
                 echo $totalCount . "\n";
-                if(!array_key_exists('hits', $j)) {
+                if (!array_key_exists('hits', $j)) {
                     throw new Exception("Stocks list not found in response!\n");
                 }
                 $hits = $j['hits'];
@@ -88,7 +90,7 @@ class CompanyGetter
                     echo "Response Recieved from investing.com\n";
 
                     $j = json_decode($response->getBody(), true);
-                    if(!array_key_exists('hits', $j)) {
+                    if (!array_key_exists('hits', $j)) {
                         throw new Exception("Stocks list not found in response!\n");
                     }
                     $hits = $j['hits'];
@@ -102,31 +104,31 @@ class CompanyGetter
             echo "Successful Writes: " . $successCount . "\n\n";
             $overallCount = $overallCount + $total;
             $overallSuccessCount = $overallSuccessCount + $successCount;
-        } 
+        }
         echo "Overall Count: " . $overallCount . "\n";
-        echo "Overall Successful Writes:" . $overallSuccessCount . "\n\n"; 
+        echo "Overall Successful Writes:" . $overallSuccessCount . "\n\n";
     }
 
-    private static function getAllExchanges($client) {
+    private static function getAllExchanges($client)
+    {
         $exchanges = [];
         try {
             $response = RequestBuilder::requestScreener("0", ",", $client, RequestBuilder::COUNTRY_TO_GET_EXCHANGES);
             $j = json_decode($response->getBody(), true);
-            if(array_key_exists("aggs", $j) && array_key_exists("exchangeAgg", $j["aggs"]) &&array_key_exists("buckets", $j["aggs"]["exchangeAgg"])) {
+            if (array_key_exists("aggs", $j) && array_key_exists("exchangeAgg", $j["aggs"]) && array_key_exists("buckets", $j["aggs"]["exchangeAgg"])) {
                 $exchangeList = $j["aggs"]["exchangeAgg"]["buckets"];
-                foreach ($exchangeList as $exchange){
-                    if(!array_key_exists("key", $exchange)) {
+                foreach ($exchangeList as $exchange) {
+                    if (!array_key_exists("key", $exchange)) {
                         throw new Exception("Could not find exchange ID in listing");
                     }
                     $exchangeID = $exchange["key"];
                     array_push($exchanges, $exchangeID);
                 }
-            }
-            else {
+            } else {
                 throw new Exception("JSON did not contain exchange list\n" . json_encode($j) . "\n");
             }
             return $exchanges;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo "\nError trying to get all exchanges: " . $e->getMessage() . "\n";
             return null;
         }

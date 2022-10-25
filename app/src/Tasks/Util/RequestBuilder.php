@@ -13,7 +13,7 @@ class RequestBuilder
     const TIMEOUT = 15;
     const COUNTRY = ',';
     const COUNTRY_TO_GET_EXCHANGES = '1';
-    const MARKET_CAP_MIN = 1;
+    const MARKET_CAP_MIN = '50000';
     const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
     // Constants for obtaining values from Investing.com 
@@ -62,7 +62,7 @@ class RequestBuilder
 
     // Requests data for 50 stocks based on the page number. Can filter by exchange
     // Returns JSON
-    public static function requestScreener($pageNumber, $exchangeNumber, $client, $country=self::COUNTRY)
+    public static function requestScreener($pageNumber, $exchangeNumber, $client, $country = self::COUNTRY)
     {
         $response = $client->request('POST', (self::BASE_INVESTING_URL . self::SCREENER_PATH), self::getScreenerRequestOptions($pageNumber, $exchangeNumber, $country));
         return $response;
@@ -103,7 +103,7 @@ class RequestBuilder
 
     static function getScreenerBody($pn, $ex, $country)
     {
-        if(strcmp($country, self::COUNTRY_TO_GET_EXCHANGES) == 0) {
+        if (strcmp($country, self::COUNTRY_TO_GET_EXCHANGES) == 0) {
             return [
                 'country[]' => $country
             ];
@@ -111,9 +111,10 @@ class RequestBuilder
         return [
             'country[]' => $country,
             'exchange[]' => $ex,
+            'pn' => $pn,
+            'equityType' => 'ORD',
             'eq_market_cap[min]' => self::MARKET_CAP_MIN,
             'eq_market_cap[max]' => self::MARKET_CAP_MAX,
-            'pn' => $pn,
             'order[col]' => 'eq_market_cap',
             'order[dir]' => 'd'
         ];
