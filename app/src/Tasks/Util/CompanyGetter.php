@@ -118,11 +118,23 @@ class CompanyGetter
             if (array_key_exists("aggs", $j) && array_key_exists("exchangeAgg", $j["aggs"]) && array_key_exists("buckets", $j["aggs"]["exchangeAgg"])) {
                 $exchangeList = $j["aggs"]["exchangeAgg"]["buckets"];
                 foreach ($exchangeList as $exchange) {
+                    $badExchange = false;
                     if (!array_key_exists("key", $exchange)) {
                         throw new Exception("Could not find exchange ID in listing");
                     }
                     $exchangeID = $exchange["key"];
-                    array_push($exchanges, $exchangeID);
+                    foreach(RequestBuilder::BAD_EXCHANGES as $bad) {
+                        if(strcmp($exchangeID, $bad) == 0) {
+                            $badExchange = true;
+                            break;
+                        }
+                    }
+                    if(!$badExchange) {
+                        array_push($exchanges, $exchangeID);
+                    }
+                    else {
+                        echo("Skipping exchange: " . $exchangeID);
+                    }
                 }
             } else {
                 throw new Exception("JSON did not contain exchange list\n" . json_encode($j) . "\n");
