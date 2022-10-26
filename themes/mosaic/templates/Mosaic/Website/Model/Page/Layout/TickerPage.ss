@@ -99,7 +99,7 @@
                 <div class="grid__item">$MarketCapFormatted</div>
                 <div class="grid__item">$PriceFormatted</div>
                 <div class="grid__item">
-                    $ROA <% if $CustomCalculation %>*<% end_if %>
+                    $ROAFormatted <% if $CustomCalculation %>*<% end_if %>
                 </div>
                 <div class="grid__item">
                     $PE <% if $CustomCalculation %>*<% end_if %>

@@ -55,6 +55,11 @@ class CompanyVersion extends DataObject
         return self::shortenNumber($this->Price);
     }
 
+    public function getROAFormatted()
+    {
+        return self::shortenNumber($this->ROA);
+    }
+
     public function canView($member = null)
     {
         return true;
