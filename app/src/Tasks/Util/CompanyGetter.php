@@ -122,7 +122,11 @@ class CompanyGetter
                         throw new Exception("Could not find exchange ID in listing");
                     }
                     $exchangeID = $exchange["key"];
-                    array_push($exchanges, $exchangeID);
+                    if (!in_array($exchangeID, RequestBuilder::BAD_EXCHANGES)) {
+                        array_push($exchanges, $exchangeID);
+                    } else {
+                        echo ("Skipping exchange: " . $exchangeID);
+                    }
                 }
             } else {
                 throw new Exception("JSON did not contain exchange list\n" . json_encode($j) . "\n");

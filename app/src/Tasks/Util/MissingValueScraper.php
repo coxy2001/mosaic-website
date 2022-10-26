@@ -31,6 +31,8 @@ class MissingValueScraper
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
             $ROA = self::extractROA($xpathRatioPage);
             return $ROA;
+        } catch (EmptyDataException $e) {
+            throw new Exception("Ratios page existed but had no usable data: " . $e->getMessage() . "aborting now...\n");
         } catch (Exception $e) {
             echo ("Could not get ROA from ratio page\n" . $e->getMessage() . "Now trying calculation\n");
         }
@@ -40,7 +42,7 @@ class MissingValueScraper
         $xpath = self::getXPath($response->getBody());
 
         if (!self::dateOk($xpath)) {
-            throw new Exception("Stock is too old, aborting...");
+            throw new Exception("Stock is too old, aborting...\n");
         }
         // Extract the total income
         $totalIncome = self::getIncome($xpath);
@@ -68,6 +70,8 @@ class MissingValueScraper
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
             $PE = self::extractPE($xpathRatioPage);
             return $PE;
+        } catch (EmptyDataException $e) {
+            throw new Exception("Ratios page existed but had no usable data: " . $e->getMessage() . "aborting now...\n");
         } catch (Exception $e) {
             echo ("Could not get PE from ratio page " . $e->getMessage() . "Now trying calculation\n");
         }
@@ -77,7 +81,7 @@ class MissingValueScraper
         $xpath = self::getXPath($response->getBody());
 
         if (!self::dateOk($xpath)) {
-            throw new Exception("Stock is too old, aborting...");
+            throw new Exception("Stock is too old, aborting...\n");
         }
 
         // Get total eps
@@ -102,19 +106,17 @@ class MissingValueScraper
         $ROAvals = self::checkMultipleResults($resultROA, self::ROA_TTM);
 
         if (strcmp($ROAvals[0], self::ROA_TTM) == 0 && sizeof($ROAvals) > 1) {
-            try {
-                $percent = explode("%", $ROAvals[1]);
-                $ROA = $percent[0];
-                // $ROA =("-a");
-                if (self::checkDouble($ROA)) {
-                    return (float)$ROA;
-                } else {
-                    throw new Exception("Value was not a Double\n");
-                }
-            } catch (Exception $e) {
-                throw new Exception("Could not find ROA in ratios tab\n" . $e->getMessage());
-                // return null;
+            $percent = explode("%", $ROAvals[1]);
+            $ROA = $percent[0];
+            // $ROA =("-a");
+            if (self::checkDouble($ROA)) {
+                return (float)$ROA;
+            } else {
+                throw new EmptyDataException("ROA was not a Double\n");
             }
+        }
+        else {
+            throw new Exception("Could not find ROA in ratios tab\n");
         }
     }
 
@@ -124,24 +126,23 @@ class MissingValueScraper
         $PEvals = self::checkMultipleResults($resultPE, self::PE_TTM);
 
         if (strcmp($PEvals[0], self::PE_TTM) == 0 && sizeof($PEvals) > 1) {
-            try {
-                $PE = ($PEvals[1]);
-                // $PE = ("-a");
-                if (self::checkDouble($PE)) {
-                    return (float)$PE;
-                } else {
-                    throw new Exception("Value was not a Double\n");
-                }
-                return $PE;
-            } catch (Exception $e) {
-                throw new Exception("Could not find ROA in ratios tab\n" . $e->getMessage());
-                // return null;
+            $PE = ($PEvals[1]);
+            // $PE = ("-a");
+            if (self::checkDouble($PE)) {
+                return (float)$PE;
+            } else {
+                throw new EmptyDataException("PE was not a Double\n");
             }
+            return $PE;
+        }
+        else {
+            throw new Exception("Could not find ROA in ratios tab\n");
         }
     }
 
     private static function dateOk($xpath)
     {
+        echo "----- CHECKING THE DATE -----\n";
         $results = $xpath->evaluate('//parent::span[text()="' . self::PERIOD . '"]');
         $dates = self::checkMultipleResults($results, self::PERIOD);
 
@@ -154,9 +155,9 @@ class MissingValueScraper
             $firstYear = intval($firstYear);
 
             date_default_timezone_set('America/Los_Angeles');
-            $currentYear = date('y');
+            $currentYear = date('Y');
             $currentYear = intval($currentYear);
-
+            echo ("Year: " . $firstYear . "\n" . "Current Year: " . $currentYear . "\n");
             if ($currentYear > $firstYear + 1) {
                 return false;
             }
@@ -203,7 +204,7 @@ class MissingValueScraper
                 throw new Exception("No value for income found\n" . $e->getMessage());
             }
         } else {
-            throw new Exception("Could not find all income values");
+            throw new Exception("Could not find all income values\n");
         }
         // Return Total Income
         return $totalIncome;
