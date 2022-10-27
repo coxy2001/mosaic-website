@@ -11,13 +11,14 @@ use SilverStripe\Dev\BuildTask;
 
 class TestProcessTask extends BuildTask
 {
-    private const PAGE_LIMIT = 4;
-    private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
+    private const PAGE_LIMIT = -1;
+    // private const EXCHANGES = ["2", "3", "18", "20", "83", "104", "88", "51", "26", "22"];
+    private const EXCHANGES = null;
 
     private static $segment = "TestProcessTask";
 
     /**
-     * Test full process with a limited set of exchanges and a page limit
+     * Test full process with options for a limited set of exchanges and a page limit
      *
      * @return void
      */

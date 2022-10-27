@@ -39,8 +39,6 @@ class ListCompanyExtractor
 
         // Go through all the key features we want to grab
         foreach (RequestBuilder::FEATURES as $feature) {
-            // TODO check certain features non null and allow some to be null
-
             // Get all the features
             // If a feature is missing add it to the missing list to be handled later
             try {
@@ -52,8 +50,6 @@ class ListCompanyExtractor
                     } else {
                         $pID = $company[$feature];
                         if (intval($pID) != 0) {
-                            // TODO: throw exception of custom type here instead of returning
-                            // echo "PID: " . $pID . "\n";
                             return;
                         }
                     }
@@ -98,7 +94,6 @@ class ListCompanyExtractor
         }
         $extracted += [RequestBuilder::CUSTOM_CALC => false];
         if (count($missing) != 0) {
-            // echo "Fixing missing features \n";
             try {
                 // Check for required features
                 if (in_array(RequestBuilder::NAME, $missing) || in_array(RequestBuilder::STOCK_SYMBOL, $missing) || in_array(RequestBuilder::STOCK_EXCHANGE, $missing) || in_array(RequestBuilder::LINK, $missing) || in_array(RequestBuilder::PRICE, $missing) || in_array(RequestBuilder::MARKET_CAP, $missing)) {
@@ -108,9 +103,6 @@ class ListCompanyExtractor
                     foreach ($missing as $feature) {
                         $extracted += [$feature => null];
                     }
-                }
-                if (intval($extracted[RequestBuilder::MARKET_CAP]) == 0) {
-                    throw new Exception("Market Cap is Zero\n");
                 }
                 // If ROA missing try to find it using the missing value scraper and set the Custom Calc property
                 if (in_array(RequestBuilder::ROA, $missing)) {
@@ -137,6 +129,7 @@ class ListCompanyExtractor
         return $extracted;
     }
 
+    // Checkers used to make sure ROA and PE is never null by the end
     private static function checkNull($value, $valueName = " ")
     {
         if (is_null($value)) {

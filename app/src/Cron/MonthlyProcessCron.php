@@ -11,11 +11,13 @@ use SilverStripe\CronTask\Interfaces\CronTask;
 
 class MonthlyProcessCron implements CronTask
 {
+    // This cron task executes once a month
     public function getSchedule()
     {
         return "* * * * *";
     }
 
+    // Run all the tasks to get new data, rank it, and version it
     public function process()
     {
         DeleteCompaniesTask::create()->run(null);

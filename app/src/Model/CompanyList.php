@@ -9,6 +9,7 @@ use SilverStripe\ORM\PaginatedList;
 
 class CompanyList extends DataObject
 {
+    // Default layout for sending to front end
     public const DEFAULT_LENGTH = 30;
     public const DEFAULT_SORT = "Rank";
     public const DEFAULT_DIRECTION = "ASC";
@@ -18,6 +19,7 @@ class CompanyList extends DataObject
         "Year" => "Int",
     ];
 
+    // Each entry corresponds to a set of Companies in CompanyVersion table
     private static $has_many = [
         "Companies" => CompanyVersion::class
     ];
@@ -40,6 +42,7 @@ class CompanyList extends DataObject
         "Month",
     ];
 
+    // Headers for writing out to CSV
     private static $csv_headers = [
         "Rank",
         "Ticker",
@@ -60,6 +63,7 @@ class CompanyList extends DataObject
         "Link",
     ];
 
+    // Method for getting a complete set of stock data in paged chunks
     public function getPaginatedList(HTTPRequest $request)
     {
         // Sort list by the 'sort' and 'direction' get arguments using DEFAULT_SORT and DEFAULT_DIRECTION as fallbacks
@@ -89,6 +93,7 @@ class CompanyList extends DataObject
         return $paginatedList;
     }
 
+    // Method for writing data out to a CSV
     public function getCSV()
     {
         $stream = fopen("php://output", 'w');
@@ -100,6 +105,7 @@ class CompanyList extends DataObject
         }
     }
 
+    // Method for getting the name of an entry based on the date of its creation.
     public function getName()
     {
         if ($this->Year && $this->Month) {

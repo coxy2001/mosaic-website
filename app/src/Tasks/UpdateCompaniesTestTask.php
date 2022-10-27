@@ -13,6 +13,7 @@ class UpdateCompaniesTestTask extends BuildTask
     private $pageLimit = -1;
     private $exchanges = null;
 
+    // Seters for applying a page limit and restricting exchanges to a list
     public function setLimits(int $pageLimit, $exchanges)
     {
         $this->pageLimit = $pageLimit;
@@ -34,7 +35,7 @@ class UpdateCompaniesTestTask extends BuildTask
             if ($companies->count() != 0) {
                 throw new Exception("Company table should be empty before getting new ones");
             }
-            // Add data into Company table
+            // Add data into Company table with limits in place
             CompanyGetter::getAll($this->pageLimit, $this->exchanges);
         } catch (Exception $e) {
             echo "\n\nError while getting new Company data\n" . $e->getMessage() . "\n\n";
