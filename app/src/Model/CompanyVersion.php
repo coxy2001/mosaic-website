@@ -38,8 +38,8 @@ class CompanyVersion extends DataObject
 
     private function shortenNumber($num)
     {
-        $units = ['', 'K', 'M', 'B', 'T'];
-        for ($i = 0; $num >= 1000 && $i < count($units); $i++) {
+        $units = ['', 'K', 'M', 'B', 'T', 'Q', 'Qu', 'S'];
+        for ($i = 0; $num >= 1000; $i++) {
             $num /= 1000;
         }
         return round($num, 2) . $units[$i];

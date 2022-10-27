@@ -16,6 +16,8 @@ class RequestBuilder
     // const BAD_EXCHANGES = ['97'];
     const BAD_EXCHANGES = [''];
     const EXCHANGE_LIMIT = 30000;
+    const PRICE_MIN = '0.1';
+    const PRICE_MAX = '999999999999999999';    // Max for sql big int
     const MARKET_CAP_MIN = '50000';
     const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
@@ -118,6 +120,8 @@ class RequestBuilder
             'equityType' => 'ORD',
             'eq_market_cap[min]' => self::MARKET_CAP_MIN,
             'eq_market_cap[max]' => self::MARKET_CAP_MAX,
+            'last[min]' => self::PRICE_MIN,
+            'last[max]' => self::PRICE_MAX,
             'order[col]' => 'eq_market_cap',
             'order[dir]' => 'd'
         ];
