@@ -36,6 +36,10 @@ class CompanyGetter
                 $successCount = 0;
                 echo "count from total count: ";
                 echo $totalCount . "\n";
+                if ($totalCount > RequestBuilder::EXCHANGE_LIMIT) {
+                    echo ("Skipping exchange: " . $exchangeNumber . " count too large!\n");
+                    continue;
+                }
                 if (!array_key_exists('hits', $j)) {
                     throw new Exception("Stocks list not found in response!\n");
                 }
@@ -133,7 +137,7 @@ class CompanyGetter
                         array_push($exchanges, $exchangeID);
                     }
                     else {
-                        echo("Skipping exchange: " . $exchangeID);
+                        echo("Skipping exchange: " . $exchangeID . "\n");
                     }
                 }
             } else {

@@ -14,6 +14,7 @@ class RequestBuilder
     const COUNTRY = ',';
     const COUNTRY_TO_GET_EXCHANGES = '1';
     const BAD_EXCHANGES = ['97'];
+    const EXCHANGE_LIMIT = 30000;
     const MARKET_CAP_MIN = '50000';
     const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
