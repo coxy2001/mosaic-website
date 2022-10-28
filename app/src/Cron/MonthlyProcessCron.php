@@ -14,7 +14,7 @@ class MonthlyProcessCron implements CronTask
     // This cron task executes once a month
     public function getSchedule()
     {
-        return "* * * * *";
+        return "0 0 1 * *";
     }
 
     // Run all the tasks to get new data, rank it, and version it
