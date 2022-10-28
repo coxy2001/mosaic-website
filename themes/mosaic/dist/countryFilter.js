@@ -1074,6 +1074,8 @@ const countryText = document.getElementById("country-text");
 let countryAll, countries;
 
 function renderCountries() {
+    if (countryOptions == null) return;
+
     // Create All Countries option
     countryOptions.innerHTML += `<label class="multiselect__option">
         <input data-country="all" type="checkbox" checked />
