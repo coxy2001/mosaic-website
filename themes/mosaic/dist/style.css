@@ -94,6 +94,13 @@ p {
   margin-bottom: 1rem;
 }
 
+a {
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+
 input,
 select {
   display: inline-block;
@@ -394,12 +401,6 @@ select {
   top: 50%;
   transform: translateY(-50%);
   content: "▲";
-}
-.grid__link {
-  color: inherit;
-}
-.grid__link:hover {
-  text-decoration: none;
 }
 
 .grid-options {
