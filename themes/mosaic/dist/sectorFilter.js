@@ -5,6 +5,8 @@ const sectorAll = document.querySelector('[data-sector="all"]');
 const sectors = document.querySelectorAll("[data-sector]");
 
 function renderSectors() {
+    if (sectorSelect == null) return;
+
     // Toggle expand click event
     sectorSelect.addEventListener("click", () => {
         sectorOptions.classList.toggle("multiselect__options--expanded");
