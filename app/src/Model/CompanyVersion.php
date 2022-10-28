@@ -6,8 +6,11 @@ use SilverStripe\ORM\DataObject;
 
 class CompanyVersion extends DataObject
 {
+    // Fields should be the same as Company table
     private static $db = Company::DB_FIELDS;
 
+    // Every company in this table belongs to a set based on version (When it was added)
+    // So each company has the id of the set/version it belongs to.
     private static $has_one = [
         "CompanyList" => CompanyList::class
     ];
@@ -35,6 +38,8 @@ class CompanyVersion extends DataObject
         "Exchange",
         "Sector",
     ];
+
+    // Methods for nice formatting
 
     private function shortenNumber($num)
     {

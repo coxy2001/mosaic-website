@@ -15,7 +15,6 @@ class RankCompaniesPETask extends BuildTask
      *
      * @return void
      */
-    // TODO: Error handling
     public function run($request)
     {
         try {

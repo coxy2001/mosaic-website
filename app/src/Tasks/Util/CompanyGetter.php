@@ -10,7 +10,10 @@ class CompanyGetter
     // Gets all the stock data into the company database
     public static function getAll($pageLimit = -1, $exchanges = null)
     {
+        // Get a client object for making requests
         $client = RequestBuilder::getClient();
+
+        // Check to make sure a valid set of exchanges is input
         if (is_null($exchanges)) {
             print("Getting All Exchanges\n");
             $exchanges = self::getAllExchanges($client);
@@ -22,6 +25,7 @@ class CompanyGetter
         $overallSuccessCount = 0;
         $exchangeLoopCount = 1;
 
+        // Get data for every exchange
         foreach ($exchanges as $exchangeNumber) {
             $pageNumber = 1;
             print("Getting Exchange " . $exchangeNumber . " (" . $exchangeLoopCount . " of " . sizeof($exchanges) . ")" . "\n");
@@ -36,6 +40,13 @@ class CompanyGetter
                 $successCount = 0;
                 echo "count from total count: ";
                 echo $totalCount . "\n";
+
+                // If the exchange is very large it probably means its an option to get all exchanges which is broken so we need to skip
+                if ($totalCount > RequestBuilder::EXCHANGE_LIMIT) {
+                    echo ("Skipping exchange: " . $exchangeNumber . " count too large!\n");
+                    continue;
+                }
+                // Figure out how many loops we need to do for this exchange
                 if (!array_key_exists('hits', $j)) {
                     throw new Exception("Stocks list not found in response!\n");
                 }
@@ -47,6 +58,7 @@ class CompanyGetter
                 echo $e->getMessage() . "\n";
             }
             $total = count($hits);
+            // Process each set of 50
             for ($i = 0; $i < $iterations; $i++) {
                 if (!is_null($pageLimit) && $i == $pageLimit) {
                     break;
@@ -59,11 +71,7 @@ class CompanyGetter
                     $companies = array();
                     echo "Extracting data\n";
                     $companies = ListCompanyExtractor::extractStocks($j, $client);
-
-                    // echo "\nSkipped " . (count($hits) - count($companies)) . " companies\n";
-
                 } catch (Exception $e) {
-                    // TODO: How many timeouts to allow for
                     echo "\nEror extracting data from investing.com: " . $e->getMessage() . "\n";
                 }
                 try {
@@ -74,7 +82,6 @@ class CompanyGetter
                         $successCount++;
                     }
                     echo "Done\n";
-                    // echo $successCount . " Succesful Writes\n";
                 } catch (Exception $e) {
                     echo "\nEror writing data to tempCompanies " . $e->getMessage() . "\n";
                 }
@@ -100,6 +107,7 @@ class CompanyGetter
                     echo $e->getMessage() . "\n";
                 }
             }
+            // Print out useful statistics for how the getter is performing
             echo "\n\nTotal: " . $total . "\n";
             echo "Successful Writes: " . $successCount . "\n\n";
             $overallCount = $overallCount + $total;
@@ -109,6 +117,7 @@ class CompanyGetter
         echo "Overall Successful Writes:" . $overallSuccessCount . "\n\n";
     }
 
+    // Used to obtain a list of all exchanges available by investing.com
     private static function getAllExchanges($client)
     {
         $exchanges = [];
@@ -125,7 +134,7 @@ class CompanyGetter
                     if (!in_array($exchangeID, RequestBuilder::BAD_EXCHANGES)) {
                         array_push($exchanges, $exchangeID);
                     } else {
-                        echo ("Skipping exchange: " . $exchangeID);
+                        echo ("Skipping exchange: " . $exchangeID . "\n");
                     }
                 }
             } else {

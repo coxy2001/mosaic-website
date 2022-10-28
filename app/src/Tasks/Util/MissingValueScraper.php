@@ -21,12 +21,14 @@ class MissingValueScraper
     const PE_TTM = 'P/E Ratio TTM';
     const PERIOD = 'Period Ending:';
 
-    // TODO: Check for ratios tab first! Also maybe use EPS if available instead of grabbing it
-
     // Uses the base url of a stock to get get the ROA
+    // If the ratio page exists use that to get the data
+    // If ratio page exists but contained no data abort
+    // If ratio page does not exist try to calculate ROA manually
     public static function getROA($companyUrl, $client)
     {
         $xpathRatioPage = null;
+        // Try ratios page
         try {
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
             $ROA = self::extractROA($xpathRatioPage);
@@ -41,6 +43,7 @@ class MissingValueScraper
         // Transform html into a navigatable object
         $xpath = self::getXPath($response->getBody());
 
+        // Abort if stock is too old
         if (!self::dateOk($xpath)) {
             throw new Exception("Stock is too old, aborting...\n");
         }
@@ -56,16 +59,19 @@ class MissingValueScraper
 
         print("Done\n\n");
 
-        // TODO: investigate floats
         // Return ROA
         return $totalIncome / $assets * 100;
     }
 
 
     // Use the base url of a stock to get the PE
+    // If the ratio page exists use that to get the data
+    // If ratio page exists but contained no data abort
+    // If ratio page does not exist try to calculate PE manually
     public static function getPE($companyUrl, $price, $client)
     {
         $xpathRatioPage = null;
+        // Try ratios page
         try {
             $xpathRatioPage = self::useRatioPage($companyUrl, $client);
             $PE = self::extractPE($xpathRatioPage);
@@ -80,6 +86,7 @@ class MissingValueScraper
         // transform html
         $xpath = self::getXPath($response->getBody());
 
+        // Abort if stock is too old
         if (!self::dateOk($xpath)) {
             throw new Exception("Stock is too old, aborting...\n");
         }
@@ -93,6 +100,8 @@ class MissingValueScraper
         return $price / $totalEPS;
     }
 
+    // Function for getting the ratio page
+    // Converts the HTML and returns an XML object (xpath)
     public static function useRatioPage($companyUrl, $client)
     {
         $response  = RequestBuilder::requestStockPage($companyUrl, self::RATIOS, $client);
@@ -100,6 +109,7 @@ class MissingValueScraper
         return $xpath;
     }
 
+    // Searches for ROA in the xpath and checks its an appropriate value
     private static function extractROA($xpath)
     {
         $resultROA = $xpath->evaluate('//parent::span[text()="Return on Assets "]');
@@ -108,8 +118,7 @@ class MissingValueScraper
         if (strcmp($ROAvals[0], self::ROA_TTM) == 0 && sizeof($ROAvals) > 1) {
             $percent = explode("%", $ROAvals[1]);
             $ROA = $percent[0];
-            // $ROA =("-a");
-            if (self::checkDouble($ROA)) {
+            if (self::checkFloat($ROA)) {
                 return (float)$ROA;
             } else {
                 throw new EmptyDataException("ROA was not a Double\n");
@@ -120,6 +129,7 @@ class MissingValueScraper
         }
     }
 
+    // Searches for PE in the xpath and checks its an appropriate value
     private static function extractPE($xpath)
     {
         $resultPE = $xpath->evaluate('//parent::span[text()="' . self::PE . '"]');
@@ -127,19 +137,20 @@ class MissingValueScraper
 
         if (strcmp($PEvals[0], self::PE_TTM) == 0 && sizeof($PEvals) > 1) {
             $PE = ($PEvals[1]);
-            // $PE = ("-a");
-            if (self::checkDouble($PE)) {
+            if (self::checkFloat($PE)) {
                 return (float)$PE;
             } else {
                 throw new EmptyDataException("PE was not a Double\n");
             }
-            return $PE;
         }
         else {
             throw new Exception("Could not find ROA in ratios tab\n");
         }
     }
 
+    // Extracts the date on the page using the xpath object
+    // Returns true if the date is within 2 years of the current date
+    // Returns false otherwise
     private static function dateOk($xpath)
     {
         echo "----- CHECKING THE DATE -----\n";
@@ -165,6 +176,8 @@ class MissingValueScraper
         }
     }
 
+    // xpath always returns a list of results
+    // this is used to confirm which item in the list is the one we're looking for
     private static function checkMultipleResults($results, $search)
     {
         foreach ($results as $result) {
@@ -192,7 +205,7 @@ class MissingValueScraper
                 $totalIncome = 0;
                 $output = "";
                 for ($i = 1; $i < count($incomeVals); $i++) {
-                    if (self::checkDouble($incomeVals[$i])) {
+                    if (self::checkFloat($incomeVals[$i])) {
                         $totalIncome += floatval($incomeVals[$i]);
                     }
                     $output = $output . $incomeVals[$i] . ", ";
@@ -220,12 +233,11 @@ class MissingValueScraper
 
         // Add all the values together if they are available
         if (strcmp($epsVals[0], self::EPS) == 0 && sizeof($epsVals) == 5) {
-            // TODO: watch out for floats!
             try {
                 $totalEPS = 0;
                 $output = "";
                 for ($i = 1; $i < count($epsVals); $i++) {
-                    if (self::checkDouble($epsVals[$i])) {
+                    if (self::checkFloat($epsVals[$i])) {
                         $totalEPS = floatval($epsVals[$i]);
                     }
                     $output = $output . $epsVals[$i] . ", ";
@@ -260,7 +272,7 @@ class MissingValueScraper
                 $output = "";
                 // Get first available value for assets
                 for ($i = 1; $i < count($assetVals); $i++) {
-                    if (self::checkDouble($assetVals[$i])) {
+                    if (self::checkFloat($assetVals[$i])) {
                         $assets = floatval($assetVals[$i]);
                         break;
                     }
@@ -278,7 +290,9 @@ class MissingValueScraper
         return $assets;
     }
 
-    private static function checkDouble($extractedNumber)
+    // Functions used to check the data type of numbers
+
+    private static function checkFloat($extractedNumber)
     {
         $val = (float)$extractedNumber;
         if (strcmp(strval($val), $extractedNumber) != 0) {

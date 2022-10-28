@@ -6,44 +6,39 @@ use GuzzleHttp\Client;
 
 class RequestBuilder
 {
-    const INCOME_STATEMENT = '-income-statement';
-    const BALANCE_SHEET = '-balance-sheet';
+    // Constants for default/base values to be used to build requests
     const BASE_INVESTING_URL = 'https://www.investing.com';
     const SCREENER_PATH = '/stock-screener/Service/SearchStocks';
     const TIMEOUT = 15;
     const COUNTRY = ',';
+
+    // Constants for figuring out what exchanges to use
     const COUNTRY_TO_GET_EXCHANGES = '1';
-    const BAD_EXCHANGES = ['97'];
+    const BAD_EXCHANGES = [''];
+    const EXCHANGE_LIMIT = 30000;
+    
+    // Constants for filtering search results from investing.com
     const PRICE_MIN = '0.1';
     const PRICE_MAX = '999999999999999999';    // Max for sql big int
     const MARKET_CAP_MIN = '50000';
     const MARKET_CAP_MAX = '999999999999999999';    // Max for sql big int
 
     // Constants for obtaining values from Investing.com 
-    // consider ttm pe? ttmpehigh, ttmpelow
-    // consider ttm roa? ttmroapct
     const NAME = 'name_trans';
     const STOCK_SYMBOL = 'stock_symbol';
     const STOCK_EXCHANGE = 'exchange_trans';
     const SECTOR = 'sector_trans';
-    // const ROA = 'aroapct';
     const ROA = 'ttmroapct';
     const PE = 'eq_pe_ratio';
     const PRICE = 'last';
     const MARKET_CAP = 'eq_market_cap';
-    // const MARKET_CAP = 'mktcap';
     const VIEWDATA = 'viewData';
     const LINK = 'link';
     const FLAG = 'flag';
     const CUSTOM_CALC = 'custom_calculation';
-    // const FREE_CASH_FLOW = 'a1fcf';
     const FREE_CASH_FLOW = 'ttmfcf';
     const DIVIDENDS_YIELD = 'yield_us';
-
     const CURRENT_RATIO = 'acurratio';
-    // const CURRENT_RATIO = 'qcurratio';
-    // const PRICE_TO_BOOK = 'aprice2bk';
-    // const PRICE_TO_BOOK = 'price2bk';
     const PRICE_TO_BOOK = 'price2bk_us';
     const EPS = 'eq_eps';
     const PARENT_PAIR_ID = 'parent_pair_ID';

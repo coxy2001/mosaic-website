@@ -6,6 +6,7 @@ use SilverStripe\ORM\DataObject;
 
 class Company extends DataObject
 {
+    // Table column headers (Used in CompanyVersion as well)
     public const DB_FIELDS = [
         "Ticker" => "Varchar(6)",
         "Name" => "Varchar",
